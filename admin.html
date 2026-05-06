@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -373,7 +373,7 @@
             <input type="text" id="product-search" placeholder="Buscar..." style="padding:8px 14px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);font-size:.85rem;outline:none;width:180px" oninput="renderProductsTable()">
             <select id="product-cat-filter" style="padding:8px 12px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);font-size:.85rem;outline:none" onchange="renderProductsTable()">
               <option value="all">Todas las categorías</option>
-              <option value="lamparas">Lámparas</option>
+              <option value="pantallas">Pantallas</option>
               <option value="bolsos">Bolsos</option>
               <option value="cojines">Cojines</option>
               <option value="personalizados">Personalizados</option>
@@ -420,7 +420,7 @@
                   <label>Categoría *</label>
                   <select id="pf-category" required>
                     <option value="">Seleccionar categoría...</option>
-                    <option value="lamparas">Lámparas</option>
+                    <option value="pantallas">Pantallas</option>
                     <option value="bolsos">Bolsos</option>
                     <option value="cojines">Cojines</option>
                     <option value="personalizados">Personalizados</option>
@@ -1121,7 +1121,7 @@ document.getElementById('product-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const editId = parseInt(document.getElementById('edit-product-id').value) || null;
   const catVal = document.getElementById('pf-category').value;
-  const catLabels = { lamparas:'Lámparas', bolsos:'Bolsos', cojines:'Cojines', personalizados:'Personalizados' };
+  const catLabels = { pantallas:'Pantallas', bolsos:'Bolsos', cojines:'Cojines', personalizados:'Personalizados' };
   const images = JSON.parse(document.getElementById('pf-images-json').value || '[]');
   if (!images.length) {
     showToast('Añade al menos una imagen al producto', 'error'); return;
@@ -1345,7 +1345,7 @@ function renderCustomers() {
 function renderCategories() {
   const all = getAllProducts();
   const CATS = [
-    {id:'lamparas',label:'Lámparas',icon:'lightbulb'},
+    {id:'pantallas',label:'Pantallas',icon:'lightbulb'},
     {id:'bolsos',label:'Bolsos',icon:'bag-shopping'},
     {id:'cojines',label:'Cojines',icon:'couch'},
     {id:'personalizados',label:'Personalizados',icon:'wand-magic-sparkles'}

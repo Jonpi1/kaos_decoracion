@@ -1,4 +1,4 @@
-/* ===================================================
+﻿/* ===================================================
    KAOS DECORACIÓN — Catálogo de Productos
 =================================================== */
 
@@ -8,8 +8,8 @@ const PRODUCTS = [
     id: 1,
     name: "Lámpara Industrial Hierro Forjado",
     slug: "lampara-industrial-hierro-forjado",
-    category: "lamparas",
-    categoryLabel: "Lámparas",
+    category: "pantallas",
+    categoryLabel: "Pantallas",
     price: 89.00,
     oldPrice: 115.00,
     description: "Lámpara de mesa artesanal en hierro negro mate con base de madera maciza reciclada. Casquillo E27, incluye bombilla vintage Edison.",
@@ -37,8 +37,8 @@ const PRODUCTS = [
     id: 2,
     name: "Lámpara Colgante Macramé Boho",
     slug: "lampara-colgante-macrame-boho",
-    category: "lamparas",
-    categoryLabel: "Lámparas",
+    category: "pantallas",
+    categoryLabel: "Pantallas",
     price: 75.00,
     oldPrice: null,
     description: "Lámpara de techo tejida a mano en algodón natural. Estilo bohemio con flecos y nudos artesanales. Cable de tela de 150 cm.",
@@ -66,8 +66,8 @@ const PRODUCTS = [
     id: 3,
     name: "Lámpara de Resina Geométrica Ámbar",
     slug: "lampara-resina-geometrica-ambar",
-    category: "lamparas",
-    categoryLabel: "Lámparas",
+    category: "pantallas",
+    categoryLabel: "Pantallas",
     price: 145.00,
     oldPrice: null,
     description: "Exclusiva lámpara de sobremesa con pantalla en resina epoxi translúcida en tono ámbar. Base de madera roble. Efecto vitral único.",
@@ -95,8 +95,8 @@ const PRODUCTS = [
     id: 4,
     name: "Lámpara de Pie Bambú Natural",
     slug: "lampara-pie-bambu-natural",
-    category: "lamparas",
-    categoryLabel: "Lámparas",
+    category: "pantallas",
+    categoryLabel: "Pantallas",
     price: 128.00,
     oldPrice: 165.00,
     description: "Lámpara de pie artesanal con estructura en bambú natural tratado y pantalla de papel de arroz japonés. Eco-friendly y sostenible.",
@@ -124,8 +124,8 @@ const PRODUCTS = [
     id: 5,
     name: "Aplique de Pared Metal Dorado Industrial",
     slug: "aplique-pared-metal-dorado",
-    category: "lamparas",
-    categoryLabel: "Lámparas",
+    category: "pantallas",
+    categoryLabel: "Pantallas",
     price: 67.00,
     oldPrice: null,
     description: "Aplique artesanal de pared en tubo de acero acabado dorado envejecido. Bombilla de filamento Edison incluida. Instalación sencilla.",
@@ -153,8 +153,8 @@ const PRODUCTS = [
     id: 6,
     name: "Lámpara Colgante Ramas de Madera",
     slug: "lampara-colgante-ramas-madera",
-    category: "lamparas",
-    categoryLabel: "Lámparas",
+    category: "pantallas",
+    categoryLabel: "Pantallas",
     price: 195.00,
     oldPrice: null,
     description: "Espectacular lámpara colgante escultura con ramas de madera natural entrelazadas a mano. Pieza única de alto impacto decorativo.",
@@ -602,11 +602,11 @@ const PRODUCTS = [
 
 const CATEGORIES = [
   {
-    id: "lamparas",
-    label: "Lámparas",
+    id: "pantallas",
+    label: "Pantallas",
     description: "Iluminación artesanal única para cada rincón",
     image: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=600&auto=format&fit=crop&q=80",
-    count: PRODUCTS.filter(p => p.category === "lamparas").length
+    count: PRODUCTS.filter(p => p.category === "pantallas").length
   },
   {
     id: "bolsos",
