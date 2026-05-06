@@ -22,6 +22,13 @@ const Admin = {
       name:         'Violeta Sanz',
       avatar:       'VS',
       role:         'Propietaria'
+    },
+    {
+      username:     'alejandra.hidalgo',
+      passwordHash: btoa('kaos_ale'),
+      name:         'Alejandra Hidalgo',
+      avatar:       'AH',
+      role:         'Administradora'
     }
   ],
 
