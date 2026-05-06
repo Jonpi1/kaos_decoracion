@@ -1344,30 +1344,64 @@ function renderCustomers() {
 ══════════════════════════════════════════ */
 function renderCategories() {
   const all = getAllProducts();
-  const grid = document.getElementById('categories-admin-grid');
-  if (!grid) return;
-  grid.innerHTML = [
+  const CATS = [
     {id:'lamparas',label:'Lámparas',icon:'lightbulb'},
     {id:'bolsos',label:'Bolsos',icon:'bag-shopping'},
     {id:'decoracion',label:'Decoración',icon:'palette'},
     {id:'personalizados',label:'Personalizados',icon:'wand-magic-sparkles'}
-  ].map(cat => {
+  ];
+  const grid = document.getElementById('categories-admin-grid');
+  if (!grid) return;
+  grid.innerHTML = CATS.map(cat => {
     const count = all.filter(p => p.category === cat.id).length;
+    const img   = getCategoryImg(cat.id);
     return `
-      <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:24px;display:flex;gap:16px;align-items:center">
-        <div style="width:52px;height:52px;border-radius:var(--radius-md);background:var(--c-primary);color:var(--c-gold);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">
-          <i class="fas fa-${cat.icon}"></i>
+      <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);overflow:hidden">
+        <div style="position:relative;height:140px;background:#eee;overflow:hidden">
+          <img id="cat-img-${cat.id}" src="${img}" alt="${cat.label}"
+               style="width:100%;height:100%;object-fit:cover;display:${img?'block':'none'}">
+          <div id="cat-img-placeholder-${cat.id}"
+               style="position:absolute;inset:0;display:${img?'none':'flex'};align-items:center;justify-content:center;background:var(--c-primary);color:var(--c-gold);font-size:2.5rem">
+            <i class="fas fa-${cat.icon}"></i>
+          </div>
+          <label style="position:absolute;bottom:8px;right:8px;cursor:pointer">
+            <input type="file" accept="image/*" style="display:none"
+                   onchange="changeCategoryImage('${cat.id}', this)">
+            <span style="background:rgba(0,0,0,.65);color:#fff;padding:5px 12px;border-radius:20px;font-size:.78rem;font-weight:700">
+              <i class="fas fa-camera"></i> Cambiar foto
+            </span>
+          </label>
         </div>
-        <div style="flex:1">
-          <strong style="display:block;margin-bottom:4px">${cat.label}</strong>
-          <span style="font-size:.82rem;color:var(--c-gray)">${count} producto${count!==1?'s':''}</span>
-        </div>
-        <div style="display:flex;gap:8px">
-          <button class="act-btn" onclick="switchSection('products');setTimeout(()=>{document.getElementById('product-cat-filter').value='${cat.id}';renderProductsTable();},50)">Ver</button>
-          <button class="act-btn" onclick="switchSection('add-product');document.getElementById('pf-category').value='${cat.id}'">+ Añadir</button>
+        <div style="padding:16px 20px;display:flex;align-items:center;gap:12px">
+          <div style="flex:1">
+            <strong style="display:block;margin-bottom:2px">${cat.label}</strong>
+            <span style="font-size:.82rem;color:var(--c-gray)">${count} producto${count!==1?'s':''}</span>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="act-btn" onclick="switchSection('products');setTimeout(()=>{document.getElementById('product-cat-filter').value='${cat.id}';renderProductsTable();},50)">Ver</button>
+            <button class="act-btn" onclick="switchSection('add-product');document.getElementById('pf-category').value='${cat.id}'">+ Añadir</button>
+          </div>
         </div>
       </div>`;
   }).join('');
+}
+
+function changeCategoryImage(catId, input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const dataUrl = e.target.result;
+    const custom = JSON.parse(localStorage.getItem('kaos_category_images') || '{}');
+    custom[catId] = dataUrl;
+    localStorage.setItem('kaos_category_images', JSON.stringify(custom));
+    const imgEl = document.getElementById('cat-img-' + catId);
+    const placeholder = document.getElementById('cat-img-placeholder-' + catId);
+    if (imgEl) { imgEl.src = dataUrl; imgEl.style.display = 'block'; }
+    if (placeholder) placeholder.style.display = 'none';
+    showToast('Imagen de categoría actualizada ✓', 'success');
+  };
+  reader.readAsDataURL(file);
 }
 
 /* ══════════════════════════════════════════

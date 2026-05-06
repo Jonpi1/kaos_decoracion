@@ -644,6 +644,17 @@ const SHIPPING_OPTIONS = [
   { id: "free", label: "Recogida en taller (Madrid)", price: 0.00 }
 ];
 
+function getCategoryImg(catId) {
+  try {
+    const custom = JSON.parse(localStorage.getItem('kaos_category_images') || '{}');
+    const cat = CATEGORIES.find(c => c.id === catId);
+    return custom[catId] || (cat ? cat.image : '');
+  } catch {
+    const cat = CATEGORIES.find(c => c.id === catId);
+    return cat ? cat.image : '';
+  }
+}
+
 function getAllProducts() {
   try {
     const deleted = JSON.parse(localStorage.getItem('kaos_deleted_ids') || '[]');

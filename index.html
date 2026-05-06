@@ -390,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (catGrid) {
     catGrid.innerHTML = CATEGORIES.map(cat => `
       <a href="tienda.html?cat=${cat.id}" class="category-card reveal">
-        <img src="${cat.image}" alt="${cat.label}" loading="lazy">
+        <img src="${getCategoryImg(cat.id)}" alt="${cat.label}" loading="lazy">
         <div class="category-card-overlay"></div>
         <div class="category-card-content">
           <div class="eyebrow">Colección</div>
