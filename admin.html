@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin — Kaos Decoración</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%232C1A0E'/><text y='.9em' font-size='70' x='15' fill='%23C9A96E'>K</text></svg>">
+  <style>
+    /* ─── Login Gate ─── */
+    #admin-login-gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: linear-gradient(135deg, #1A0E06 0%, #2C1A0E 50%, #3D2510 100%);
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .login-gate-card {
+      background: var(--c-white); border-radius: var(--radius-xl);
+      padding: 48px 40px; width: 100%; max-width: 440px;
+      box-shadow: 0 32px 80px rgba(0,0,0,.4);
+      animation: slideUp .5s ease both;
+    }
+    .login-gate-header { text-align: center; margin-bottom: 36px; }
+    .login-gate-logo {
+      width: 72px; height: 72px; background: var(--c-primary);
+      border-radius: var(--radius-md); display: flex; align-items: center;
+      justify-content: center; margin: 0 auto 16px;
+      font-family: var(--ff-heading); font-size: 2rem; font-weight: 700;
+      color: var(--c-gold);
+    }
+    .login-gate-header h2 { font-size: 1.5rem; margin-bottom: 6px; }
+    .login-gate-header p { color: var(--c-gray); font-size: .88rem; }
+    .login-input-group { position: relative; margin-bottom: 16px; }
+    .login-input-group i {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--c-gray); font-size: .95rem; pointer-events: none;
+    }
+    .login-input-group input {
+      width: 100%; padding: 13px 14px 13px 40px;
+      border: 1.5px solid var(--c-border); border-radius: var(--radius-sm);
+      font-size: .95rem; outline: none; transition: border-color .2s, box-shadow .2s;
+      background: var(--c-bg);
+    }
+    .login-input-group input:focus {
+      border-color: var(--c-gold);
+      box-shadow: 0 0 0 3px rgba(201,169,110,.15);
+    }
+    .login-input-group .toggle-pass {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      color: var(--c-gray); cursor: pointer; padding: 4px;
+    }
+    #login-error {
+      background: rgba(192,57,43,.1); border: 1px solid rgba(192,57,43,.3);
+      color: var(--c-error); border-radius: var(--radius-sm);
+      padding: 10px 14px; font-size: .85rem; margin-bottom: 16px;
+      display: none; align-items: center; gap: 8px;
+    }
+    .owner-hint {
+      margin-top: 24px; padding: 14px 16px;
+      background: var(--c-light-gray); border-radius: var(--radius-md);
+      font-size: .78rem; color: var(--c-gray); line-height: 1.7;
+    }
+    .owner-hint strong { color: var(--c-primary); }
+
+    /* ─── Sidebar ─── */
+    .admin-sidebar {
+      width: 250px; min-height: 100vh; background: var(--c-primary);
+      position: fixed; top: 0; left: 0; z-index: 900;
+      display: flex; flex-direction: column; padding: 24px 0;
+      transition: transform .3s ease;
+    }
+    .admin-sidebar-logo {
+      padding: 0 20px 24px; border-bottom: 1px solid rgba(255,255,255,.1);
+      margin-bottom: 16px;
+    }
+    .admin-sidebar-logo .logo-mark { background: var(--c-gold); }
+    .admin-sidebar-logo .logo-text strong { color: var(--c-white); }
+    .admin-sidebar-logo .logo-text span { color: rgba(255,255,255,.4); }
+    .admin-nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 20px; font-size: .875rem; font-weight: 700;
+      color: rgba(255,255,255,.6); cursor: pointer;
+      transition: all .2s; border-left: 3px solid transparent;
+      text-decoration: none;
+    }
+    .admin-nav-item:hover, .admin-nav-item.active {
+      background: rgba(255,255,255,.08); color: var(--c-white);
+      border-left-color: var(--c-gold);
+    }
+    .admin-nav-item i { width: 18px; text-align: center; color: var(--c-gold); }
+    .admin-nav-section {
+      padding: 14px 20px 6px; font-size: .7rem; letter-spacing: .12em;
+      text-transform: uppercase; color: rgba(255,255,255,.3);
+    }
+    /* Session card in sidebar */
+    .admin-session-card {
+      margin: 0 12px 16px; padding: 14px 16px;
+      background: rgba(255,255,255,.07); border-radius: var(--radius-md);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .admin-session-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--c-gold); color: var(--c-white);
+      font-size: .85rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ─── Main ─── */
+    .admin-main { margin-left: 250px; min-height: 100vh; background: var(--c-bg); }
+    .admin-topbar {
+      background: var(--c-white); border-bottom: 1px solid var(--c-border);
+      padding: 16px 32px; display: flex; align-items: center;
+      justify-content: space-between; position: sticky; top: 0; z-index: 100;
+      gap: 12px;
+    }
+    .admin-page-section { display: none; }
+    .admin-page-section.active { display: block; }
+
+    /* ─── Tables ─── */
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th {
+      text-align: left; padding: 12px 16px; font-size: .75rem;
+      font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--c-gray); background: var(--c-light-gray);
+      border-bottom: 1px solid var(--c-border);
+    }
+    .data-table td { padding: 13px 16px; border-bottom: 1px solid var(--c-border); font-size: .88rem; vertical-align: middle; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: rgba(201,169,110,.04); }
+    .product-thumb { width: 46px; height: 46px; border-radius: var(--radius-sm); object-fit: cover; }
+    .stock-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: .72rem; font-weight: 700; }
+    .stock-ok  { background: rgba(74,124,89,.12);  color: var(--c-success); }
+    .stock-low { background: rgba(192,57,43,.12);  color: var(--c-error); }
+    .stock-med { background: rgba(241,196,15,.12); color: #d4a017; }
+    .act-btn { background: none; border: 1px solid var(--c-border); border-radius: var(--radius-sm); padding: 5px 10px; font-size: .78rem; color: var(--c-primary); cursor: pointer; transition: all .2s; }
+    .act-btn:hover { background: var(--c-primary); color: var(--c-white); border-color: var(--c-primary); }
+    .del-btn { background: none; border: 1px solid rgba(192,57,43,.3); border-radius: var(--radius-sm); padding: 5px 10px; font-size: .78rem; color: var(--c-error); cursor: pointer; transition: all .2s; }
+    .del-btn:hover { background: var(--c-error); color: var(--c-white); }
+
+    /* ─── Image upload zone ─── */
+    .img-upload-zone {
+      border: 2px dashed var(--c-border); border-radius: var(--radius-md);
+      padding: 28px; text-align: center; cursor: pointer;
+      transition: all .2s; background: var(--c-light-gray);
+    }
+    .img-upload-zone:hover, .img-upload-zone.dragover {
+      border-color: var(--c-gold); background: rgba(201,169,110,.08);
+    }
+    .img-preview-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-top: 12px; }
+    .img-preview-item { position: relative; aspect-ratio:1; border-radius: var(--radius-sm); overflow: hidden; }
+    .img-preview-item img { width:100%; height:100%; object-fit:cover; }
+    .img-preview-item .remove-img {
+      position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+      border-radius: 50%; background: rgba(192,57,43,.9); color: #fff;
+      font-size: .7rem; display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+
+    /* ─── Modal ─── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.5);
+      z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-box {
+      background: var(--c-white); border-radius: var(--radius-xl);
+      padding: 36px; max-width: 580px; width: 100%; max-height: 90vh; overflow-y: auto;
+      animation: slideUp .3s ease;
+    }
+
+    /* ─── Custom Orders badge ─── */
+    .notif-badge {
+      min-width: 18px; height: 18px; border-radius: 9px;
+      background: var(--c-error); color: #fff;
+      font-size: .65rem; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0 5px; margin-left: auto;
+    }
+
+    @media (max-width: 960px) {
+      .admin-sidebar { transform: translateX(-100%); }
+      .admin-sidebar.open { transform: translateX(0); }
+      .admin-main { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     LOGIN GATE — Solo para propietarios
+════════════════════════════════════════ -->
+<div id="admin-login-gate">
+  <div class="login-gate-card">
+    <div class="login-gate-header">
+      <div class="login-gate-logo">K</div>
+      <h2>Acceso de propietario</h2>
+      <p>Panel de administración exclusivo — <strong>Kaos Decoración</strong></p>
+    </div>
+
+    <div id="login-error"><i class="fas fa-exclamation-circle"></i><span id="login-error-msg"></span></div>
+
+    <form id="admin-login-form" novalidate>
+      <div class="login-input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="admin-username" placeholder="Usuario (ej: jon.pinedo)" autocomplete="username" required>
+      </div>
+      <div class="login-input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="admin-password" placeholder="Contraseña" autocomplete="current-password" required>
+        <span class="toggle-pass" onclick="togglePass()"><i class="far fa-eye" id="pass-eye"></i></span>
+      </div>
+      <button type="submit" class="btn btn--primary btn--full btn--lg" style="margin-top:8px">
+        <i class="fas fa-sign-in-alt"></i> Entrar al panel
+      </button>
+    </form>
+
+    <div class="owner-hint">
+      <i class="fas fa-shield-halved" style="color:var(--c-gold)"></i>
+      <strong>Acceso restringido.</strong> Solo los propietarios autorizados de Kaos Decoración pueden entrar a este panel.
+      Si has olvidado tu contraseña, contacta con el equipo técnico.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PANEL ADMIN (visible tras login)
+════════════════════════════════════════ -->
+<div id="admin-panel" style="display:none">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="admin-sidebar-logo">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">K</div>
+        <div class="logo-text"><strong>Kaos Decoración</strong><span>Panel Admin</span></div>
+      </a>
+    </div>
+
+    <!-- Session info -->
+    <div class="admin-session-card">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="admin-session-avatar" id="sidebar-avatar">–</div>
+        <div style="min-width:0">
+          <strong style="display:block;font-size:.85rem;color:var(--c-white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="sidebar-name">–</strong>
+          <span style="font-size:.72rem;color:var(--c-gold)" id="sidebar-role">–</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-nav-section">Principal</div>
+    <div class="admin-nav-item active" data-section="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</div>
+    <div class="admin-nav-item" data-section="orders"><i class="fas fa-box"></i> Pedidos</div>
+    <div class="admin-nav-item" data-section="custom-orders">
+      <i class="fas fa-wand-magic-sparkles"></i> Encargos personalizados
+      <span class="notif-badge" id="custom-orders-badge" style="display:none">0</span>
+    </div>
+
+    <div class="admin-nav-section">Catálogo</div>
+    <div class="admin-nav-item" data-section="products"><i class="fas fa-tag"></i> Productos</div>
+    <div class="admin-nav-item" data-section="add-product"><i class="fas fa-plus-circle"></i> Añadir producto</div>
+    <div class="admin-nav-item" data-section="categories"><i class="fas fa-folder"></i> Categorías</div>
+
+    <div class="admin-nav-section">Clientes</div>
+    <div class="admin-nav-item" data-section="customers"><i class="fas fa-users"></i> Clientes</div>
+    <div class="admin-nav-item" data-section="coupons"><i class="fas fa-percent"></i> Cupones</div>
+
+    <div class="admin-nav-section">Cuenta</div>
+    <div class="admin-nav-item" data-section="settings"><i class="fas fa-cog"></i> Ajustes tienda</div>
+    <div class="admin-nav-item" data-section="security"><i class="fas fa-lock"></i> Seguridad</div>
+
+    <div style="margin-top:auto;padding:16px 12px 0;border-top:1px solid rgba(255,255,255,.1)">
+      <a href="index.html" class="admin-nav-item" style="border-left:none">
+        <i class="fas fa-store"></i> Ver tienda
+      </a>
+      <div class="admin-nav-item" id="btn-admin-logout" style="color:rgba(255,100,100,.7)">
+        <i class="fas fa-right-from-bracket" style="color:rgba(255,100,100,.7)"></i> Cerrar sesión
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="admin-main">
+    <!-- Topbar -->
+    <div class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:14px">
+        <button id="sidebar-toggle" class="action-btn" style="display:none" onclick="document.getElementById('admin-sidebar').classList.toggle('open')">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div>
+          <h2 style="font-size:1.15rem;margin:0" id="page-heading">Dashboard</h2>
+          <p style="font-size:.78rem;color:var(--c-gray);margin:0" id="page-subheading">Resumen general</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:.82rem;color:var(--c-gray)">Bienvenido/a, <strong id="topbar-name" style="color:var(--c-primary)">–</strong></span>
+        <button onclick="adminLogout()" class="btn btn--outline btn--sm">
+          <i class="fas fa-sign-out-alt"></i> Salir
+        </button>
+      </div>
+    </div>
+
+    <div style="padding:28px 32px" id="admin-content">
+
+      <!-- ── DASHBOARD ── -->
+      <div class="admin-page-section active" id="section-dashboard">
+        <div class="admin-stats" style="margin-bottom:28px">
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon sales"><i class="fas fa-euro-sign"></i></div>
+            <div class="admin-stat-info"><strong id="stat-revenue">—</strong><span>Ingresos totales</span></div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon orders"><i class="fas fa-box"></i></div>
+            <div class="admin-stat-info"><strong id="stat-orders">—</strong><span>Pedidos</span></div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon products"><i class="fas fa-tag"></i></div>
+            <div class="admin-stat-info"><strong id="stat-products">—</strong><span>Productos</span></div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon users"><i class="fas fa-users"></i></div>
+            <div class="admin-stat-info"><strong id="stat-users">—</strong><span>Clientes</span></div>
+          </div>
+        </div>
+        <div class="admin-grid">
+          <div class="admin-card">
+            <h3>Pedidos recientes</h3>
+            <table class="data-table">
+              <thead><tr><th>Ref.</th><th>Cliente</th><th>Total</th><th>Estado</th></tr></thead>
+              <tbody id="dash-orders-body"></tbody>
+            </table>
+          </div>
+          <div class="admin-card">
+            <h3>Stock bajo ⚠</h3>
+            <div id="stock-alerts"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PEDIDOS ── -->
+      <div class="admin-page-section" id="section-orders">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+          <h3 style="margin:0">Todos los pedidos</h3>
+          <select id="order-status-filter" style="padding:8px 12px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);font-size:.85rem;outline:none" onchange="renderAllOrders()">
+            <option value="all">Todos los estados</option>
+            <option value="procesando">Procesando</option>
+            <option value="enviado">Enviado</option>
+            <option value="entregado">Entregado</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+        </div>
+        <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);overflow:hidden;overflow-x:auto">
+          <table class="data-table">
+            <thead><tr><th>Ref.</th><th>Cliente</th><th>Email</th><th>Fecha</th><th>Total</th><th>Estado</th><th>Acción</th></tr></thead>
+            <tbody id="all-orders-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── ENCARGOS PERSONALIZADOS ── -->
+      <div class="admin-page-section" id="section-custom-orders">
+        <div style="margin-bottom:20px">
+          <h3 style="margin-bottom:6px">Encargos personalizados</h3>
+          <p style="color:var(--c-gray);font-size:.88rem">Aquí aparecen los pedidos de productos personalizados. Puedes asignarles un nombre definitivo y notas de producción.</p>
+        </div>
+        <div id="custom-orders-list"></div>
+      </div>
+
+      <!-- ── PRODUCTOS ── -->
+      <div class="admin-page-section" id="section-products">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+          <h3 style="margin:0">Catálogo de productos</h3>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <input type="text" id="product-search" placeholder="Buscar..." style="padding:8px 14px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);font-size:.85rem;outline:none;width:180px" oninput="renderProductsTable()">
+            <select id="product-cat-filter" style="padding:8px 12px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);font-size:.85rem;outline:none" onchange="renderProductsTable()">
+              <option value="all">Todas las categorías</option>
+              <option value="lamparas">Lámparas</option>
+              <option value="bolsos">Bolsos</option>
+              <option value="decoracion">Decoración</option>
+              <option value="personalizados">Personalizados</option>
+            </select>
+            <button class="btn btn--gold btn--sm" onclick="switchSection('add-product')">
+              <i class="fas fa-plus"></i> Nuevo producto
+            </button>
+          </div>
+        </div>
+        <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);overflow:hidden;overflow-x:auto">
+          <table class="data-table">
+            <thead><tr><th>Img</th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Visible</th><th>Acciones</th></tr></thead>
+            <tbody id="products-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── AÑADIR / EDITAR PRODUCTO ── -->
+      <div class="admin-page-section" id="section-add-product">
+        <div style="max-width:800px">
+          <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px">
+            <button onclick="switchSection('products')" class="btn btn--outline btn--sm"><i class="fas fa-arrow-left"></i> Volver</button>
+            <div>
+              <h3 style="margin:0" id="form-product-title">Añadir nuevo producto</h3>
+              <p style="color:var(--c-gray);font-size:.82rem;margin:0">Los campos con * son obligatorios</p>
+            </div>
+          </div>
+
+          <form id="product-form" novalidate>
+            <input type="hidden" id="edit-product-id" value="">
+
+            <!-- Sección: Información básica -->
+            <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px;margin-bottom:20px">
+              <h4 style="margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">
+                <i class="fas fa-info-circle" style="color:var(--c-gold);margin-right:8px"></i>Información del producto
+              </h4>
+              <div class="form-grid">
+                <div class="form-group full">
+                  <label>Nombre del producto *</label>
+                  <input type="text" id="pf-name" placeholder="Ej: Lámpara Artesanal Hierro Negro" required
+                    style="font-size:1rem;font-weight:600">
+                </div>
+                <div class="form-group">
+                  <label>Categoría *</label>
+                  <select id="pf-category" required>
+                    <option value="">Seleccionar categoría...</option>
+                    <option value="lamparas">Lámparas</option>
+                    <option value="bolsos">Bolsos</option>
+                    <option value="decoracion">Decoración</option>
+                    <option value="personalizados">Personalizados</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>SKU / Referencia</label>
+                  <input type="text" id="pf-sku" placeholder="KAO-LAM-001">
+                </div>
+                <div class="form-group full">
+                  <label>Descripción corta * <span style="font-size:.75rem;color:var(--c-gray)">(se muestra en tarjetas)</span></label>
+                  <textarea id="pf-description" rows="3" placeholder="Breve descripción del producto..." required></textarea>
+                </div>
+                <div class="form-group full">
+                  <label>Descripción completa <span style="font-size:.75rem;color:var(--c-gray)">(en la ficha del producto)</span></label>
+                  <textarea id="pf-long-description" rows="5" placeholder="Descripción detallada: materiales, proceso de fabricación, cuidados..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sección: Precio y stock -->
+            <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px;margin-bottom:20px">
+              <h4 style="margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">
+                <i class="fas fa-euro-sign" style="color:var(--c-gold);margin-right:8px"></i>Precio y stock
+              </h4>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Precio de venta (€) *</label>
+                  <input type="number" id="pf-price" placeholder="89.00" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                  <label>Precio anterior (€) <span style="font-size:.72rem;color:var(--c-gray)">Para mostrar tachado</span></label>
+                  <input type="number" id="pf-old-price" placeholder="115.00" min="0" step="0.01">
+                </div>
+                <div class="form-group">
+                  <label>Unidades en stock *</label>
+                  <input type="number" id="pf-stock" placeholder="10" min="0" required>
+                </div>
+                <div class="form-group">
+                  <label>Valoración (1.0 – 5.0)</label>
+                  <input type="number" id="pf-rating" placeholder="4.8" min="1" max="5" step="0.1">
+                </div>
+              </div>
+            </div>
+
+            <!-- Sección: Imágenes -->
+            <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px;margin-bottom:20px">
+              <h4 style="margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">
+                <i class="fas fa-images" style="color:var(--c-gold);margin-right:8px"></i>Imágenes del producto
+              </h4>
+              <!-- Subida de archivo -->
+              <div class="img-upload-zone" id="upload-zone" onclick="document.getElementById('img-file-input').click()"
+                ondragover="event.preventDefault();this.classList.add('dragover')"
+                ondragleave="this.classList.remove('dragover')"
+                ondrop="handleImageDrop(event)">
+                <i class="fas fa-cloud-upload-alt" style="font-size:2rem;color:var(--c-gold);margin-bottom:10px"></i>
+                <p style="font-weight:700;color:var(--c-primary);margin-bottom:4px">Arrastra imágenes aquí o haz clic para subir</p>
+                <p style="font-size:.8rem;color:var(--c-gray)">PNG, JPG, WebP — Máx. 4 imágenes por producto</p>
+              </div>
+              <input type="file" id="img-file-input" accept="image/*" multiple style="display:none" onchange="handleImageFiles(this.files)">
+
+              <!-- O pegar URL -->
+              <div style="display:flex;align-items:center;gap:12px;margin:14px 0">
+                <div style="flex:1;height:1px;background:var(--c-border)"></div>
+                <span style="font-size:.78rem;color:var(--c-gray)">o añade por URL</span>
+                <div style="flex:1;height:1px;background:var(--c-border)"></div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <input type="url" id="pf-image-url" placeholder="https://images.unsplash.com/..." style="flex:1;padding:10px 14px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);font-size:.88rem;outline:none">
+                <button type="button" onclick="addImageUrl()" class="btn btn--outline btn--sm">Añadir</button>
+              </div>
+
+              <!-- Previews -->
+              <div class="img-preview-grid" id="img-preview-grid" style="display:none"></div>
+              <input type="hidden" id="pf-images-json" value="[]">
+            </div>
+
+            <!-- Sección: Detalles técnicos -->
+            <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px;margin-bottom:20px">
+              <h4 style="margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">
+                <i class="fas fa-ruler-combined" style="color:var(--c-gold);margin-right:8px"></i>Detalles técnicos
+              </h4>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Material</label>
+                  <input type="text" id="pf-material" placeholder="Hierro forjado + madera reciclada">
+                </div>
+                <div class="form-group">
+                  <label>Dimensiones</label>
+                  <input type="text" id="pf-dimensions" placeholder="30 cm altura × 18 cm base">
+                </div>
+                <div class="form-group">
+                  <label>Peso</label>
+                  <input type="text" id="pf-weight" placeholder="1.8 kg">
+                </div>
+                <div class="form-group">
+                  <label>Colores disponibles <span style="font-size:.72rem;color:var(--c-gray)">(separados por coma)</span></label>
+                  <input type="text" id="pf-colors" placeholder="Negro, Dorado, Natural">
+                </div>
+              </div>
+            </div>
+
+            <!-- Sección: Opciones -->
+            <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px;margin-bottom:24px">
+              <h4 style="margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">
+                <i class="fas fa-sliders" style="color:var(--c-gold);margin-right:8px"></i>Opciones de visibilidad
+              </h4>
+              <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
+                <label style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid var(--c-border);border-radius:var(--radius-md);cursor:pointer;transition:all .2s" id="lbl-featured">
+                  <input type="checkbox" id="pf-featured" style="accent-color:var(--c-gold);width:18px;height:18px" onchange="styleCheckLabel('lbl-featured',this)">
+                  <div><strong style="display:block;font-size:.88rem">⭐ Producto destacado</strong><span style="font-size:.75rem;color:var(--c-gray)">Aparece en la página de inicio</span></div>
+                </label>
+                <label style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid var(--c-border);border-radius:var(--radius-md);cursor:pointer;transition:all .2s" id="lbl-new">
+                  <input type="checkbox" id="pf-new" style="accent-color:var(--c-gold);width:18px;height:18px" onchange="styleCheckLabel('lbl-new',this)">
+                  <div><strong style="display:block;font-size:.88rem">🆕 Producto nuevo</strong><span style="font-size:.75rem;color:var(--c-gray)">Muestra la etiqueta "Nuevo"</span></div>
+                </label>
+                <label style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid var(--c-border);border-radius:var(--radius-md);cursor:pointer;transition:all .2s" id="lbl-sale">
+                  <input type="checkbox" id="pf-sale" style="accent-color:var(--c-gold);width:18px;height:18px" onchange="styleCheckLabel('lbl-sale',this)">
+                  <div><strong style="display:block;font-size:.88rem">🏷 En oferta</strong><span style="font-size:.75rem;color:var(--c-gray)">Muestra la etiqueta "Sale"</span></div>
+                </label>
+                <label style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid var(--c-border);border-radius:var(--radius-md);cursor:pointer;transition:all .2s" id="lbl-custom">
+                  <input type="checkbox" id="pf-custom" style="accent-color:var(--c-gold);width:18px;height:18px" onchange="styleCheckLabel('lbl-custom',this)">
+                  <div><strong style="display:block;font-size:.88rem">✏️ Personalizable</strong><span style="font-size:.75rem;color:var(--c-gray)">Permite notas de personalización</span></div>
+                </label>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px">
+              <button type="submit" class="btn btn--gold btn--lg">
+                <i class="fas fa-save"></i> <span id="form-submit-label">Guardar producto</span>
+              </button>
+              <button type="button" onclick="resetProductForm()" class="btn btn--outline">
+                <i class="fas fa-undo"></i> Limpiar
+              </button>
+              <button type="button" onclick="switchSection('products')" class="btn btn--outline" style="margin-left:auto">
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ── CATEGORÍAS ── -->
+      <div class="admin-page-section" id="section-categories">
+        <h3 style="margin-bottom:20px">Categorías</h3>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px" id="categories-admin-grid"></div>
+      </div>
+
+      <!-- ── CLIENTES ── -->
+      <div class="admin-page-section" id="section-customers">
+        <h3 style="margin-bottom:20px">Clientes registrados</h3>
+        <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);overflow:hidden;overflow-x:auto">
+          <table class="data-table">
+            <thead><tr><th>Avatar</th><th>Nombre</th><th>Email</th><th>Registro</th><th>Pedidos</th></tr></thead>
+            <tbody id="customers-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── CUPONES ── -->
+      <div class="admin-page-section" id="section-coupons">
+        <h3 style="margin-bottom:20px">Códigos de descuento</h3>
+        <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);overflow:hidden;margin-bottom:24px">
+          <table class="data-table">
+            <thead><tr><th>Código</th><th>Tipo</th><th>Descuento</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td><code style="background:var(--c-light-gray);padding:3px 8px;border-radius:4px">KAOS10</code></td><td>Porcentaje</td><td style="color:var(--c-success);font-weight:700">10%</td><td><span class="order-status entregado">Activo</span></td></tr>
+              <tr><td><code style="background:var(--c-light-gray);padding:3px 8px;border-radius:4px">BIENVENIDO</code></td><td>Porcentaje</td><td style="color:var(--c-success);font-weight:700">15%</td><td><span class="order-status entregado">Activo</span></td></tr>
+              <tr><td><code style="background:var(--c-light-gray);padding:3px 8px;border-radius:4px">ENVIOGRATIS</code></td><td>Envío</td><td style="color:var(--c-success);font-weight:700">100%</td><td><span class="order-status entregado">Activo</span></td></tr>
+              <tr><td><code style="background:var(--c-light-gray);padding:3px 8px;border-radius:4px">VERANO20</code></td><td>Porcentaje</td><td style="color:var(--c-success);font-weight:700">20%</td><td><span class="order-status enviado">Temporal</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px;max-width:480px">
+          <h4 style="margin-bottom:16px">Crear nuevo cupón</h4>
+          <div class="form-grid">
+            <div class="form-group"><label>Código</label><input type="text" id="new-coupon-code" placeholder="NUEVO25" style="text-transform:uppercase"></div>
+            <div class="form-group"><label>Tipo</label><select id="new-coupon-type"><option value="percent">Porcentaje (%)</option><option value="fixed">Cantidad fija (€)</option><option value="shipping">Envío gratuito</option></select></div>
+            <div class="form-group"><label>Valor</label><input type="number" id="new-coupon-value" placeholder="25"></div>
+            <div class="form-group"><label>Expira</label><input type="date" id="new-coupon-expiry"></div>
+          </div>
+          <button onclick="createCoupon()" class="btn btn--gold" style="margin-top:16px"><i class="fas fa-plus"></i> Crear cupón</button>
+        </div>
+      </div>
+
+      <!-- ── AJUSTES ── -->
+      <div class="admin-page-section" id="section-settings">
+        <div style="max-width:640px">
+          <h3 style="margin-bottom:20px">Ajustes de la tienda</h3>
+          <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px;margin-bottom:20px">
+            <h4 style="margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">Información general</h4>
+            <div class="form-grid">
+              <div class="form-group full"><label>Nombre de la tienda</label><input type="text" value="Kaos Decoración" id="s-store-name"></div>
+              <div class="form-group full"><label>Email de contacto</label><input type="email" value="hola@kaosdecoración.es" id="s-email"></div>
+              <div class="form-group"><label>Teléfono</label><input type="tel" value="+34 912 345 678" id="s-phone"></div>
+              <div class="form-group"><label>IVA (%)</label><input type="number" value="21" id="s-vat"></div>
+              <div class="form-group full"><label>Dirección</label><input type="text" value="Calle Lavapiés 24, 28012 Madrid" id="s-address"></div>
+            </div>
+            <button onclick="showToast('Ajustes guardados ✓','success')" class="btn btn--primary" style="margin-top:16px"><i class="fas fa-save"></i> Guardar</button>
+          </div>
+          <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px">
+            <h4 style="margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">Envíos</h4>
+            <div class="form-grid">
+              <div class="form-group"><label>Coste envío estándar (€)</label><input type="number" value="5.95" step="0.01"></div>
+              <div class="form-group"><label>Coste envío express (€)</label><input type="number" value="12.95" step="0.01"></div>
+              <div class="form-group"><label>Envío gratuito a partir de (€)</label><input type="number" value="80"></div>
+              <div class="form-group"><label>Plazo estándar</label><input type="text" value="3-5 días laborables"></div>
+            </div>
+            <button onclick="showToast('Configuración de envíos guardada ✓','success')" class="btn btn--primary" style="margin-top:16px"><i class="fas fa-save"></i> Guardar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SEGURIDAD ── -->
+      <div class="admin-page-section" id="section-security">
+        <div style="max-width:520px">
+          <h3 style="margin-bottom:6px">Seguridad de la cuenta</h3>
+          <p style="color:var(--c-gray);font-size:.88rem;margin-bottom:28px">Cambia tu contraseña de acceso al panel de administración.</p>
+
+          <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px;margin-bottom:20px">
+            <h4 style="margin-bottom:4px">Sesión activa</h4>
+            <p style="color:var(--c-gray);font-size:.85rem;margin-bottom:20px">Conectado como <strong id="sec-username" style="color:var(--c-primary)">–</strong> (<span id="sec-role" style="color:var(--c-gold)">–</span>)</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:.82rem;color:var(--c-gray);background:var(--c-light-gray);border-radius:var(--radius-sm);padding:12px 14px">
+              <span>Usuario:</span><strong id="sec-user-display" style="color:var(--c-primary)">–</strong>
+              <span>Último acceso:</span><strong id="sec-login-time" style="color:var(--c-primary)">–</strong>
+            </div>
+          </div>
+
+          <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px">
+            <h4 style="margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">
+              <i class="fas fa-key" style="color:var(--c-gold);margin-right:8px"></i>Cambiar contraseña
+            </h4>
+            <form id="change-pass-form" novalidate>
+              <div class="form-group" style="margin-bottom:14px">
+                <label>Contraseña actual</label>
+                <input type="password" id="cp-current" placeholder="••••••••" required>
+              </div>
+              <div class="form-group" style="margin-bottom:14px">
+                <label>Nueva contraseña</label>
+                <input type="password" id="cp-new" placeholder="••••••••" minlength="6" required>
+              </div>
+              <div class="form-group" style="margin-bottom:20px">
+                <label>Confirmar nueva contraseña</label>
+                <input type="password" id="cp-confirm" placeholder="••••••••" required>
+              </div>
+              <button type="submit" class="btn btn--primary">
+                <i class="fas fa-lock"></i> Actualizar contraseña
+              </button>
+            </form>
+          </div>
+
+          <div style="margin-top:20px;padding:20px;background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.2);border-radius:var(--radius-lg)">
+            <h4 style="color:var(--c-error);margin-bottom:8px"><i class="fas fa-triangle-exclamation"></i> Zona peligrosa</h4>
+            <p style="font-size:.82rem;color:var(--c-gray);margin-bottom:12px">Limpiar todos los datos de demo (pedidos y clientes de prueba).</p>
+            <button onclick="if(confirm('¿Borrar datos demo? Esta acción no se puede deshacer.')){clearDemoData()}" style="padding:8px 16px;border:1px solid var(--c-error);border-radius:var(--radius-sm);font-size:.82rem;color:var(--c-error);cursor:pointer;background:none">
+              <i class="fas fa-trash"></i> Limpiar datos demo
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+
+</div><!-- /admin-panel -->
+
+<!-- Modal edición rápida -->
+<div id="edit-modal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+      <h3 style="margin:0">Edición rápida</h3>
+      <button onclick="closeEditModal()" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--c-border);display:flex;align-items:center;justify-content:center;cursor:pointer;background:none;font-size:1.1rem">&times;</button>
+    </div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Nombre del producto</label>
+        <input type="text" id="modal-name" style="font-weight:600;font-size:1rem">
+      </div>
+      <div class="form-group">
+        <label>Precio (€)</label>
+        <input type="number" id="modal-price" step="0.01">
+      </div>
+      <div class="form-group">
+        <label>Stock (unidades)</label>
+        <input type="number" id="modal-stock" min="0">
+      </div>
+      <div class="form-group full">
+        <label>Descripción corta</label>
+        <textarea id="modal-description" rows="3"></textarea>
+      </div>
+      <div class="form-group full" style="display:flex;gap:16px">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:.85rem;font-weight:700">
+          <input type="checkbox" id="modal-featured" style="accent-color:var(--c-gold)"> Destacado
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:.85rem;font-weight:700">
+          <input type="checkbox" id="modal-new" style="accent-color:var(--c-gold)"> Nuevo
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:.85rem;font-weight:700">
+          <input type="checkbox" id="modal-sale" style="accent-color:var(--c-gold)"> Oferta
+        </label>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button onclick="saveEditModal()" class="btn btn--gold">Guardar cambios</button>
+      <button onclick="closeEditModal()" class="btn btn--outline">Cancelar</button>
+      <button onclick="deleteProduct(parseInt(document.getElementById('modal-product-id').value))" class="del-btn" style="margin-left:auto;padding:8px 16px">
+        <i class="fas fa-trash"></i> Eliminar
+      </button>
+    </div>
+    <input type="hidden" id="modal-product-id">
+  </div>
+</div>
+
+<!-- Modal encargo personalizado -->
+<div id="custom-order-modal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+      <h3 style="margin:0">Gestionar encargo personalizado</h3>
+      <button onclick="document.getElementById('custom-order-modal').style.display='none'" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--c-border);display:flex;align-items:center;justify-content:center;cursor:pointer;background:none">&times;</button>
+    </div>
+    <div id="custom-order-modal-content"></div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+<script>
+/* ══════════════════════════════════════════
+   PRODUCTOS EN LOCALSTORAGE
+   (extiende el array PRODUCTS de data.js)
+══════════════════════════════════════════ */
+const EXTRA_PRODUCTS_KEY = 'kaos_extra_products';
+const DELETED_IDS_KEY    = 'kaos_deleted_ids';
+
+function getExtraProducts() {
+  try { return JSON.parse(localStorage.getItem(EXTRA_PRODUCTS_KEY)) || []; }
+  catch { return []; }
+}
+function getDeletedIds() {
+  try { return JSON.parse(localStorage.getItem(DELETED_IDS_KEY)) || []; }
+  catch { return []; }
+}
+function getAllProducts() {
+  const deleted = getDeletedIds();
+  const base  = PRODUCTS.filter(p => !deleted.includes(p.id));
+  const extra = getExtraProducts();
+  return [...base, ...extra];
+}
+function saveExtraProduct(p) {
+  const list = getExtraProducts();
+  const idx  = list.findIndex(x => x.id === p.id);
+  if (idx > -1) list[idx] = p; else list.push(p);
+  localStorage.setItem(EXTRA_PRODUCTS_KEY, JSON.stringify(list));
+}
+function updateBaseProduct(p) {
+  /* Para productos del array base, guardamos los cambios en extra con mismo id */
+  saveExtraProduct(p);
+  /* Y los "eliminamos" de la vista base para usar el extra */
+  const deleted = getDeletedIds();
+  const baseIds = PRODUCTS.map(x => x.id);
+  if (baseIds.includes(p.id) && !deleted.includes(p.id)) {
+    deleted.push(p.id);
+    localStorage.setItem(DELETED_IDS_KEY, JSON.stringify(deleted));
+  }
+}
+function removeProduct(id) {
+  /* Extra */
+  const extra = getExtraProducts().filter(p => p.id !== id);
+  localStorage.setItem(EXTRA_PRODUCTS_KEY, JSON.stringify(extra));
+  /* Base */
+  const deleted = getDeletedIds();
+  if (!deleted.includes(id)) deleted.push(id);
+  localStorage.setItem(DELETED_IDS_KEY, JSON.stringify(deleted));
+}
+
+/* ══════════════════════════════════════════
+   LOGIN GATE
+══════════════════════════════════════════ */
+function togglePass() {
+  const inp = document.getElementById('admin-password');
+  const ico = document.getElementById('pass-eye');
+  const isPass = inp.type === 'password';
+  inp.type = isPass ? 'text' : 'password';
+  ico.className = isPass ? 'far fa-eye-slash' : 'far fa-eye';
+}
+
+document.getElementById('admin-login-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const username = document.getElementById('admin-username').value;
+  const password = document.getElementById('admin-password').value;
+  const result = Admin.login(username, password);
+  const errBox = document.getElementById('login-error');
+  if (result.ok) {
+    errBox.style.display = 'none';
+    showAdminPanel();
+  } else {
+    errBox.style.display = 'flex';
+    document.getElementById('login-error-msg').textContent = result.error;
+    document.getElementById('admin-password').value = '';
+  }
+});
+
+function showAdminPanel() {
+  document.getElementById('admin-login-gate').style.display = 'none';
+  document.getElementById('admin-panel').style.display = '';
+  const s = Admin.current();
+  if (s) {
+    document.getElementById('sidebar-avatar').textContent = s.avatar || s.name?.charAt(0) || '?';
+    document.getElementById('sidebar-name').textContent   = s.name || '–';
+    document.getElementById('sidebar-role').textContent   = s.role || 'Admin';
+    document.getElementById('topbar-name').textContent    = s.name || '–';
+    document.getElementById('sec-username').textContent   = s.name || '–';
+    document.getElementById('sec-role').textContent       = s.role || '–';
+    document.getElementById('sec-user-display').textContent = s.username || '–';
+    document.getElementById('sec-login-time').textContent = new Date(s.loginAt).toLocaleString('es-ES');
+  }
+  loadDashboard();
+  checkCustomOrders();
+}
+
+function adminLogout() {
+  Admin.logout();
+  document.getElementById('admin-panel').style.display = 'none';
+  document.getElementById('admin-login-gate').style.display = 'flex';
+  document.getElementById('admin-username').value = '';
+  document.getElementById('admin-password').value = '';
+}
+
+document.getElementById('btn-admin-logout').addEventListener('click', adminLogout);
+
+/* ══════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════ */
+const PAGE_HEADINGS = {
+  dashboard: ['Dashboard', 'Resumen general de Kaos Decoración'],
+  orders: ['Pedidos', 'Historial y gestión de pedidos'],
+  'custom-orders': ['Encargos personalizados', 'Gestiona los pedidos bajo encargo'],
+  products: ['Catálogo', 'Gestiona nombres, precios y stock'],
+  'add-product': ['Nuevo producto', 'Añadir o editar un producto'],
+  categories: ['Categorías', 'Organización del catálogo'],
+  customers: ['Clientes', 'Usuarios registrados en la tienda'],
+  coupons: ['Cupones', 'Códigos de descuento activos'],
+  settings: ['Ajustes', 'Configuración general de la tienda'],
+  security: ['Seguridad', 'Gestión de contraseñas y acceso'],
+};
+
+function switchSection(id) {
+  document.querySelectorAll('.admin-nav-item').forEach(n =>
+    n.classList.toggle('active', n.dataset.section === id)
+  );
+  document.querySelectorAll('.admin-page-section').forEach(s =>
+    s.classList.toggle('active', s.id === `section-${id}`)
+  );
+  const [h, sub] = PAGE_HEADINGS[id] || [id, ''];
+  document.getElementById('page-heading').textContent    = h;
+  document.getElementById('page-subheading').textContent = sub;
+  if (id === 'orders')          renderAllOrders();
+  if (id === 'products')        renderProductsTable();
+  if (id === 'customers')       renderCustomers();
+  if (id === 'categories')      renderCategories();
+  if (id === 'custom-orders')   renderCustomOrders();
+}
+
+document.querySelectorAll('.admin-nav-item[data-section]').forEach(nav =>
+  nav.addEventListener('click', () => switchSection(nav.dataset.section))
+);
+
+/* ══════════════════════════════════════════
+   DASHBOARD
+══════════════════════════════════════════ */
+function loadDashboard() {
+  const orders = JSON.parse(localStorage.getItem(Auth._ordersKey) || '[]');
+  const revenue = orders.reduce((s, o) => s + (o.totals?.total || 0), 0);
+  document.getElementById('stat-revenue').textContent  = formatPrice(revenue);
+  document.getElementById('stat-orders').textContent   = orders.length;
+  document.getElementById('stat-products').textContent = getAllProducts().length;
+  document.getElementById('stat-users').textContent    = (Auth.getUsers?.() || []).length;
+
+  const dashBody = document.getElementById('dash-orders-body');
+  dashBody.innerHTML = orders.slice(0, 6).map(o => `
+    <tr>
+      <td><code style="font-size:.78rem">${o.id}</code></td>
+      <td>${o.customerName || '—'}</td>
+      <td><strong>${formatPrice(o.totals?.total || 0)}</strong></td>
+      <td><span class="order-status ${o.status}">${o.status}</span></td>
+    </tr>
+  `).join('') || '<tr><td colspan="4" style="text-align:center;color:var(--c-gray);padding:20px">Sin pedidos aún</td></tr>';
+
+  const lowStock = getAllProducts().filter(p => p.stock <= 5);
+  document.getElementById('stock-alerts').innerHTML = lowStock.length
+    ? lowStock.map(p => `
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--c-border)">
+        <img src="${p.images?.[0]||''}" style="width:36px;height:36px;border-radius:4px;object-fit:cover">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.82rem;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.name}</div>
+        </div>
+        <span class="stock-badge ${p.stock <= 2 ? 'stock-low':'stock-med'}">${p.stock} uds.</span>
+      </div>`).join('')
+    : '<p style="color:var(--c-gray);font-size:.85rem">✓ Sin alertas de stock</p>';
+}
+
+/* ══════════════════════════════════════════
+   PRODUCTOS — tabla
+══════════════════════════════════════════ */
+function renderProductsTable() {
+  const q   = (document.getElementById('product-search')?.value || '').toLowerCase();
+  const cat = document.getElementById('product-cat-filter')?.value || 'all';
+  let list = getAllProducts();
+  if (cat !== 'all') list = list.filter(p => p.category === cat);
+  if (q) list = list.filter(p =>
+    p.name.toLowerCase().includes(q) || (p.sku||'').toLowerCase().includes(q)
+  );
+  const tbody = document.getElementById('products-table-body');
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--c-gray);padding:28px">Sin productos</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(p => `
+    <tr>
+      <td><img src="${p.images?.[0]||'https://via.placeholder.com/46'}" class="product-thumb" alt="${p.name}" onerror="this.src='https://via.placeholder.com/46'"></td>
+      <td style="max-width:220px">
+        <strong style="display:block;font-size:.88rem">${p.name}</strong>
+        <span style="font-size:.72rem;color:var(--c-gray)">${p.sku||'—'}</span>
+      </td>
+      <td><span style="font-size:.75rem;color:var(--c-gold);font-weight:700;text-transform:uppercase">${p.categoryLabel||p.category}</span></td>
+      <td><strong>${formatPrice(p.price)}</strong>${p.oldPrice?`<br><span style="font-size:.72rem;text-decoration:line-through;color:var(--c-gray)">${formatPrice(p.oldPrice)}</span>`:''}</td>
+      <td><span class="stock-badge ${p.stock>10?'stock-ok':p.stock>4?'stock-med':'stock-low'}">${p.stock} uds.</span></td>
+      <td style="text-align:center">
+        ${p.isFeatured?'<i class="fas fa-star" style="color:var(--c-gold)" title="Destacado"></i>':''}&nbsp;
+        ${p.isNew?'<span style="font-size:.68rem;background:var(--c-primary);color:#fff;padding:1px 6px;border-radius:8px">Nuevo</span>':''}
+      </td>
+      <td>
+        <div style="display:flex;gap:6px">
+          <button class="act-btn" onclick="openEditModal(${p.id})" title="Editar"><i class="fas fa-edit"></i></button>
+          <button class="act-btn" onclick="openFullEdit(${p.id})" title="Editar completo"><i class="fas fa-expand-alt"></i></button>
+          <a href="producto.html?id=${p.id}" class="act-btn" target="_blank" title="Ver en tienda" style="text-decoration:none"><i class="fas fa-eye"></i></a>
+          <button class="del-btn" onclick="deleteProduct(${p.id})" title="Eliminar"><i class="fas fa-trash"></i></button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+/* ══════════════════════════════════════════
+   MODAL EDICIÓN RÁPIDA
+══════════════════════════════════════════ */
+function openEditModal(id) {
+  const all = getAllProducts();
+  const p = all.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('modal-product-id').value  = id;
+  document.getElementById('modal-name').value        = p.name;
+  document.getElementById('modal-price').value       = p.price;
+  document.getElementById('modal-stock').value       = p.stock;
+  document.getElementById('modal-description').value = p.description;
+  document.getElementById('modal-featured').checked  = !!p.isFeatured;
+  document.getElementById('modal-new').checked       = !!p.isNew;
+  document.getElementById('modal-sale').checked      = !!p.isOnSale;
+  document.getElementById('edit-modal').style.display = 'flex';
+}
+
+function closeEditModal() { document.getElementById('edit-modal').style.display = 'none'; }
+
+function saveEditModal() {
+  const id = parseInt(document.getElementById('modal-product-id').value);
+  const all = getAllProducts();
+  const p = all.find(x => x.id === id);
+  if (!p) return;
+  p.name        = document.getElementById('modal-name').value;
+  p.price       = parseFloat(document.getElementById('modal-price').value) || p.price;
+  p.stock       = parseInt(document.getElementById('modal-stock').value) || 0;
+  p.description = document.getElementById('modal-description').value;
+  p.isFeatured  = document.getElementById('modal-featured').checked;
+  p.isNew       = document.getElementById('modal-new').checked;
+  p.isOnSale    = document.getElementById('modal-sale').checked;
+  updateBaseProduct(p);
+  closeEditModal();
+  renderProductsTable();
+  showToast(`"${p.name}" actualizado ✓`, 'success');
+}
+
+/* ══════════════════════════════════════════
+   EDICIÓN COMPLETA (carga formulario)
+══════════════════════════════════════════ */
+function openFullEdit(id) {
+  const p = getAllProducts().find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('edit-product-id').value     = id;
+  document.getElementById('form-product-title').textContent = 'Editar: ' + p.name;
+  document.getElementById('form-submit-label').textContent  = 'Guardar cambios';
+  document.getElementById('pf-name').value             = p.name;
+  document.getElementById('pf-category').value         = p.category;
+  document.getElementById('pf-sku').value              = p.sku || '';
+  document.getElementById('pf-price').value            = p.price;
+  document.getElementById('pf-old-price').value        = p.oldPrice || '';
+  document.getElementById('pf-stock').value            = p.stock;
+  document.getElementById('pf-rating').value           = p.rating || '';
+  document.getElementById('pf-description').value      = p.description || '';
+  document.getElementById('pf-long-description').value = p.longDescription || '';
+  document.getElementById('pf-material').value         = p.material || '';
+  document.getElementById('pf-dimensions').value       = p.dimensions || '';
+  document.getElementById('pf-weight').value           = p.weight || '';
+  document.getElementById('pf-colors').value           = (p.colorNames||[]).join(', ');
+  document.getElementById('pf-featured').checked       = !!p.isFeatured;
+  document.getElementById('pf-new').checked            = !!p.isNew;
+  document.getElementById('pf-sale').checked           = !!p.isOnSale;
+  document.getElementById('pf-custom').checked         = !!p.isCustomizable;
+  /* Imágenes */
+  currentImages = [...(p.images || [])];
+  document.getElementById('pf-images-json').value = JSON.stringify(currentImages);
+  renderImagePreviews();
+  ['lbl-featured','lbl-new','lbl-sale','lbl-custom'].forEach(id => {
+    const cb = document.getElementById(id.replace('lbl-','pf-'));
+    styleCheckLabel(id, cb);
+  });
+  switchSection('add-product');
+}
+
+/* ══════════════════════════════════════════
+   ELIMINAR PRODUCTO
+══════════════════════════════════════════ */
+function deleteProduct(id) {
+  const p = getAllProducts().find(x => x.id === id);
+  if (!p) return;
+  if (!confirm(`¿Eliminar "${p.name}"? Esta acción no se puede deshacer.`)) return;
+  removeProduct(id);
+  closeEditModal();
+  renderProductsTable();
+  showToast(`"${p.name}" eliminado`, 'info');
+}
+
+/* ══════════════════════════════════════════
+   IMAGEN UPLOAD
+══════════════════════════════════════════ */
+let currentImages = [];
+
+function handleImageFiles(files) {
+  [...files].forEach(file => {
+    if (currentImages.length >= 4) { showToast('Máximo 4 imágenes por producto', 'error'); return; }
+    const reader = new FileReader();
+    reader.onload = e => { currentImages.push(e.target.result); renderImagePreviews(); };
+    reader.readAsDataURL(file);
+  });
+}
+
+function handleImageDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.remove('dragover');
+  handleImageFiles(e.dataTransfer.files);
+}
+
+function addImageUrl() {
+  const url = document.getElementById('pf-image-url').value.trim();
+  if (!url) return;
+  if (currentImages.length >= 4) { showToast('Máximo 4 imágenes','error'); return; }
+  currentImages.push(url);
+  renderImagePreviews();
+  document.getElementById('pf-image-url').value = '';
+}
+
+function renderImagePreviews() {
+  const grid = document.getElementById('img-preview-grid');
+  document.getElementById('pf-images-json').value = JSON.stringify(currentImages);
+  if (!currentImages.length) { grid.style.display = 'none'; return; }
+  grid.style.display = 'grid';
+  grid.innerHTML = currentImages.map((src, i) => `
+    <div class="img-preview-item">
+      <img src="${src}" onerror="this.src='https://via.placeholder.com/80'">
+      ${i === 0 ? '<span style="position:absolute;bottom:4px;left:4px;background:var(--c-gold);color:#fff;font-size:.65rem;padding:1px 6px;border-radius:8px;font-weight:700">Principal</span>' : ''}
+      <div class="remove-img" onclick="removeImage(${i})"><i class="fas fa-times"></i></div>
+    </div>
+  `).join('');
+}
+
+function removeImage(idx) {
+  currentImages.splice(idx, 1);
+  renderImagePreviews();
+}
+
+/* ══════════════════════════════════════════
+   FORMULARIO NUEVO / EDITAR PRODUCTO
+══════════════════════════════════════════ */
+function styleCheckLabel(lblId, cb) {
+  const lbl = document.getElementById(lblId);
+  if (lbl) lbl.style.borderColor = cb.checked ? 'var(--c-gold)' : 'var(--c-border)';
+}
+
+document.querySelectorAll('#product-form input[type=checkbox]').forEach(cb => {
+  cb.addEventListener('change', function() {
+    const lbl = this.closest('label');
+    if (lbl) lbl.style.borderColor = this.checked ? 'var(--c-gold)' : 'var(--c-border)';
+  });
+});
+
+document.getElementById('product-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const editId = parseInt(document.getElementById('edit-product-id').value) || null;
+  const catVal = document.getElementById('pf-category').value;
+  const catLabels = { lamparas:'Lámparas', bolsos:'Bolsos', decoracion:'Decoración', personalizados:'Personalizados' };
+  const images = JSON.parse(document.getElementById('pf-images-json').value || '[]');
+  if (!images.length) {
+    showToast('Añade al menos una imagen al producto', 'error'); return;
+  }
+  const product = {
+    id:              editId || (Date.now()),
+    name:            document.getElementById('pf-name').value.trim(),
+    slug:            document.getElementById('pf-name').value.trim().toLowerCase().replace(/\s+/g,'-').replace(/[^\w-]/g,''),
+    category:        catVal,
+    categoryLabel:   catLabels[catVal] || catVal,
+    price:           parseFloat(document.getElementById('pf-price').value) || 0,
+    oldPrice:        parseFloat(document.getElementById('pf-old-price').value) || null,
+    description:     document.getElementById('pf-description').value.trim(),
+    longDescription: document.getElementById('pf-long-description').value.trim(),
+    images,
+    stock:           parseInt(document.getElementById('pf-stock').value) || 0,
+    rating:          parseFloat(document.getElementById('pf-rating').value) || 4.5,
+    reviewCount:     0,
+    tags:            [],
+    isNew:           document.getElementById('pf-new').checked,
+    isFeatured:      document.getElementById('pf-featured').checked,
+    isOnSale:        document.getElementById('pf-sale').checked,
+    isCustomizable:  document.getElementById('pf-custom').checked,
+    material:        document.getElementById('pf-material').value,
+    dimensions:      document.getElementById('pf-dimensions').value,
+    weight:          document.getElementById('pf-weight').value,
+    colorNames:      document.getElementById('pf-colors').value.split(',').map(s=>s.trim()).filter(Boolean),
+    sku:             document.getElementById('pf-sku').value.trim() || `KAO-${catVal.slice(0,3).toUpperCase()}-${Date.now().toString(36).toUpperCase().slice(-4)}`
+  };
+
+  if (editId) {
+    updateBaseProduct(product);
+    showToast(`"${product.name}" actualizado ✓`, 'success');
+  } else {
+    saveExtraProduct(product);
+    showToast(`"${product.name}" añadido al catálogo ✓`, 'success');
+  }
+  resetProductForm();
+  switchSection('products');
+});
+
+function resetProductForm() {
+  document.getElementById('product-form').reset();
+  document.getElementById('edit-product-id').value = '';
+  document.getElementById('form-product-title').textContent = 'Añadir nuevo producto';
+  document.getElementById('form-submit-label').textContent  = 'Guardar producto';
+  currentImages = [];
+  renderImagePreviews();
+  ['lbl-featured','lbl-new','lbl-sale','lbl-custom'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.borderColor = 'var(--c-border)';
+  });
+}
+
+/* ══════════════════════════════════════════
+   ENCARGOS PERSONALIZADOS
+══════════════════════════════════════════ */
+function checkCustomOrders() {
+  const orders = JSON.parse(localStorage.getItem(Auth._ordersKey) || '[]');
+  const custom = orders.filter(o =>
+    o.items?.some(i => getProductById(i.productId)?.isCustomizable)
+  );
+  const badge = document.getElementById('custom-orders-badge');
+  if (custom.length) { badge.textContent = custom.length; badge.style.display = ''; }
+  else badge.style.display = 'none';
+}
+
+function renderCustomOrders() {
+  const orders = JSON.parse(localStorage.getItem(Auth._ordersKey) || '[]');
+  const custom = orders.filter(o =>
+    o.items?.some(i => {
+      const p = getProductById(i.productId) || getAllProducts().find(x => x.id === i.productId);
+      return p?.isCustomizable;
+    })
+  );
+  const container = document.getElementById('custom-orders-list');
+  if (!custom.length) {
+    container.innerHTML = `
+      <div class="empty-state" style="padding:60px 0">
+        <i class="fas fa-wand-magic-sparkles"></i>
+        <h3>Sin encargos pendientes</h3>
+        <p>Cuando un cliente haga un pedido personalizado aparecerá aquí.</p>
+      </div>`;
+    return;
+  }
+  container.innerHTML = custom.map(o => `
+    <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:24px;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+        <div>
+          <strong style="font-size:1rem">${o.id}</strong>
+          <span class="order-status ${o.status}" style="margin-left:10px">${o.status}</span>
+        </div>
+        <div style="text-align:right;font-size:.82rem;color:var(--c-gray)">
+          ${new Date(o.createdAt).toLocaleDateString('es-ES')} · <strong>${o.customerName}</strong><br>
+          ${o.customerEmail}
+        </div>
+      </div>
+      ${o.items.map(item => {
+        const p = getAllProducts().find(x => x.id === item.productId) || getProductById(item.productId);
+        if (!p?.isCustomizable) return '';
+        const noteKey = `custom_note_${o.id}_${item.productId}`;
+        const nameKey = `custom_pname_${o.id}_${item.productId}`;
+        const savedNote = localStorage.getItem(noteKey) || '';
+        const savedName = localStorage.getItem(nameKey) || '';
+        return `
+          <div style="background:var(--c-light-gray);border-radius:var(--radius-md);padding:16px;margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+              <img src="${p.images?.[0]||''}" style="width:52px;height:52px;border-radius:6px;object-fit:cover">
+              <div>
+                <strong>${p.name}</strong> × ${item.qty}
+                <div style="font-size:.78rem;color:var(--c-gray)">
+                  Nota del cliente: <em>"${item.customNote || o.shipping?.notes || 'Sin especificar'}"</em>
+                </div>
+              </div>
+              <strong style="margin-left:auto">${formatPrice(item.price * item.qty)}</strong>
+            </div>
+            <div class="form-grid" style="gap:12px">
+              <div class="form-group">
+                <label style="font-size:.8rem">Nombre definitivo del producto</label>
+                <input type="text" id="${nameKey}" value="${savedName}" placeholder="Ej: Cartel madera 'García'"
+                  style="padding:8px 12px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);font-size:.88rem;outline:none;width:100%">
+              </div>
+              <div class="form-group">
+                <label style="font-size:.8rem">Notas de producción internas</label>
+                <input type="text" id="${noteKey}" value="${savedNote}" placeholder="Ej: Fuente cursiva, 22mm, haya natural"
+                  style="padding:8px 12px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);font-size:.88rem;outline:none;width:100%">
+              </div>
+            </div>
+            <button onclick="saveCustomNote('${noteKey}','${nameKey}')" class="btn btn--gold btn--sm" style="margin-top:10px">
+              <i class="fas fa-save"></i> Guardar notas
+            </button>
+          </div>`;
+      }).join('')}
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <select onchange="updateOrderStatus('${o.id}',this.value)" style="padding:7px 12px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);font-size:.82rem;outline:none">
+          <option ${o.status==='procesando'?'selected':''} value="procesando">Procesando</option>
+          <option ${o.status==='en_produccion'?'selected':''} value="en_produccion">En producción</option>
+          <option ${o.status==='enviado'?'selected':''} value="enviado">Enviado</option>
+          <option ${o.status==='entregado'?'selected':''} value="entregado">Entregado</option>
+        </select>
+        <span style="font-size:.8rem;color:var(--c-gray)">← Cambia el estado del pedido</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function saveCustomNote(noteKey, nameKey) {
+  const note = document.getElementById(noteKey)?.value;
+  const name = document.getElementById(nameKey)?.value;
+  if (note !== undefined) localStorage.setItem(noteKey, note);
+  if (name !== undefined) localStorage.setItem(nameKey, name);
+  showToast('Notas guardadas ✓', 'success');
+}
+
+/* ══════════════════════════════════════════
+   PEDIDOS
+══════════════════════════════════════════ */
+function renderAllOrders() {
+  const filter = document.getElementById('order-status-filter')?.value || 'all';
+  let orders = JSON.parse(localStorage.getItem(Auth._ordersKey) || '[]');
+  if (filter !== 'all') orders = orders.filter(o => o.status === filter);
+  const tbody = document.getElementById('all-orders-body');
+  if (!orders.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--c-gray);padding:28px">Sin pedidos</td></tr>'; return;
+  }
+  tbody.innerHTML = orders.map(o => `
+    <tr>
+      <td><code style="font-size:.78rem">${o.id}</code></td>
+      <td>${o.customerName||'—'}</td>
+      <td style="font-size:.8rem">${o.customerEmail||'—'}</td>
+      <td style="font-size:.8rem;color:var(--c-gray)">${new Date(o.createdAt).toLocaleDateString('es-ES')}</td>
+      <td><strong>${formatPrice(o.totals?.total||0)}</strong></td>
+      <td>
+        <select onchange="updateOrderStatus('${o.id}',this.value)" style="font-size:.78rem;padding:4px 8px;border:1px solid var(--c-border);border-radius:4px;outline:none">
+          <option ${o.status==='procesando'?'selected':''} value="procesando">Procesando</option>
+          <option ${o.status==='en_produccion'?'selected':''} value="en_produccion">En producción</option>
+          <option ${o.status==='enviado'?'selected':''} value="enviado">Enviado</option>
+          <option ${o.status==='entregado'?'selected':''} value="entregado">Entregado</option>
+          <option ${o.status==='cancelado'?'selected':''} value="cancelado">Cancelado</option>
+        </select>
+      </td>
+      <td><button class="act-btn" onclick="showToast('Detalle completo próximamente','info')"><i class="fas fa-eye"></i></button></td>
+    </tr>
+  `).join('');
+}
+
+function updateOrderStatus(orderId, newStatus) {
+  try {
+    const all = JSON.parse(localStorage.getItem(Auth._ordersKey) || '[]');
+    const idx = all.findIndex(o => o.id === orderId);
+    if (idx > -1) { all[idx].status = newStatus; localStorage.setItem(Auth._ordersKey, JSON.stringify(all)); }
+    showToast(`Pedido ${orderId} → ${newStatus} ✓`, 'success');
+  } catch { showToast('Error al actualizar', 'error'); }
+}
+
+/* ══════════════════════════════════════════
+   CLIENTES
+══════════════════════════════════════════ */
+function renderCustomers() {
+  const users = Auth.getUsers?.() || [];
+  const tbody = document.getElementById('customers-tbody');
+  if (!users.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--c-gray);padding:28px">Sin clientes aún</td></tr>'; return;
+  }
+  const allOrders = JSON.parse(localStorage.getItem(Auth._ordersKey) || '[]');
+  tbody.innerHTML = users.map(u => {
+    const count = allOrders.filter(o => o.userId === u.id).length;
+    return `<tr>
+      <td><div style="width:36px;height:36px;border-radius:50%;background:var(--c-primary);color:var(--c-gold);font-weight:700;display:flex;align-items:center;justify-content:center">${u.avatar||u.name?.charAt(0)||'U'}</div></td>
+      <td><strong>${u.name||'—'}</strong></td>
+      <td style="font-size:.85rem;color:var(--c-gray)">${u.email}</td>
+      <td style="font-size:.82rem;color:var(--c-gray)">${new Date(u.createdAt).toLocaleDateString('es-ES')}</td>
+      <td><span class="stock-badge stock-ok">${count} pedido${count!==1?'s':''}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+/* ══════════════════════════════════════════
+   CATEGORÍAS
+══════════════════════════════════════════ */
+function renderCategories() {
+  const all = getAllProducts();
+  const grid = document.getElementById('categories-admin-grid');
+  if (!grid) return;
+  grid.innerHTML = [
+    {id:'lamparas',label:'Lámparas',icon:'lightbulb'},
+    {id:'bolsos',label:'Bolsos',icon:'bag-shopping'},
+    {id:'decoracion',label:'Decoración',icon:'palette'},
+    {id:'personalizados',label:'Personalizados',icon:'wand-magic-sparkles'}
+  ].map(cat => {
+    const count = all.filter(p => p.category === cat.id).length;
+    return `
+      <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:24px;display:flex;gap:16px;align-items:center">
+        <div style="width:52px;height:52px;border-radius:var(--radius-md);background:var(--c-primary);color:var(--c-gold);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">
+          <i class="fas fa-${cat.icon}"></i>
+        </div>
+        <div style="flex:1">
+          <strong style="display:block;margin-bottom:4px">${cat.label}</strong>
+          <span style="font-size:.82rem;color:var(--c-gray)">${count} producto${count!==1?'s':''}</span>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="act-btn" onclick="switchSection('products');setTimeout(()=>{document.getElementById('product-cat-filter').value='${cat.id}';renderProductsTable();},50)">Ver</button>
+          <button class="act-btn" onclick="switchSection('add-product');document.getElementById('pf-category').value='${cat.id}'">+ Añadir</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+/* ══════════════════════════════════════════
+   CUPONES
+══════════════════════════════════════════ */
+function createCoupon() {
+  const code  = document.getElementById('new-coupon-code').value.trim().toUpperCase();
+  const type  = document.getElementById('new-coupon-type').value;
+  const value = document.getElementById('new-coupon-value').value;
+  if (!code || !value) { showToast('Rellena el código y el valor','error'); return; }
+  DISCOUNT_CODES[code] = { type, value: parseFloat(value), label: `${value}${type==='percent'?'%':'€'} descuento` };
+  showToast(`Cupón "${code}" creado ✓`, 'success');
+  document.getElementById('new-coupon-code').value = '';
+  document.getElementById('new-coupon-value').value = '';
+}
+
+/* ══════════════════════════════════════════
+   CAMBIAR CONTRASEÑA
+══════════════════════════════════════════ */
+document.getElementById('change-pass-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const current = document.getElementById('cp-current').value;
+  const newPass  = document.getElementById('cp-new').value;
+  const confirm  = document.getElementById('cp-confirm').value;
+  if (newPass !== confirm) { showToast('Las contraseñas no coinciden','error'); return; }
+  if (newPass.length < 6)  { showToast('Mínimo 6 caracteres','error'); return; }
+  const result = Admin.changePassword(current, newPass);
+  if (result.ok) {
+    showToast('Contraseña actualizada correctamente ✓','success');
+    this.reset();
+  } else {
+    showToast(result.error, 'error');
+  }
+});
+
+/* ══════════════════════════════════════════
+   LIMPIAR DATOS DEMO
+══════════════════════════════════════════ */
+function clearDemoData() {
+  localStorage.removeItem(Auth._ordersKey);
+  localStorage.removeItem(Auth._usersKey);
+  showToast('Datos demo eliminados. Recarga.','success');
+  setTimeout(() => location.reload(), 1500);
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  if (Admin.isLoggedIn()) showAdminPanel();
+  /* Mostrar toggle sidebar en móvil */
+  if (window.innerWidth < 960) {
+    const t = document.getElementById('sidebar-toggle');
+    if (t) t.style.display = '';
+  }
+});
+</script>
+</body>
+</html>

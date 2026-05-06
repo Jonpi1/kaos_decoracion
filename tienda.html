@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda — Kaos Decoración</title>
+  <meta name="description" content="Explora nuestro catálogo completo de artesanía: lámparas, bolsos, decoración y productos personalizados. Piezas únicas hechas a mano en Madrid.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%232C1A0E'/><text y='.9em' font-size='70' x='15' fill='%23C9A96E'>K</text></svg>">
+</head>
+<body>
+
+<div id="loading-overlay" class="loading-overlay">
+  <div class="loader"></div>
+  <span class="script" style="font-size:1.2rem">Kaos Decoración</span>
+</div>
+
+<div id="promo-bar" class="promo-bar">
+  🎁 Envío gratuito en pedidos +80€ · Código <strong>KAOS10</strong> = 10% descuento
+  <span class="close-promo"><i class="fas fa-times"></i></span>
+</div>
+
+<header id="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">K</div>
+        <div class="logo-text"><strong>Kaos Decoración</strong><span>Artesanía · Madrid</span></div>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="tienda.html" class="active">Tienda</a>
+        <a href="tienda.html?cat=lamparas">Lámparas</a>
+        <a href="tienda.html?cat=bolsos">Bolsos</a>
+        <a href="tienda.html?cat=decoracion">Decoración</a>
+        <a href="sobre-nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <div id="search-bar" class="search-bar">
+          <input type="text" id="search-input" placeholder="Buscar...">
+          <button><i class="fas fa-search"></i></button>
+        </div>
+        <button id="search-toggle" class="action-btn"><i class="fas fa-search"></i></button>
+        <a href="cuenta.html" id="btn-login" class="action-btn"><i class="far fa-user"></i></a>
+        <a href="cuenta.html" id="btn-user" class="action-btn" style="display:none"><i class="fas fa-user-circle"></i></a>
+        <a href="carrito.html" class="action-btn" style="position:relative">
+          <i class="fas fa-shopping-bag"></i><span class="cart-count">0</span>
+        </a>
+        <button id="menu-toggle" class="menu-toggle"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav id="mobile-nav" class="mobile-nav">
+  <a href="index.html">Inicio</a>
+  <a href="tienda.html">Tienda</a>
+  <a href="tienda.html?cat=lamparas">Lámparas</a>
+  <a href="tienda.html?cat=bolsos">Bolsos</a>
+  <a href="tienda.html?cat=decoracion">Decoración</a>
+  <a href="tienda.html?cat=personalizados">Personalizados</a>
+  <a href="sobre-nosotros.html">Sobre Nosotros</a>
+  <a href="contacto.html">Contacto</a>
+</nav>
+
+<div class="page-content">
+  <div class="page-banner">
+    <h1>Nuestra Tienda</h1>
+    <p>Piezas artesanales únicas, hechas a mano con amor en Madrid</p>
+    <div class="breadcrumb">
+      <a href="index.html">Inicio</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current" id="breadcrumb-current">Tienda</span>
+    </div>
+  </div>
+
+  <section style="padding: 56px 0 96px">
+    <div class="container">
+      <div class="shop-header">
+        <div class="shop-filters" id="shop-filters">
+          <button class="filter-btn active" data-cat="all">Todos</button>
+          <button class="filter-btn" data-cat="lamparas"><i class="fas fa-lightbulb"></i> Lámparas</button>
+          <button class="filter-btn" data-cat="bolsos"><i class="fas fa-bag-shopping"></i> Bolsos</button>
+          <button class="filter-btn" data-cat="decoracion"><i class="fas fa-palette"></i> Decoración</button>
+          <button class="filter-btn" data-cat="personalizados"><i class="fas fa-wand-magic-sparkles"></i> Personalizados</button>
+          <button class="filter-btn" data-cat="new"><i class="fas fa-sparkles"></i> Nuevos</button>
+          <button class="filter-btn" data-cat="sale"><i class="fas fa-tag"></i> Ofertas</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+          <span class="shop-meta" id="product-count">20 productos</span>
+          <div class="shop-sort">
+            <select id="sort-select" aria-label="Ordenar por">
+              <option value="featured">Destacados</option>
+              <option value="price-asc">Precio: menor a mayor</option>
+              <option value="price-desc">Precio: mayor a menor</option>
+              <option value="rating">Mejor valorados</option>
+              <option value="newest">Más recientes</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="products-grid products-grid--3" id="products-grid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div id="no-results" style="display:none">
+        <div class="empty-state">
+          <i class="fas fa-search"></i>
+          <h3>Sin resultados</h3>
+          <p>No encontramos productos que coincidan con tu búsqueda. Prueba con otros términos o explora todas las categorías.</p>
+          <button class="btn btn--primary" onclick="resetFilters()">Ver todos los productos</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-content reveal">
+        <span class="eyebrow">Novedades semanales</span>
+        <h2>¿Quieres ser el primero?</h2>
+        <p>Suscríbete y recibe las nuevas colecciones antes que nadie, junto con descuentos exclusivos.</p>
+        <form class="newsletter-form" novalidate>
+          <input type="email" placeholder="Tu email" required>
+          <button type="submit" class="btn btn--gold">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-mark">K</div>
+            <div class="logo-text"><strong>Kaos Decoración</strong><span>Artesanía · Madrid</span></div>
+          </a>
+          <p>Taller artesanal en el corazón de Madrid.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-pinterest"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Categorías</h5>
+          <a href="tienda.html?cat=lamparas">Lámparas</a>
+          <a href="tienda.html?cat=bolsos">Bolsos</a>
+          <a href="tienda.html?cat=decoracion">Decoración</a>
+          <a href="tienda.html?cat=personalizados">Personalizados</a>
+        </div>
+        <div class="footer-col">
+          <h5>Ayuda</h5>
+          <a href="faq.html">FAQ</a>
+          <a href="contacto.html">Contacto</a>
+          <a href="#">Envíos y devoluciones</a>
+          <a href="#">Aviso legal</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contacto</h5>
+          <a href="tel:+34912345678"><i class="fas fa-phone" style="color:var(--c-gold);margin-right:6px"></i>+34 912 345 678</a>
+          <a href="mailto:hola@kaos.es"><i class="fas fa-envelope" style="color:var(--c-gold);margin-right:6px"></i>hola@kaos.es</a>
+          <a href="#"><i class="fas fa-location-dot" style="color:var(--c-gold);margin-right:6px"></i>Lavapiés, Madrid</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Kaos Decoración · Madrid, España</span>
+        <div class="footer-payment">
+          <span class="payment-badge">VISA</span><span class="payment-badge">Mastercard</span>
+          <span class="payment-badge">PayPal</span><span class="payment-badge">SSL</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+<script>
+let currentProducts = getAllProducts();
+
+function getFilteredProducts(cat, query, sort) {
+  let list = getAllProducts();
+  if (cat === 'new') list = list.filter(p => p.isNew);
+  else if (cat === 'sale') list = list.filter(p => p.isOnSale);
+  else if (cat && cat !== 'all') list = list.filter(p => p.category === cat);
+  if (query) {
+    const q = query.toLowerCase();
+    list = list.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.description.toLowerCase().includes(q) ||
+      p.tags.some(t => t.includes(q))
+    );
+  }
+  switch (sort) {
+    case 'price-asc':  list.sort((a,b) => a.price - b.price); break;
+    case 'price-desc': list.sort((a,b) => b.price - a.price); break;
+    case 'rating':     list.sort((a,b) => b.rating - a.rating); break;
+    case 'newest':     list.sort((a,b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0)); break;
+    default: list.sort((a,b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0));
+  }
+  return list;
+}
+
+function renderProducts(list) {
+  const grid = document.getElementById('products-grid');
+  const noRes = document.getElementById('no-results');
+  const count = document.getElementById('product-count');
+  if (count) count.textContent = `${list.length} producto${list.length !== 1 ? 's' : ''}`;
+  if (!list.length) {
+    grid.innerHTML = '';
+    noRes.style.display = '';
+    return;
+  }
+  noRes.style.display = 'none';
+  grid.innerHTML = list.map(p => renderProductCard(p)).join('');
+  initReveal();
+  initWishlistBtn();
+}
+
+function resetFilters() {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === 'all'));
+  document.getElementById('sort-select').value = 'featured';
+  renderProducts(getFilteredProducts('all', '', 'featured'));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(location.search);
+  const catParam = params.get('cat') || 'all';
+  const qParam = params.get('q') || '';
+  const saleParam = params.get('sale');
+
+  let activeCat = catParam;
+  if (saleParam) activeCat = 'sale';
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.cat === activeCat);
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      renderProducts(getFilteredProducts(this.dataset.cat, '', document.getElementById('sort-select').value));
+      const bc = document.getElementById('breadcrumb-current');
+      if (bc) bc.textContent = this.textContent.trim() || 'Tienda';
+      history.replaceState({}, '', `tienda.html?cat=${this.dataset.cat}`);
+    });
+  });
+
+  document.getElementById('sort-select').addEventListener('change', function() {
+    const activeCat = document.querySelector('.filter-btn.active')?.dataset.cat || 'all';
+    renderProducts(getFilteredProducts(activeCat, '', this.value));
+  });
+
+  if (qParam) {
+    document.getElementById('search-input').value = qParam;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === 'all'));
+  }
+  renderProducts(getFilteredProducts(activeCat, qParam, 'featured'));
+
+  const bc = document.getElementById('breadcrumb-current');
+  const catObj = CATEGORIES.find(c => c.id === catParam);
+  if (bc && catObj) bc.textContent = catObj.label;
+});
+</script>
+</body>
+</html>

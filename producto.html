@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Producto — Kaos Decoración</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%232C1A0E'/><text y='.9em' font-size='70' x='15' fill='%23C9A96E'>K</text></svg>">
+</head>
+<body>
+<div id="loading-overlay" class="loading-overlay"><div class="loader"></div><span class="script" style="font-size:1.2rem">Kaos Decoración</span></div>
+<div id="promo-bar" class="promo-bar">🎁 Envío gratuito +80€ · Código <strong>KAOS10</strong> = 10% dto.<span class="close-promo"><i class="fas fa-times"></i></span></div>
+
+<header id="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">K</div>
+        <div class="logo-text"><strong>Kaos Decoración</strong><span>Artesanía · Madrid</span></div>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="tienda.html" class="active">Tienda</a>
+        <a href="tienda.html?cat=lamparas">Lámparas</a>
+        <a href="tienda.html?cat=bolsos">Bolsos</a>
+        <a href="tienda.html?cat=decoracion">Decoración</a>
+        <a href="sobre-nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <div id="search-bar" class="search-bar"><input type="text" id="search-input" placeholder="Buscar..."><button><i class="fas fa-search"></i></button></div>
+        <button id="search-toggle" class="action-btn"><i class="fas fa-search"></i></button>
+        <a href="cuenta.html" id="btn-login" class="action-btn"><i class="far fa-user"></i></a>
+        <a href="cuenta.html" id="btn-user" class="action-btn" style="display:none"><i class="fas fa-user-circle"></i></a>
+        <a href="carrito.html" class="action-btn" style="position:relative"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+        <button id="menu-toggle" class="menu-toggle"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+<nav id="mobile-nav" class="mobile-nav">
+  <a href="index.html">Inicio</a><a href="tienda.html">Tienda</a>
+  <a href="tienda.html?cat=lamparas">Lámparas</a><a href="tienda.html?cat=bolsos">Bolsos</a>
+  <a href="tienda.html?cat=decoracion">Decoración</a><a href="sobre-nosotros.html">Sobre Nosotros</a>
+</nav>
+
+<div class="page-content">
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="index.html">Inicio</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="tienda.html">Tienda</a>
+        <i class="fas fa-chevron-right"></i>
+        <span id="bc-category">Categoría</span>
+        <i class="fas fa-chevron-right"></i>
+        <span id="bc-product" style="color:var(--c-primary);font-weight:600">Producto</span>
+      </nav>
+    </div>
+  </div>
+
+  <section class="product-detail">
+    <div class="container">
+      <div id="product-not-found" style="display:none">
+        <div class="empty-state">
+          <i class="fas fa-box-open"></i>
+          <h3>Producto no encontrado</h3>
+          <p>El producto que buscas no existe o ha sido eliminado.</p>
+          <a href="tienda.html" class="btn btn--primary">Ver toda la tienda</a>
+        </div>
+      </div>
+
+      <div id="product-content" class="product-detail-grid">
+        <!-- Gallery -->
+        <div class="product-gallery" id="product-gallery">
+          <div class="gallery-main">
+            <img id="gallery-main-img" src="" alt="" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="gallery-thumbs" id="gallery-thumbs"></div>
+        </div>
+
+        <!-- Info -->
+        <div class="product-info" id="product-info">
+          <div class="breadcrumb" style="margin-bottom:16px">
+            <a href="tienda.html" style="color:var(--c-gray)">Tienda</a>
+            <i class="fas fa-chevron-right" style="font-size:.6rem;color:var(--c-gray)"></i>
+            <a id="info-category-link" href="tienda.html" style="color:var(--c-gray)"></a>
+          </div>
+          <div class="product-badges" style="position:static;margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap" id="product-badges"></div>
+          <h1 id="product-name" style="font-size:2rem;margin-bottom:12px"></h1>
+
+          <div class="product-rating" style="margin-bottom:20px">
+            <div class="stars" id="product-stars"></div>
+            <span class="rating-count" id="product-reviews"></span>
+            <span style="font-size:.8rem;color:var(--c-gray);margin-left:8px" id="product-stock-badge"></span>
+          </div>
+
+          <div class="product-price-big">
+            <span class="price" id="product-price"></span>
+            <span class="price-old" id="product-old-price" style="display:none"></span>
+            <span class="price-discount" id="product-discount" style="display:none"></span>
+          </div>
+
+          <p class="product-description" id="product-description"></p>
+
+          <!-- Color selector -->
+          <div class="product-options" id="color-selector" style="display:none">
+            <div class="option-label">Color: <span id="selected-color-name" style="font-weight:400;color:var(--c-gray)"></span></div>
+            <div class="color-options" id="color-options"></div>
+          </div>
+
+          <!-- Custom note -->
+          <div id="custom-note" style="display:none;margin-bottom:24px">
+            <div class="option-label" style="margin-bottom:8px"><i class="fas fa-wand-magic-sparkles" style="color:var(--c-gold)"></i> Personalización</div>
+            <textarea id="custom-text" placeholder="Describe tu personalización (nombre, fecha, colores deseados...)"
+              style="width:100%;padding:12px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);resize:vertical;min-height:80px;font-family:inherit;font-size:.9rem;outline:none"></textarea>
+          </div>
+
+          <!-- Qty + CTA -->
+          <div style="margin-bottom:28px">
+            <div class="option-label" style="margin-bottom:10px">Cantidad</div>
+            <div class="qty-selector">
+              <button class="qty-minus" type="button">−</button>
+              <input type="number" id="qty-input" value="1" min="1" max="99" style="width:56px;height:44px;text-align:center;border:none;border-left:1.5px solid var(--c-border);border-right:1.5px solid var(--c-border);font-size:1rem;font-weight:700;outline:none">
+              <button class="qty-plus" type="button">+</button>
+            </div>
+          </div>
+
+          <div class="product-cta">
+            <button class="btn btn--primary btn--lg" id="btn-add-cart">
+              <i class="fas fa-shopping-bag"></i> Añadir al carrito
+            </button>
+            <button class="btn btn--gold btn--lg" id="btn-buy-now">
+              Comprar ahora
+            </button>
+            <button class="btn-wishlist" id="btn-wishlist" title="Lista de deseos"><i class="far fa-heart"></i></button>
+          </div>
+
+          <!-- Trust badges -->
+          <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:28px;padding:16px;background:var(--c-light-gray);border-radius:var(--radius-md)">
+            <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--c-gray)">
+              <i class="fas fa-shield-halved" style="color:var(--c-gold)"></i> Pago 100% seguro
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--c-gray)">
+              <i class="fas fa-truck-fast" style="color:var(--c-gold)"></i> Envío 3-5 días
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--c-gray)">
+              <i class="fas fa-arrows-rotate" style="color:var(--c-gold)"></i> 30 días devolución
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--c-gray)">
+              <i class="fas fa-hand-holding-heart" style="color:var(--c-gold)"></i> Hecho a mano
+            </div>
+          </div>
+
+          <!-- Meta -->
+          <div class="product-meta">
+            <div class="product-meta-item">
+              <strong>Material</strong>
+              <span id="meta-material">—</span>
+            </div>
+            <div class="product-meta-item">
+              <strong>Dimensiones</strong>
+              <span id="meta-dimensions">—</span>
+            </div>
+            <div class="product-meta-item">
+              <strong>Peso</strong>
+              <span id="meta-weight">—</span>
+            </div>
+            <div class="product-meta-item">
+              <strong>Referencia</strong>
+              <span id="meta-sku">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Long description tabs -->
+      <div id="product-tabs" style="margin-top:64px;border-top:1px solid var(--c-border);padding-top:48px">
+        <div style="display:flex;gap:0;border-bottom:1px solid var(--c-border);margin-bottom:32px">
+          <button class="tab-btn active" data-tab="description" style="padding:12px 24px;font-weight:700;color:var(--c-gray);border-bottom:2px solid transparent;transition:all .2s;background:none;font-size:.95rem;cursor:pointer">Descripción</button>
+          <button class="tab-btn" data-tab="shipping" style="padding:12px 24px;font-weight:700;color:var(--c-gray);border-bottom:2px solid transparent;transition:all .2s;background:none;font-size:.95rem;cursor:pointer">Envío & Devolución</button>
+          <button class="tab-btn" data-tab="reviews" style="padding:12px 24px;font-weight:700;color:var(--c-gray);border-bottom:2px solid transparent;transition:all .2s;background:none;font-size:.95rem;cursor:pointer">Opiniones</button>
+        </div>
+        <div id="tab-description" class="tab-content" style="line-height:1.85;color:var(--c-gray);max-width:760px"></div>
+        <div id="tab-shipping" class="tab-content" style="display:none;max-width:760px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+            <div style="background:var(--c-light-gray);border-radius:var(--radius-lg);padding:24px">
+              <h4 style="margin-bottom:16px"><i class="fas fa-truck-fast" style="color:var(--c-gold);margin-right:8px"></i>Envío</h4>
+              <ul style="list-style:disc;padding-left:18px;color:var(--c-gray);line-height:2;font-size:.9rem">
+                <li>Envío estándar (3-5 días laborables): 5,95 €</li>
+                <li>Envío express (1-2 días): 12,95 €</li>
+                <li>Gratis en pedidos superiores a 80 €</li>
+                <li>Recogida en taller en Madrid: Gratis</li>
+                <li>Envíos a toda España peninsular</li>
+              </ul>
+            </div>
+            <div style="background:var(--c-light-gray);border-radius:var(--radius-lg);padding:24px">
+              <h4 style="margin-bottom:16px"><i class="fas fa-arrows-rotate" style="color:var(--c-gold);margin-right:8px"></i>Devoluciones</h4>
+              <ul style="list-style:disc;padding-left:18px;color:var(--c-gray);line-height:2;font-size:.9rem">
+                <li>30 días para devoluciones sin coste</li>
+                <li>El producto debe estar en su estado original</li>
+                <li>Productos personalizados no tienen devolución</li>
+                <li>Reembolso en 3-5 días laborables</li>
+                <li>Contacta en hola@kaosdecoración.es</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div id="tab-reviews" class="tab-content" style="display:none" id="reviews-container">
+          <!-- Reviews rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Products -->
+  <section style="padding:64px 0;background:var(--c-light-gray)">
+    <div class="container">
+      <div class="section-title reveal">
+        <span class="eyebrow">También te gustará</span>
+        <h2>Productos relacionados</h2>
+      </div>
+      <div class="products-grid" id="related-products"></div>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-content">
+        <span class="eyebrow">No te pierdas nada</span>
+        <h2>Suscríbete y ahorra</h2>
+        <p>Recibe un 10% de descuento en tu próximo pedido al suscribirte.</p>
+        <form class="newsletter-form" novalidate>
+          <input type="email" placeholder="Tu email" required>
+          <button type="submit" class="btn btn--gold">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><div class="logo-mark">K</div><div class="logo-text"><strong>Kaos Decoración</strong><span>Artesanía · Madrid</span></div></a>
+          <p>Piezas únicas hechas a mano en Madrid.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-pinterest"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col"><h5>Tienda</h5><a href="tienda.html">Todos los productos</a><a href="tienda.html?cat=lamparas">Lámparas</a><a href="tienda.html?cat=bolsos">Bolsos</a><a href="tienda.html?cat=decoracion">Decoración</a></div>
+        <div class="footer-col"><h5>Ayuda</h5><a href="faq.html">FAQ</a><a href="contacto.html">Contacto</a><a href="#">Envíos</a><a href="#">Devoluciones</a></div>
+        <div class="footer-col"><h5>Contacto</h5><a href="tel:+34912345678"><i class="fas fa-phone" style="color:var(--c-gold);margin-right:6px"></i>+34 912 345 678</a><a href="mailto:hola@kaos.es"><i class="fas fa-envelope" style="color:var(--c-gold);margin-right:6px"></i>hola@kaos.es</a></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 Kaos Decoración · Madrid</span><div class="footer-payment"><span class="payment-badge">VISA</span><span class="payment-badge">PayPal</span><span class="payment-badge">SSL</span></div></div>
+    </div>
+  </footer>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+<script>
+const SAMPLE_REVIEWS = [
+  { name: "Carmen López", rating: 5, date: "15 ene 2025", text: "Absolutamente increíble. La calidad supera todas las expectativas. Llegó perfectamente embalado y es exactamente como en las fotos." },
+  { name: "Javier Moreno", rating: 5, date: "8 ene 2025", text: "Lo compré como regalo y fue todo un éxito. El acabado artesanal se nota en cada detalle. Vale cada euro." },
+  { name: "Silvia Fernández", rating: 4, date: "2 ene 2025", text: "Muy bonito y bien hecho. El envío fue rápido y el embalaje cuidadoso. Le doy 4 estrellas porque tardó un día más de lo esperado." },
+  { name: "Roberto Iglesias", rating: 5, date: "28 dic 2024", text: "Una pieza de arte. Lo tengo en mi salón y todos los visitantes me preguntan dónde lo compré. Totalmente recomendable." }
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(location.search);
+  const id = parseInt(params.get('id'));
+  const product = getProductById(id);
+
+  if (!product) {
+    document.getElementById('product-not-found').style.display = '';
+    document.getElementById('product-content').style.display = 'none';
+    document.getElementById('product-tabs').style.display = 'none';
+    return;
+  }
+
+  document.title = `${product.name} — Kaos Decoración`;
+  document.getElementById('page-title').textContent = `${product.name} — Kaos Decoración`;
+  document.getElementById('bc-category').textContent = product.categoryLabel;
+  document.getElementById('bc-product').textContent = product.name;
+
+  /* Gallery */
+  document.getElementById('gallery-main-img').src = product.images[0];
+  document.getElementById('gallery-main-img').alt = product.name;
+  document.getElementById('gallery-thumbs').innerHTML = product.images.map((img, i) => `
+    <div class="gallery-thumb ${i === 0 ? 'active' : ''}">
+      <img src="${img}" alt="${product.name} vista ${i+1}" loading="lazy">
+    </div>
+  `).join('');
+  initProductGallery();
+
+  /* Badges */
+  const disc = getDiscountPercent(product.price, product.oldPrice);
+  const badgesEl = document.getElementById('product-badges');
+  if (product.isNew) badgesEl.innerHTML += '<span class="badge badge--new">Nuevo</span>';
+  if (product.isOnSale) badgesEl.innerHTML += `<span class="badge badge--sale">-${disc}%</span>`;
+  if (product.isCustomizable) badgesEl.innerHTML += '<span class="badge badge--custom">Personalizable</span>';
+
+  /* Info */
+  document.getElementById('product-name').textContent = product.name;
+  document.getElementById('product-stars').innerHTML = renderStars(product.rating);
+  document.getElementById('product-reviews').textContent = `(${product.reviewCount} opiniones)`;
+  document.getElementById('product-stock-badge').textContent = product.stock <= 5 ? `⚠ Solo quedan ${product.stock} unidades` : `✓ En stock`;
+  document.getElementById('product-stock-badge').style.color = product.stock <= 5 ? 'var(--c-error)' : 'var(--c-success)';
+  document.getElementById('product-price').textContent = formatPrice(product.price);
+  if (product.oldPrice) {
+    document.getElementById('product-old-price').textContent = formatPrice(product.oldPrice);
+    document.getElementById('product-old-price').style.display = '';
+    document.getElementById('product-discount').textContent = `-${disc}%`;
+    document.getElementById('product-discount').style.display = '';
+  }
+  document.getElementById('product-description').textContent = product.description;
+  document.getElementById('info-category-link').textContent = product.categoryLabel;
+  document.getElementById('info-category-link').href = `tienda.html?cat=${product.category}`;
+
+  /* Colors */
+  if (product.colors) {
+    document.getElementById('color-selector').style.display = '';
+    const nameEl = document.getElementById('selected-color-name');
+    nameEl.textContent = product.colorNames[0];
+    document.getElementById('color-options').innerHTML = product.colors.map((c, i) => `
+      <div class="color-swatch ${i === 0 ? 'active' : ''}" style="background:${c}" title="${product.colorNames[i]}"
+        data-name="${product.colorNames[i]}"
+        onclick="document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('active'));this.classList.add('active');document.getElementById('selected-color-name').textContent=this.dataset.name">
+      </div>
+    `).join('');
+  }
+
+  /* Custom note */
+  if (product.isCustomizable) document.getElementById('custom-note').style.display = '';
+
+  /* Meta */
+  document.getElementById('meta-material').textContent = product.material || '—';
+  document.getElementById('meta-dimensions').textContent = product.dimensions || '—';
+  document.getElementById('meta-weight').textContent = product.weight || '—';
+  document.getElementById('meta-sku').textContent = product.sku || '—';
+
+  /* Qty max */
+  document.getElementById('qty-input').max = product.stock;
+
+  /* Add to cart */
+  document.getElementById('btn-add-cart').addEventListener('click', () => {
+    const qty = parseInt(document.getElementById('qty-input').value) || 1;
+    Cart.add(product.id, qty);
+  });
+
+  /* Buy now */
+  document.getElementById('btn-buy-now').addEventListener('click', () => {
+    const qty = parseInt(document.getElementById('qty-input').value) || 1;
+    Cart.add(product.id, qty);
+    window.location.href = 'checkout.html';
+  });
+
+  /* Wishlist */
+  const wishBtn = document.getElementById('btn-wishlist');
+  wishBtn.dataset.productId = product.id;
+  initWishlistBtn();
+
+  /* Long description */
+  document.getElementById('tab-description').innerHTML = `<p style="line-height:1.85;color:var(--c-gray)">${product.longDescription}</p>`;
+
+  /* Tab switching */
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.style.borderBottomColor = 'transparent'; b.style.color = 'var(--c-gray)';
+        b.classList.remove('active');
+      });
+      this.style.borderBottomColor = 'var(--c-gold)'; this.style.color = 'var(--c-primary)';
+      this.classList.add('active');
+      document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+      document.getElementById(`tab-${this.dataset.tab}`).style.display = '';
+    });
+  });
+
+  /* Reviews */
+  document.getElementById('tab-reviews').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      ${SAMPLE_REVIEWS.map(r => `
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar" style="background:var(--c-primary)">${r.name.charAt(0)}</div>
+            <div class="review-meta">
+              <strong>${r.name}</strong>
+              <div class="stars" style="font-size:.8rem;margin:3px 0">${renderStars(r.rating)}</div>
+              <span>${r.date}</span>
+            </div>
+          </div>
+          <p class="review-text">"${r.text}"</p>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  /* Related products */
+  const related = getAllProducts().filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+  document.getElementById('related-products').innerHTML = related.map(p => renderProductCard(p)).join('');
+  initReveal();
+  initWishlistBtn();
+});
+</script>
+</body>
+</html>

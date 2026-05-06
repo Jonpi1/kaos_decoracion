@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Cuenta — Kaos Decoración</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%232C1A0E'/><text y='.9em' font-size='70' x='15' fill='%23C9A96E'>K</text></svg>">
+</head>
+<body>
+<div id="loading-overlay" class="loading-overlay"><div class="loader"></div><span class="script" style="font-size:1.2rem">Kaos Decoración</span></div>
+
+<header id="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">K</div>
+        <div class="logo-text"><strong>Kaos Decoración</strong><span>Artesanía · Madrid</span></div>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Inicio</a><a href="tienda.html">Tienda</a>
+        <a href="tienda.html?cat=lamparas">Lámparas</a><a href="tienda.html?cat=bolsos">Bolsos</a>
+        <a href="sobre-nosotros.html">Nosotros</a><a href="contacto.html">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <a href="cuenta.html" id="btn-login" class="action-btn"><i class="far fa-user"></i></a>
+        <a href="cuenta.html" id="btn-user" class="action-btn" style="display:none"><i class="fas fa-user-circle"></i></a>
+        <a href="carrito.html" class="action-btn" style="position:relative"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+        <button id="menu-toggle" class="menu-toggle"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+<nav id="mobile-nav" class="mobile-nav">
+  <a href="index.html">Inicio</a><a href="tienda.html">Tienda</a><a href="contacto.html">Contacto</a>
+</nav>
+
+<!-- Auth panel (shown when not logged in) -->
+<div id="auth-panel" class="auth-page page-content" style="display:none">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="logo-mark" style="margin:0 auto 12px;width:56px;height:56px;font-size:1.5rem">K</div>
+      <h2 style="font-size:1.6rem;margin-bottom:4px">Bienvenido/a</h2>
+      <p style="color:var(--c-gray);font-size:.9rem">Accede a tu cuenta de Kaos Decoración</p>
+    </div>
+    <div class="auth-tabs">
+      <div class="auth-tab active" onclick="switchTab('login')">Iniciar sesión</div>
+      <div class="auth-tab" onclick="switchTab('register')">Crear cuenta</div>
+    </div>
+
+    <!-- Login -->
+    <form id="form-login" class="auth-form active" novalidate>
+      <div id="login-error" style="color:var(--c-error);font-size:.85rem;margin-bottom:12px;display:none"></div>
+      <div class="form-group" style="margin-bottom:16px">
+        <label>Email o usuario</label>
+        <input type="text" name="email" placeholder="tu@email.com o jon.pinedo" required autocomplete="username">
+      </div>
+      <div class="form-group" style="margin-bottom:8px">
+        <label>Contraseña</label>
+        <input type="password" name="password" placeholder="••••••••" required>
+      </div>
+      <div style="text-align:right;margin-bottom:20px">
+        <a href="#" style="font-size:.82rem;color:var(--c-gold)">¿Olvidaste tu contraseña?</a>
+      </div>
+      <button type="submit" class="btn btn--primary btn--full btn--lg">Iniciar sesión</button>
+      <div class="form-divider"><span>o continúa con</span></div>
+      <div style="display:flex;gap:10px">
+        <button type="button" onclick="demoLogin()" class="btn btn--outline btn--full" style="font-size:.85rem">
+          <i class="fas fa-user"></i> Demo (María García)
+        </button>
+      </div>
+      <p style="text-align:center;font-size:.8rem;color:var(--c-gray);margin-top:16px">
+        Demo: <strong>demo@kaosdecoración.es</strong> / <strong>kaos2024</strong>
+      </p>
+    </form>
+
+    <!-- Register -->
+    <form id="form-register" class="auth-form" novalidate>
+      <div class="form-group" style="margin-bottom:16px">
+        <label>Nombre completo</label>
+        <input type="text" name="name" placeholder="María García" required>
+      </div>
+      <div class="form-group" style="margin-bottom:16px">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="tu@email.com" required>
+      </div>
+      <div class="form-group" style="margin-bottom:16px">
+        <label>Contraseña (mín. 6 caracteres)</label>
+        <input type="password" name="password" placeholder="••••••••" required minlength="6">
+      </div>
+      <div class="form-group" style="margin-bottom:20px">
+        <label>Confirmar contraseña</label>
+        <input type="password" name="confirm" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn--gold btn--full btn--lg">Crear mi cuenta</button>
+      <p style="text-align:center;font-size:.78rem;color:var(--c-gray);margin-top:12px">
+        Al registrarte aceptas nuestros <a href="#" style="color:var(--c-gold)">términos y condiciones</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- Account dashboard (shown when logged in) -->
+<div id="account-dashboard" class="page-content" style="display:none">
+  <div class="page-banner" style="padding:48px 0">
+    <h1>Mi Cuenta</h1>
+    <div class="breadcrumb">
+      <a href="index.html">Inicio</a><i class="fas fa-chevron-right"></i>
+      <span class="current">Mi Cuenta</span>
+    </div>
+  </div>
+
+  <section class="account-page">
+    <div class="container">
+      <div class="account-grid">
+        <!-- Sidebar -->
+        <div class="account-sidebar">
+          <div class="account-profile">
+            <div class="account-avatar" id="account-avatar">M</div>
+            <h4 id="account-name">Usuario</h4>
+            <span id="account-email">email@email.com</span>
+          </div>
+          <div class="account-menu">
+            <div class="account-menu-item active" data-panel="orders">
+              <i class="fas fa-box"></i> Mis pedidos
+            </div>
+            <div class="account-menu-item" data-panel="profile">
+              <i class="fas fa-user-edit"></i> Mis datos
+            </div>
+            <div class="account-menu-item" data-panel="wishlist">
+              <i class="fas fa-heart"></i> Lista de deseos
+            </div>
+            <div class="account-menu-item" data-panel="addresses">
+              <i class="fas fa-location-dot"></i> Mis direcciones
+            </div>
+            <a href="admin.html" class="account-menu-item" style="text-decoration:none">
+              <i class="fas fa-cog" style="color:var(--c-gray)"></i> Panel admin
+            </a>
+            <div class="account-menu-item danger" data-panel="logout">
+              <i class="fas fa-right-from-bracket"></i> Cerrar sesión
+            </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <div>
+          <!-- Orders panel -->
+          <div id="panel-orders" class="account-panel active">
+            <div class="account-panel-header">
+              <h2>Mis pedidos</h2>
+              <p>Historial completo de tus compras en Kaos Decoración.</p>
+            </div>
+            <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);overflow:hidden">
+              <table class="orders-table">
+                <thead>
+                  <tr>
+                    <th>Pedido</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Artículos</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-tbody">
+                  <tr><td colspan="5" style="text-align:center;padding:40px;color:var(--c-gray)">Cargando pedidos...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Profile panel -->
+          <div id="panel-profile" class="account-panel">
+            <div class="account-panel-header">
+              <h2>Mis datos</h2>
+              <p>Actualiza tu información personal y de contacto.</p>
+            </div>
+            <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:32px">
+              <form id="form-profile" novalidate>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label>Nombre completo</label>
+                    <input type="text" name="name" id="profile-name" placeholder="Tu nombre">
+                  </div>
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" id="profile-email" placeholder="tu@email.com" readonly style="background:var(--c-light-gray)">
+                  </div>
+                  <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="tel" name="phone" id="profile-phone" placeholder="+34 600 000 000">
+                  </div>
+                  <div class="form-group">
+                    <label>Ciudad</label>
+                    <input type="text" name="city" id="profile-city" placeholder="Madrid">
+                  </div>
+                </div>
+                <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--c-border)">
+                  <h4 style="margin-bottom:16px">Cambiar contraseña</h4>
+                  <div class="form-grid">
+                    <div class="form-group">
+                      <label>Nueva contraseña</label>
+                      <input type="password" name="newpass" placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                      <label>Confirmar contraseña</label>
+                      <input type="password" name="confirmpass" placeholder="••••••••">
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn--primary" style="margin-top:24px">
+                  <i class="fas fa-save"></i> Guardar cambios
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Wishlist panel -->
+          <div id="panel-wishlist" class="account-panel">
+            <div class="account-panel-header">
+              <h2>Lista de deseos</h2>
+              <p>Los productos que has marcado como favoritos.</p>
+            </div>
+            <div id="wishlist-grid" class="products-grid products-grid--3"></div>
+            <div id="wishlist-empty" style="display:none">
+              <div class="empty-state">
+                <i class="far fa-heart"></i>
+                <h3>Tu lista de deseos está vacía</h3>
+                <p>Explora la tienda y guarda tus piezas favoritas con el icono <i class="far fa-heart"></i>.</p>
+                <a href="tienda.html" class="btn btn--primary">Explorar tienda</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Addresses panel -->
+          <div id="panel-addresses" class="account-panel">
+            <div class="account-panel-header">
+              <h2>Mis direcciones</h2>
+              <p>Gestiona tus direcciones de envío habituales.</p>
+            </div>
+            <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:32px">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+                <div style="padding:20px;border:2px solid var(--c-gold);border-radius:var(--radius-md);position:relative">
+                  <span style="position:absolute;top:-10px;left:16px;background:var(--c-gold);color:#fff;font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:10px;letter-spacing:.05em">PRINCIPAL</span>
+                  <p style="color:var(--c-primary);font-size:.9rem;line-height:1.8">
+                    <strong id="addr-name">—</strong><br>
+                    <span id="addr-text">—</span>
+                  </p>
+                  <button onclick="showToast('Función disponible próximamente','info')" class="btn btn--outline btn--sm" style="margin-top:12px">Editar</button>
+                </div>
+                <div style="padding:20px;border:2px dashed var(--c-border);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;cursor:pointer" onclick="showToast('Función disponible próximamente','info')">
+                  <i class="fas fa-plus" style="font-size:1.5rem;color:var(--c-border)"></i>
+                  <span style="font-size:.85rem;color:var(--c-gray)">Añadir dirección</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><div class="logo-mark">K</div><div class="logo-text"><strong>Kaos Decoración</strong><span>Artesanía · Madrid</span></div></a>
+        <p>Piezas únicas hechas a mano en Madrid.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-pinterest"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Tienda</h5><a href="tienda.html">Todos los productos</a><a href="tienda.html?cat=lamparas">Lámparas</a><a href="tienda.html?cat=bolsos">Bolsos</a></div>
+      <div class="footer-col"><h5>Ayuda</h5><a href="faq.html">FAQ</a><a href="contacto.html">Contacto</a></div>
+      <div class="footer-col"><h5>Contacto</h5><a href="tel:+34912345678"><i class="fas fa-phone" style="color:var(--c-gold);margin-right:6px"></i>+34 912 345 678</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 Kaos Decoración · Madrid</span></div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='register')));
+  document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+  document.getElementById(tab==='login'?'form-login':'form-register').classList.add('active');
+}
+
+function demoLogin() {
+  const result = Auth.login('demo@kaosdecoración.es', 'kaos2024');
+  if (result.ok) { showToast('¡Bienvenida, María!', 'success'); setTimeout(() => location.reload(), 600); }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const user = Auth.current();
+  const authPanel = document.getElementById('auth-panel');
+  const dashboard = document.getElementById('account-dashboard');
+
+  if (user) {
+    authPanel.style.display = 'none';
+    dashboard.style.display = '';
+    document.getElementById('account-avatar').textContent = user.name?.charAt(0) || 'U';
+    document.getElementById('account-name').textContent = user.name || 'Usuario';
+    document.getElementById('account-email').textContent = user.email || '';
+    if (document.getElementById('profile-name')) document.getElementById('profile-name').value = user.name || '';
+    if (document.getElementById('profile-email')) document.getElementById('profile-email').value = user.email || '';
+    document.getElementById('addr-name').textContent = user.name || '';
+    document.getElementById('addr-text').textContent = 'Madrid, España';
+    renderOrders();
+
+    // Wishlist
+    const wishIds = Wishlist.get();
+    const wGrid = document.getElementById('wishlist-grid');
+    const wEmpty = document.getElementById('wishlist-empty');
+    if (wishIds.length) {
+      const prods = wishIds.map(id => getProductById(id)).filter(Boolean);
+      wGrid.innerHTML = prods.map(p => renderProductCard(p)).join('');
+      initReveal(); initWishlistBtn();
+    } else {
+      wGrid.style.display = 'none';
+      wEmpty.style.display = '';
+    }
+
+    // Profile form
+    const pForm = document.getElementById('form-profile');
+    if (pForm) {
+      pForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = this.querySelector('[name=name]').value;
+        Auth.updateProfile({ name });
+        document.getElementById('account-name').textContent = name;
+        document.getElementById('account-avatar').textContent = name.charAt(0);
+        showToast('Perfil actualizado correctamente', 'success');
+      });
+    }
+  } else {
+    authPanel.style.display = 'flex';
+    dashboard.style.display = 'none';
+  }
+
+  // Panel switching
+  initAccountPanels();
+});
+</script>
+</body>
+</html>
