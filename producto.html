@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -21,10 +21,14 @@
       </a>
       <nav class="nav">
         <a href="index.html">Inicio</a>
-        <a href="tienda.html" class="active">Tienda</a>
-        <a href="tienda.html?cat=lamparas">Lámparas</a>
-        <a href="tienda.html?cat=bolsos">Bolsos</a>
-        <a href="tienda.html?cat=cojines">Cojines</a>
+        <div class="nav-dropdown">
+          <a href="tienda.html" class="active">Tienda <i class="fas fa-chevron-down dd-arrow"></i></a>
+          <div class="nav-dropdown-menu">
+            <a href="tienda.html?cat=lamparas"><i class="fas fa-lightbulb"></i> Lámparas</a>
+            <a href="tienda.html?cat=bolsos"><i class="fas fa-bag-shopping"></i> Bolsos</a>
+            <a href="tienda.html?cat=cojines"><i class="fas fa-couch"></i> Cojines</a>
+          </div>
+        </div>
         <a href="sobre-nosotros.html">Nosotros</a>
         <a href="contacto.html">Contacto</a>
       </nav>
