@@ -53,8 +53,8 @@
     <form id="form-login" class="auth-form active" novalidate>
       <div id="login-error" style="color:var(--c-error);font-size:.85rem;margin-bottom:12px;display:none"></div>
       <div class="form-group" style="margin-bottom:16px">
-        <label>Email o usuario</label>
-        <input type="text" name="email" placeholder="tu@email.com o username" required autocomplete="username">
+        <label>Gmail o usuario</label>
+        <input type="text" name="email" placeholder="tu@gmail.com o username" required autocomplete="username">
       </div>
       <div class="form-group" style="margin-bottom:8px">
         <label>Contraseña</label>
@@ -77,21 +77,31 @@
 
     <!-- Register -->
     <form id="form-register" class="auth-form" novalidate>
-      <div class="form-group" style="margin-bottom:16px">
-        <label>Nombre completo</label>
-        <input type="text" name="name" placeholder="María García" required>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+        <div class="form-group" style="margin-bottom:0">
+          <label>Nombre</label>
+          <input type="text" name="firstname" placeholder="María" required>
+        </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label>Apellido</label>
+          <input type="text" name="lastname" placeholder="García" required>
+        </div>
       </div>
       <div class="form-group" style="margin-bottom:16px">
-        <label>Email</label>
-        <input type="email" name="email" placeholder="tu@email.com" required>
+        <label>Username</label>
+        <input type="text" name="username" placeholder="username" required autocomplete="username">
+      </div>
+      <div class="form-group" style="margin-bottom:16px">
+        <label>Gmail</label>
+        <input type="email" name="email" placeholder="tu@gmail.com" required>
       </div>
       <div class="form-group" style="margin-bottom:16px">
         <label>Contraseña (mín. 6 caracteres)</label>
-        <input type="password" name="password" placeholder="••••••••" required minlength="6">
+        <input type="password" name="password" placeholder="password" required minlength="6">
       </div>
       <div class="form-group" style="margin-bottom:20px">
         <label>Confirmar contraseña</label>
-        <input type="password" name="confirm" placeholder="••••••••" required>
+        <input type="password" name="confirm" placeholder="password" required>
       </div>
       <button type="submit" class="btn btn--gold btn--full btn--lg">Crear mi cuenta</button>
       <p style="text-align:center;font-size:.78rem;color:var(--c-gray);margin-top:12px">
@@ -183,8 +193,8 @@
                     <input type="text" name="name" id="profile-name" placeholder="Tu nombre">
                   </div>
                   <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" id="profile-email" placeholder="tu@email.com" readonly style="background:var(--c-light-gray)">
+                    <label>Gmail</label>
+                    <input type="email" name="email" id="profile-email" placeholder="tu@gmail.com" readonly style="background:var(--c-light-gray)">
                   </div>
                   <div class="form-group">
                     <label>Teléfono</label>

@@ -98,17 +98,21 @@ const Auth = {
     localStorage.setItem(this._usersKey, JSON.stringify(users));
   },
 
-  register(name, email, password) {
+  register(firstname, lastname, username, email, password) {
     const users = this.getUsers();
     if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
-      return { ok: false, error: 'Ya existe una cuenta con este email.' };
+      return { ok: false, error: 'Ya existe una cuenta con este gmail.' };
     }
+    if (users.find(u => u.username && u.username.toLowerCase() === username.toLowerCase())) {
+      return { ok: false, error: 'Ese username ya está en uso.' };
+    }
+    const name = `${firstname} ${lastname}`.trim();
     const user = {
       id: Date.now().toString(),
-      name, email,
+      name, firstname, lastname, username, email,
       passwordHash: btoa(password),
       createdAt: new Date().toISOString(),
-      avatar: name.charAt(0).toUpperCase()
+      avatar: firstname.charAt(0).toUpperCase()
     };
     users.push(user);
     this.saveUsers(users);
@@ -250,10 +254,20 @@ function initAuthForms() {
   if (registerForm) {
     registerForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      const name = this.querySelector('[name=name]').value;
-      const email = this.querySelector('[name=email]').value;
-      const password = this.querySelector('[name=password]').value;
-      const confirm = this.querySelector('[name=confirm]').value;
+      const firstname = this.querySelector('[name=firstname]').value.trim();
+      const lastname  = this.querySelector('[name=lastname]').value.trim();
+      const username  = this.querySelector('[name=username]').value.trim();
+      const email     = this.querySelector('[name=email]').value.trim();
+      const password  = this.querySelector('[name=password]').value;
+      const confirm   = this.querySelector('[name=confirm]').value;
+      if (!firstname || !lastname) {
+        showToast('Introduce tu nombre y apellido', 'error');
+        return;
+      }
+      if (!username) {
+        showToast('Elige un username', 'error');
+        return;
+      }
       if (password !== confirm) {
         showToast('Las contraseñas no coinciden', 'error');
         return;
@@ -262,7 +276,7 @@ function initAuthForms() {
         showToast('La contraseña debe tener al menos 6 caracteres', 'error');
         return;
       }
-      const result = Auth.register(name, email, password);
+      const result = Auth.register(firstname, lastname, username, email, password);
       if (result.ok) {
         showToast(`¡Bienvenido/a a Kaos, ${result.user.name}!`, 'success');
         setTimeout(() => { window.location.href = 'cuenta.html'; }, 800);
