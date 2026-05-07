@@ -106,46 +106,163 @@
       flex-shrink: 0;
     }
 
-    /* ─── Appearance section ─── */
+    /* ══ APPEARANCE EDITOR — Professional ══ */
+    #section-appearance { padding: 0 !important; background: none !important; border: none !important; box-shadow: none !important; margin: -32px; }
+
+    /* Top bar */
+    .ape-header {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      padding: 18px 32px; background: #fff;
+      border-bottom: 1px solid var(--c-border);
+      position: sticky; top: 65px; z-index: 50;
+    }
+    .ape-header-left { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+    .ape-header-icon { width: 40px; height: 40px; background: linear-gradient(135deg,#2C1A0E,#5a3520); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ape-header-icon i { color: #C9A96E; font-size: 1rem; }
+    .ape-header-left h3 { font-size: 1rem; margin: 0 0 1px; }
+    .ape-header-left p  { font-size: .76rem; color: var(--c-gray); margin: 0; }
+    .ape-status {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 20px; font-size: .78rem; font-weight: 700;
+      transition: all .3s;
+    }
+    .ape-status.saved    { background: rgba(74,124,89,.1);  color: #3a7a50; }
+    .ape-status.unsaved  { background: rgba(220,140,40,.12); color: #b86a0a; }
+    .ape-header-actions { display: flex; gap: 10px; align-items: center; }
+    .ape-btn-ghost { padding: 8px 18px; background: none; border: 1.5px solid var(--c-border); border-radius: 8px; font-size: .82rem; font-weight: 700; color: var(--c-gray); cursor: pointer; transition: all .18s; }
+    .ape-btn-ghost:hover { border-color: var(--c-error); color: var(--c-error); }
+    .ape-btn-save { padding: 9px 22px; background: var(--c-primary); color: #fff; border: none; border-radius: 8px; font-size: .85rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 7px; transition: opacity .18s; }
+    .ape-btn-save:hover { opacity: .85; }
+    .ape-btn-save.saving { opacity: .6; pointer-events: none; }
+
+    /* Split body */
+    .ape-body { display: flex; min-height: calc(100vh - 130px); }
+
+    /* Editor panel */
+    .ape-editor {
+      width: 380px; flex-shrink: 0; background: #fff;
+      border-right: 1px solid var(--c-border);
+      display: flex; flex-direction: column;
+      position: sticky; top: calc(65px + 73px); height: calc(100vh - 138px); overflow: hidden;
+    }
+    .ape-tabs { display: flex; border-bottom: 1px solid var(--c-border); background: #fafafa; flex-shrink: 0; }
+    .ape-tab {
+      flex: 1; padding: 13px 8px; background: none; border: none; border-bottom: 2px solid transparent;
+      font-size: .8rem; font-weight: 700; color: var(--c-gray); cursor: pointer;
+      transition: all .18s; display: flex; align-items: center; justify-content: center; gap: 6px;
+      margin-bottom: -1px;
+    }
+    .ape-tab:hover { color: var(--c-primary); }
+    .ape-tab.active { color: var(--c-primary); border-bottom-color: var(--c-gold); background: #fff; }
+    .ape-tab i { font-size: .78rem; }
+    .ape-tab-content { flex: 1; overflow-y: auto; padding: 24px 20px; }
+    .ape-panel-desc { font-size: .8rem; color: var(--c-gray); margin: 0 0 18px; line-height: 1.5; }
+    .ape-section-label { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c-gray); margin: 20px 0 10px; }
+    .ape-section-label:first-child { margin-top: 0; }
+
+    /* Theme cards */
+    .ape-themes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .ap-theme-card {
-      border: 2px solid var(--c-border); border-radius: 14px; overflow: hidden;
-      cursor: pointer; transition: all .2s; padding-bottom: 12px;
-      background: var(--c-white);
+      border: 2px solid var(--c-border); border-radius: 12px; overflow: hidden;
+      cursor: pointer; transition: all .2s; background: #fff;
     }
-    .ap-theme-card:hover { border-color: var(--c-gold); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
-    .ap-theme-card.active { border-color: var(--c-gold); box-shadow: 0 0 0 3px rgba(201,169,110,.25); }
-    .ap-theme-preview { height: 80px; overflow: hidden; display: flex; flex-direction: column; }
-    .apt-bar { height: 22px; flex-shrink: 0; }
-    .apt-body { flex: 1; padding: 8px 10px; display: flex; flex-direction: column; gap: 5px; }
-    .apt-title { height: 8px; border-radius: 4px; width: 70%; }
-    .apt-text  { height: 5px; border-radius: 3px; width: 90%; opacity: .5; }
-    .apt-btn   { height: 12px; border-radius: 4px; width: 40%; margin-top: 2px; }
-    .ap-theme-dots { display: flex; gap: 5px; padding: 10px 12px 6px; }
-    .ap-theme-dots span { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,.08); }
-    .ap-theme-name { font-size: .78rem; font-weight: 700; text-align: center; color: var(--c-primary); padding: 0 8px; }
+    .ap-theme-card:hover { border-color: var(--c-gold); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+    .ap-theme-card.active { border-color: var(--c-gold); box-shadow: 0 0 0 3px rgba(201,169,110,.22); }
+    .ap-theme-card.active .ap-theme-name::after { content: ' ✓'; }
+    .ap-theme-preview { height: 72px; overflow: hidden; display: flex; flex-direction: column; }
+    .apt-bar { height: 20px; flex-shrink: 0; }
+    .apt-body { flex: 1; padding: 7px 8px; display: flex; flex-direction: column; gap: 4px; }
+    .apt-title { height: 7px; border-radius: 3px; width: 65%; }
+    .apt-text  { height: 4px; border-radius: 2px; width: 85%; opacity: .4; }
+    .apt-btn   { height: 11px; border-radius: 3px; width: 38%; margin-top: 2px; }
+    .ap-theme-dots { display: flex; gap: 4px; padding: 8px 10px 5px; }
+    .ap-theme-dots span { width: 13px; height: 13px; border-radius: 50%; border: 1px solid rgba(0,0,0,.1); flex-shrink: 0; }
+    .ap-theme-name { font-size: .72rem; font-weight: 700; text-align: center; color: var(--c-primary); padding: 0 8px 8px; }
 
+    /* Color rows */
     .ap-color-row {
-      display: flex; align-items: center; gap: 14px; padding: 12px 14px;
-      border: 1.5px solid var(--c-border); border-radius: 12px; cursor: pointer;
-      transition: border-color .2s, background .2s;
+      display: flex; align-items: center; gap: 12px; padding: 11px 13px;
+      border: 1.5px solid var(--c-border); border-radius: 11px; cursor: pointer;
+      transition: all .18s; margin-bottom: 9px;
     }
-    .ap-color-row:hover { border-color: var(--c-gold); background: rgba(201,169,110,.04); }
-    .ap-swatch-wrap { position: relative; width: 44px; height: 44px; flex-shrink: 0; }
-    .ap-swatch { width: 44px; height: 44px; border-radius: 10px; transition: transform .2s; }
-    .ap-color-row:hover .ap-swatch { transform: scale(1.08); }
+    .ap-color-row:hover { border-color: var(--c-gold); background: rgba(201,169,110,.03); }
+    .ap-swatch-wrap { position: relative; width: 40px; height: 40px; flex-shrink: 0; }
+    .ap-swatch { width: 40px; height: 40px; border-radius: 9px; transition: transform .18s; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+    .ap-color-row:hover .ap-swatch { transform: scale(1.1); }
+    .ap-color-info { flex: 1; min-width: 0; }
+    .ap-color-info strong { font-size: .83rem; display: block; }
+    .ap-color-info span { font-size: .73rem; color: var(--c-gray); }
+    .ap-hex-chip { font-size: .72rem; font-family: monospace; background: #f0f0f0; padding: 3px 8px; border-radius: 6px; letter-spacing: .04em; flex-shrink: 0; }
 
+    /* Palette bar */
+    .ap-palette-bar { display: flex; border-radius: 10px; overflow: hidden; height: 32px; border: 1px solid rgba(0,0,0,.07); margin-top: 18px; }
+    .ap-palette-bar div { flex: 1; }
+
+    /* Font options */
     .ap-font-option {
-      display: flex; align-items: center; gap: 10px; padding: 10px 14px;
-      border: 1.5px solid var(--c-border); border-radius: 10px; cursor: pointer;
-      transition: all .18s; user-select: none;
+      display: flex; align-items: center; gap: 10px; padding: 11px 13px;
+      border: 1.5px solid var(--c-border); border-radius: 11px; cursor: pointer;
+      transition: all .18s; user-select: none; margin-bottom: 8px;
     }
-    .ap-font-option:hover { border-color: var(--c-gold); background: rgba(201,169,110,.04); }
+    .ap-font-option:hover { border-color: var(--c-gold); background: rgba(201,169,110,.03); }
     .ap-font-option input[type=radio] { display: none; }
-    .ap-font-option.selected { border-color: var(--c-gold); background: rgba(201,169,110,.08); }
-    .ap-font-label { flex: 1; font-size: .95rem; font-weight: 700; }
-    .ap-font-tag { font-size: .68rem; background: var(--c-light-gray); color: var(--c-gray); padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+    .ap-font-option.selected { border-color: var(--c-gold); background: rgba(201,169,110,.07); }
+    .ap-font-option.selected .ap-font-check { opacity: 1; }
+    .ap-font-name { flex: 1; font-size: .93rem; font-weight: 700; }
+    .ap-font-sample { font-size: .7rem; color: var(--c-gray); margin-top: 1px; }
+    .ap-font-tag { font-size: .65rem; background: #f2f2f2; color: #888; padding: 2px 7px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
+    .ap-font-check { width: 18px; height: 18px; border-radius: 50%; background: var(--c-gold); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .18s; flex-shrink: 0; }
+    .ap-font-check i { font-size: .55rem; color: #fff; }
 
-    .ap-mini-card { border: 1px solid var(--c-border); border-radius: 10px; padding: 10px; }
+    /* Preview panel */
+    .ape-preview { flex: 1; background: #F0EEE9; display: flex; flex-direction: column; align-items: center; padding: 28px 24px; gap: 16px; overflow-y: auto; }
+    .ape-device-bar { display: flex; background: #fff; border-radius: 30px; padding: 4px; gap: 2px; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+    .ape-device-btn { width: 36px; height: 36px; border: none; background: none; border-radius: 24px; cursor: pointer; color: #999; transition: all .18s; display: flex; align-items: center; justify-content: center; }
+    .ape-device-btn.active { background: var(--c-primary); color: #fff; }
+    .ape-device-btn:hover:not(.active) { background: #f0f0f0; color: var(--c-primary); }
+
+    /* Browser frame */
+    .ape-browser { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 48px rgba(0,0,0,.14); transition: max-width .3s ease; width: 100%; }
+    .ape-browser.tablet  { max-width: 620px; }
+    .ape-browser.mobile  { max-width: 360px; }
+    .ape-browser.desktop { max-width: 100%; }
+    .ape-chrome { background: #e8e8e8; padding: 10px 16px; display: flex; align-items: center; gap: 10px; }
+    .ape-chrome-dots { display: flex; gap: 6px; }
+    .ape-chrome-dots span { width: 11px; height: 11px; border-radius: 50%; }
+    .ape-url { flex: 1; background: #fff; border-radius: 20px; padding: 4px 14px; font-size: .7rem; color: #888; border: 1px solid #ddd; }
+    .ape-browser-inner { overflow: hidden; }
+
+    /* Preview content */
+    .apv-promo { padding: 7px; text-align: center; font-size: .7rem; font-weight: 700; letter-spacing: .04em; }
+    .apv-nav { padding: 13px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .apv-logo-mark { width: 34px; height: 34px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex-shrink: 0; }
+    .apv-logo-text { margin-left: 9px; }
+    .apv-brand { font-weight: 700; font-size: .88rem; }
+    .apv-subbrand { font-size: .62rem; opacity: .45; }
+    .apv-nav-links { display: flex; gap: 16px; align-items: center; }
+    .apv-nav-link { font-size: .72rem; font-weight: 600; opacity: .7; }
+    .apv-nav-btn { padding: 6px 16px; border-radius: 20px; font-size: .7rem; font-weight: 700; }
+    .apv-hero { padding: 40px 28px; text-align: center; }
+    .apv-eyebrow { font-size: .65rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 10px; opacity: .55; }
+    .apv-title { font-size: 1.7rem; font-weight: 700; line-height: 1.18; margin-bottom: 12px; }
+    .apv-body { font-size: .78rem; line-height: 1.65; opacity: .65; max-width: 300px; margin: 0 auto 22px; }
+    .apv-hero-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .apv-btn-solid { padding: 10px 22px; border-radius: 8px; font-size: .75rem; font-weight: 700; }
+    .apv-btn-outline { padding: 9px 22px; border-radius: 8px; font-size: .75rem; font-weight: 700; border: 2px solid; }
+    .apv-products { padding: 20px 20px 30px; display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .apv-card { border-radius: 10px; overflow: hidden; border: 1px solid rgba(0,0,0,.07); }
+    .apv-card-img { height: 80px; display: flex; align-items: center; justify-content: center; }
+    .apv-card-body { padding: 9px 10px; }
+    .apv-card-name { font-size: .72rem; font-weight: 700; margin-bottom: 4px; }
+    .apv-card-price { font-size: .78rem; font-weight: 700; }
+    .apv-footer { padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .apv-footer-brand { font-size: .75rem; font-weight: 700; }
+    .apv-footer-text { font-size: .68rem; opacity: .4; }
+
+    @media (max-width: 960px) {
+      .ape-body { flex-direction: column; }
+      .ape-editor { width: 100%; position: static; height: auto; }
+    }
 
     /* ─── Main ─── */
     .admin-main { margin-left: 250px; min-height: 100vh; background: var(--c-bg); }
@@ -727,307 +844,194 @@
       </div>
 
       <!-- ══ APARIENCIA ══ -->
-      <div class="admin-page-section" id="section-appearance" style="padding:0;background:none;border:none;box-shadow:none">
+      <div class="admin-page-section" id="section-appearance">
 
-        <!-- Banner -->
-        <div style="background:linear-gradient(135deg,#2C1A0E 0%,#4a2e1a 60%,#6b4226 100%);border-radius:var(--radius-xl);padding:36px 40px;margin-bottom:28px;position:relative;overflow:hidden">
-          <div style="position:absolute;right:-20px;top:-20px;width:220px;height:220px;background:rgba(201,169,110,.08);border-radius:50%"></div>
-          <div style="position:absolute;right:60px;bottom:-40px;width:140px;height:140px;background:rgba(201,169,110,.05);border-radius:50%"></div>
-          <div style="position:relative;z-index:1">
-            <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
-              <div style="width:48px;height:48px;background:rgba(201,169,110,.2);border-radius:14px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(201,169,110,.3)">
-                <i class="fas fa-palette" style="color:#C9A96E;font-size:1.3rem"></i>
-              </div>
-              <div>
-                <h3 style="color:#fff;margin:0;font-size:1.35rem">Diseño Visual de la Tienda</h3>
-                <p style="color:rgba(255,255,255,.5);margin:0;font-size:.83rem">Personaliza colores, tipografías y estilo en tiempo real</p>
-              </div>
+        <!-- Top bar -->
+        <div class="ape-header">
+          <div class="ape-header-left">
+            <div class="ape-header-icon"><i class="fas fa-palette"></i></div>
+            <div>
+              <h3>Editor de Apariencia</h3>
+              <p>Personaliza el aspecto visual de tu tienda en tiempo real</p>
             </div>
-            <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:20px">
-              <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.7);font-size:.8rem"><i class="fas fa-bolt" style="color:#C9A96E"></i>Cambios instantáneos</div>
-              <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.7);font-size:.8rem"><i class="fas fa-globe" style="color:#C9A96E"></i>Se aplica en toda la web</div>
-              <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.7);font-size:.8rem"><i class="fas fa-rotate-left" style="color:#C9A96E"></i>Siempre reversible</div>
-            </div>
+          </div>
+          <span class="ape-status saved" id="ape-save-status"><i class="fas fa-check-circle"></i> Guardado</span>
+          <div class="ape-header-actions">
+            <button class="ape-btn-ghost" onclick="resetAppearance()"><i class="fas fa-rotate-left"></i> Restablecer</button>
+            <button class="ape-btn-save" id="ape-save-btn" onclick="saveAppearance()"><i class="fas fa-cloud-arrow-up"></i> Guardar cambios</button>
           </div>
         </div>
 
-        <!-- Temas predefinidos -->
-        <div style="background:var(--c-white);border-radius:var(--radius-xl);border:1px solid var(--c-border);padding:28px;margin-bottom:24px">
-          <h4 style="margin:0 0 6px;font-size:1rem"><i class="fas fa-swatchbook" style="color:var(--c-gold);margin-right:8px"></i>Temas predefinidos</h4>
-          <p style="color:var(--c-gray);font-size:.82rem;margin-bottom:20px">Haz clic en un tema para aplicarlo al instante</p>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px" id="ap-themes-grid">
+        <!-- Split body -->
+        <div class="ape-body">
 
-            <div class="ap-theme-card" data-theme="kaos" onclick="applyPreset('kaos')" title="Kaos Original">
-              <div class="ap-theme-preview">
-                <div class="apt-bar" style="background:#2C1A0E"></div>
-                <div class="apt-body" style="background:#FAF7F2">
-                  <div class="apt-title" style="background:#2C1A0E"></div>
-                  <div class="apt-text" style="background:#3D2B1F"></div>
-                  <div class="apt-btn" style="background:#C9A96E"></div>
-                </div>
-              </div>
-              <div class="ap-theme-dots">
-                <span style="background:#2C1A0E"></span><span style="background:#C9A96E"></span><span style="background:#FAF7F2"></span><span style="background:#3D2B1F"></span>
-              </div>
-              <div class="ap-theme-name">Kaos Original</div>
+          <!-- LEFT: editor panel -->
+          <div class="ape-editor">
+            <div class="ape-tabs">
+              <button class="ape-tab active" data-tab="themes" onclick="switchApTab('themes',this)"><i class="fas fa-swatchbook"></i> Temas</button>
+              <button class="ape-tab" data-tab="colors" onclick="switchApTab('colors',this)"><i class="fas fa-droplet"></i> Colores</button>
+              <button class="ape-tab" data-tab="fonts"  onclick="switchApTab('fonts',this)"><i class="fas fa-font"></i> Tipografía</button>
             </div>
 
-            <div class="ap-theme-card" data-theme="noche" onclick="applyPreset('noche')" title="Noche Elegante">
-              <div class="ap-theme-preview">
-                <div class="apt-bar" style="background:#0D1117"></div>
-                <div class="apt-body" style="background:#161B22">
-                  <div class="apt-title" style="background:#E6EDF3"></div>
-                  <div class="apt-text" style="background:#8B949E"></div>
-                  <div class="apt-btn" style="background:#C0A060"></div>
+            <div class="ape-tab-content">
+
+              <!-- TAB: Temas -->
+              <div id="ape-tab-themes" class="ape-panel">
+                <p class="ape-panel-desc">Selecciona un tema para aplicar toda su paleta y tipografías al instante. Puedes ajustarlo después.</p>
+                <div class="ape-themes-grid">
+                  <div class="ap-theme-card" data-theme="kaos" onclick="applyPreset('kaos')">
+                    <div class="ap-theme-preview"><div class="apt-bar" style="background:#2C1A0E"></div><div class="apt-body" style="background:#FAF7F2"><div class="apt-title" style="background:#2C1A0E"></div><div class="apt-text" style="background:#3D2B1F"></div><div class="apt-btn" style="background:#C9A96E"></div></div></div>
+                    <div class="ap-theme-dots"><span style="background:#2C1A0E"></span><span style="background:#C9A96E"></span><span style="background:#FAF7F2"></span><span style="background:#3D2B1F"></span></div>
+                    <div class="ap-theme-name">Kaos Original</div>
+                  </div>
+                  <div class="ap-theme-card" data-theme="noche" onclick="applyPreset('noche')">
+                    <div class="ap-theme-preview"><div class="apt-bar" style="background:#0D1117"></div><div class="apt-body" style="background:#161B22"><div class="apt-title" style="background:#E6EDF3"></div><div class="apt-text" style="background:#8B949E"></div><div class="apt-btn" style="background:#C0A060"></div></div></div>
+                    <div class="ap-theme-dots"><span style="background:#0D1117"></span><span style="background:#C0A060"></span><span style="background:#161B22"></span><span style="background:#E6EDF3"></span></div>
+                    <div class="ap-theme-name">Noche Elegante</div>
+                  </div>
+                  <div class="ap-theme-card" data-theme="botanico" onclick="applyPreset('botanico')">
+                    <div class="ap-theme-preview"><div class="apt-bar" style="background:#1B3A2D"></div><div class="apt-body" style="background:#F2F7F5"><div class="apt-title" style="background:#1B3A2D"></div><div class="apt-text" style="background:#3D5A50"></div><div class="apt-btn" style="background:#B5834A"></div></div></div>
+                    <div class="ap-theme-dots"><span style="background:#1B3A2D"></span><span style="background:#B5834A"></span><span style="background:#F2F7F5"></span><span style="background:#3D5A50"></span></div>
+                    <div class="ap-theme-name">Verde Botánico</div>
+                  </div>
+                  <div class="ap-theme-card" data-theme="cielo" onclick="applyPreset('cielo')">
+                    <div class="ap-theme-preview"><div class="apt-bar" style="background:#1A2E4A"></div><div class="apt-body" style="background:#F4F8FC"><div class="apt-title" style="background:#1A2E4A"></div><div class="apt-text" style="background:#334E6B"></div><div class="apt-btn" style="background:#E0A842"></div></div></div>
+                    <div class="ap-theme-dots"><span style="background:#1A2E4A"></span><span style="background:#E0A842"></span><span style="background:#F4F8FC"></span><span style="background:#334E6B"></span></div>
+                    <div class="ap-theme-name">Azul Cielo</div>
+                  </div>
+                  <div class="ap-theme-card" data-theme="tierra" onclick="applyPreset('tierra')">
+                    <div class="ap-theme-preview"><div class="apt-bar" style="background:#5C3A1E"></div><div class="apt-body" style="background:#FDF6EE"><div class="apt-title" style="background:#5C3A1E"></div><div class="apt-text" style="background:#7A5C3F"></div><div class="apt-btn" style="background:#D4956A"></div></div></div>
+                    <div class="ap-theme-dots"><span style="background:#5C3A1E"></span><span style="background:#D4956A"></span><span style="background:#FDF6EE"></span><span style="background:#7A5C3F"></span></div>
+                    <div class="ap-theme-name">Tierra Cálida</div>
+                  </div>
+                  <div class="ap-theme-card" data-theme="minimal" onclick="applyPreset('minimal')">
+                    <div class="ap-theme-preview"><div class="apt-bar" style="background:#1A1A1A"></div><div class="apt-body" style="background:#FFFFFF"><div class="apt-title" style="background:#1A1A1A"></div><div class="apt-text" style="background:#555"></div><div class="apt-btn" style="background:#B8860B"></div></div></div>
+                    <div class="ap-theme-dots"><span style="background:#1A1A1A"></span><span style="background:#B8860B"></span><span style="background:#FFFFFF"></span><span style="background:#555555"></span></div>
+                    <div class="ap-theme-name">Minimal Blanco</div>
+                  </div>
                 </div>
               </div>
-              <div class="ap-theme-dots">
-                <span style="background:#0D1117"></span><span style="background:#C0A060"></span><span style="background:#161B22"></span><span style="background:#E6EDF3"></span>
+
+              <!-- TAB: Colores -->
+              <div id="ape-tab-colors" class="ape-panel" style="display:none">
+                <p class="ape-panel-desc">Haz clic en cualquier color para abrirlo. Los cambios se reflejan en la vista previa al instante.</p>
+
+                <div class="ap-color-row" onclick="document.getElementById('ap-color-primary').click()">
+                  <div class="ap-swatch-wrap"><div class="ap-swatch" id="ap-swatch-primary"></div><input type="color" id="ap-color-primary" value="#2C1A0E" style="position:absolute;opacity:0;width:0;height:0"></div>
+                  <div class="ap-color-info"><strong>Color principal</strong><span>Cabecera, botones, sidebar</span></div>
+                  <code class="ap-hex-chip" id="ap-hex-primary">#2C1A0E</code>
+                </div>
+                <div class="ap-color-row" onclick="document.getElementById('ap-color-gold').click()">
+                  <div class="ap-swatch-wrap"><div class="ap-swatch" id="ap-swatch-gold"></div><input type="color" id="ap-color-gold" value="#C9A96E" style="position:absolute;opacity:0;width:0;height:0"></div>
+                  <div class="ap-color-info"><strong>Color acento</strong><span>Precios, badges, botones gold</span></div>
+                  <code class="ap-hex-chip" id="ap-hex-gold">#C9A96E</code>
+                </div>
+                <div class="ap-color-row" onclick="document.getElementById('ap-color-bg').click()">
+                  <div class="ap-swatch-wrap"><div class="ap-swatch" id="ap-swatch-bg"></div><input type="color" id="ap-color-bg" value="#FAF7F2" style="position:absolute;opacity:0;width:0;height:0"></div>
+                  <div class="ap-color-info"><strong>Fondo de página</strong><span>Color general del fondo</span></div>
+                  <code class="ap-hex-chip" id="ap-hex-bg">#FAF7F2</code>
+                </div>
+                <div class="ap-color-row" onclick="document.getElementById('ap-color-text').click()">
+                  <div class="ap-swatch-wrap"><div class="ap-swatch" id="ap-swatch-text"></div><input type="color" id="ap-color-text" value="#3D2B1F" style="position:absolute;opacity:0;width:0;height:0"></div>
+                  <div class="ap-color-info"><strong>Color de texto</strong><span>Párrafos y descripciones</span></div>
+                  <code class="ap-hex-chip" id="ap-hex-text">#3D2B1F</code>
+                </div>
+
+                <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--c-border)">
+                  <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c-gray);margin-bottom:10px">Paleta actual</div>
+                  <div class="ap-palette-bar">
+                    <div id="ap-palette-1"></div><div id="ap-palette-2"></div><div id="ap-palette-3"></div><div id="ap-palette-4"></div>
+                  </div>
+                </div>
               </div>
-              <div class="ap-theme-name">Noche Elegante</div>
+
+              <!-- TAB: Tipografías -->
+              <div id="ape-tab-fonts" class="ape-panel" style="display:none">
+                <p class="ape-panel-desc">Elige las fuentes que mejor representan tu marca. La vista previa se actualiza en tiempo real.</p>
+
+                <div class="ape-section-label">Títulos y encabezados</div>
+                <div id="ap-heading-options">
+                  <label class="ap-font-option" data-font="Playfair Display"><input type="radio" name="ap-font-h" value="Playfair Display"><div style="flex:1"><div class="ap-font-name" style="font-family:'Playfair Display',serif">Playfair Display</div><div class="ap-font-sample" style="font-family:'Playfair Display',serif;font-size:.8rem">Arte que vive en tu hogar</div></div><span class="ap-font-tag">Serif elegante</span><div class="ap-font-check"><i class="fas fa-check"></i></div></label>
+                  <label class="ap-font-option" data-font="Cormorant Garamond"><input type="radio" name="ap-font-h" value="Cormorant Garamond"><div style="flex:1"><div class="ap-font-name" style="font-family:'Cormorant Garamond',serif">Cormorant Garamond</div><div class="ap-font-sample" style="font-family:'Cormorant Garamond',serif;font-size:.8rem">Arte que vive en tu hogar</div></div><span class="ap-font-tag">Clásico</span><div class="ap-font-check"><i class="fas fa-check"></i></div></label>
+                  <label class="ap-font-option" data-font="Lora"><input type="radio" name="ap-font-h" value="Lora"><div style="flex:1"><div class="ap-font-name" style="font-family:'Lora',serif">Lora</div><div class="ap-font-sample" style="font-family:'Lora',serif;font-size:.8rem">Arte que vive en tu hogar</div></div><span class="ap-font-tag">Serif moderno</span><div class="ap-font-check"><i class="fas fa-check"></i></div></label>
+                  <label class="ap-font-option" data-font="Montserrat"><input type="radio" name="ap-font-h" value="Montserrat"><div style="flex:1"><div class="ap-font-name" style="font-family:'Montserrat',sans-serif">Montserrat</div><div class="ap-font-sample" style="font-family:'Montserrat',sans-serif;font-size:.8rem">Arte que vive en tu hogar</div></div><span class="ap-font-tag">Sans bold</span><div class="ap-font-check"><i class="fas fa-check"></i></div></label>
+                  <label class="ap-font-option" data-font="Raleway"><input type="radio" name="ap-font-h" value="Raleway"><div style="flex:1"><div class="ap-font-name" style="font-family:'Raleway',sans-serif">Raleway</div><div class="ap-font-sample" style="font-family:'Raleway',sans-serif;font-size:.8rem">Arte que vive en tu hogar</div></div><span class="ap-font-tag">Geométrica</span><div class="ap-font-check"><i class="fas fa-check"></i></div></label>
+                  <label class="ap-font-option" data-font="Josefin Sans"><input type="radio" name="ap-font-h" value="Josefin Sans"><div style="flex:1"><div class="ap-font-name" style="font-family:'Josefin Sans',sans-serif">Josefin Sans</div><div class="ap-font-sample" style="font-family:'Josefin Sans',sans-serif;font-size:.8rem">Arte que vive en tu hogar</div></div><span class="ap-font-tag">Minimalista</span><div class="ap-font-check"><i class="fas fa-check"></i></div></label>
+                </div>
+                <input type="hidden" id="ap-font-heading" value="Playfair Display">
+
+                <div class="ape-section-label" style="margin-top:22px">Texto y cuerpo</div>
+                <div id="ap-body-options">
+                  <label class="ap-font-option" data-font="Lato"><input type="radio" name="ap-font-b" value="Lato"><div style="flex:1"><div class="ap-font-name" style="font-family:'Lato',sans-serif">Lato</div><div class="ap-font-sample" style="font-family:'Lato',sans-serif;font-size:.8rem">Piezas artesanales únicas</div></div><span class="ap-font-tag">Neutral</span><div class="ap-font-check"><i class="fas fa-check"></i></div></label>
+                  <label class="ap-font-option" data-font="Open Sans"><input type="radio" name="ap-font-b" value="Open Sans"><div style="flex:1"><div class="ap-font-name" style="font-family:'Open Sans',sans-serif">Open Sans</div><div class="ap-font-sample" style="font-family:'Open Sans',sans-serif;font-size:.8rem">Piezas artesanales únicas</div></div><span class="ap-font-tag">Legible</span><div class="ap-font-check"><i class="fas fa-check"></i></div></label>
+                  <label class="ap-font-option" data-font="Nunito"><input type="radio" name="ap-font-b" value="Nunito"><div style="flex:1"><div class="ap-font-name" style="font-family:'Nunito',sans-serif">Nunito</div><div class="ap-font-sample" style="font-family:'Nunito',sans-serif;font-size:.8rem">Piezas artesanales únicas</div></div><span class="ap-font-tag">Amigable</span><div class="ap-font-check"><i class="fas fa-check"></i></div></label>
+                  <label class="ap-font-option" data-font="Poppins"><input type="radio" name="ap-font-b" value="Poppins"><div style="flex:1"><div class="ap-font-name" style="font-family:'Poppins',sans-serif">Poppins</div><div class="ap-font-sample" style="font-family:'Poppins',sans-serif;font-size:.8rem">Piezas artesanales únicas</div></div><span class="ap-font-tag">Moderna</span><div class="ap-font-check"><i class="fas fa-check"></i></div></label>
+                  <label class="ap-font-option" data-font="Inter"><input type="radio" name="ap-font-b" value="Inter"><div style="flex:1"><div class="ap-font-name" style="font-family:'Inter',sans-serif">Inter</div><div class="ap-font-sample" style="font-family:'Inter',sans-serif;font-size:.8rem">Piezas artesanales únicas</div></div><span class="ap-font-tag">Digital</span><div class="ap-font-check"><i class="fas fa-check"></i></div></label>
+                </div>
+                <input type="hidden" id="ap-font-body" value="Lato">
+              </div>
+
+            </div><!-- /ape-tab-content -->
+          </div><!-- /ape-editor -->
+
+          <!-- RIGHT: live preview -->
+          <div class="ape-preview">
+            <div class="ape-device-bar">
+              <button class="ape-device-btn active" title="Escritorio" onclick="switchDevice('desktop',this)"><i class="fas fa-desktop"></i></button>
+              <button class="ape-device-btn" title="Tablet" onclick="switchDevice('tablet',this)"><i class="fas fa-tablet-screen-button"></i></button>
+              <button class="ape-device-btn" title="Móvil" onclick="switchDevice('mobile',this)"><i class="fas fa-mobile-screen"></i></button>
             </div>
 
-            <div class="ap-theme-card" data-theme="botanico" onclick="applyPreset('botanico')" title="Verde Botánico">
-              <div class="ap-theme-preview">
-                <div class="apt-bar" style="background:#1B3A2D"></div>
-                <div class="apt-body" style="background:#F2F7F5">
-                  <div class="apt-title" style="background:#1B3A2D"></div>
-                  <div class="apt-text" style="background:#3D5A50"></div>
-                  <div class="apt-btn" style="background:#B5834A"></div>
+            <div class="ape-browser desktop" id="ape-browser">
+              <!-- Browser chrome -->
+              <div class="ape-chrome">
+                <div class="ape-chrome-dots">
+                  <span style="background:#FF5F57"></span><span style="background:#FFBD2E"></span><span style="background:#28CA41"></span>
                 </div>
+                <div class="ape-url">kaos-decoracion.com</div>
+                <div style="width:60px"></div>
               </div>
-              <div class="ap-theme-dots">
-                <span style="background:#1B3A2D"></span><span style="background:#B5834A"></span><span style="background:#F2F7F5"></span><span style="background:#3D5A50"></span>
-              </div>
-              <div class="ap-theme-name">Verde Botánico</div>
-            </div>
-
-            <div class="ap-theme-card" data-theme="cielo" onclick="applyPreset('cielo')" title="Azul Cielo">
-              <div class="ap-theme-preview">
-                <div class="apt-bar" style="background:#1A2E4A"></div>
-                <div class="apt-body" style="background:#F4F8FC">
-                  <div class="apt-title" style="background:#1A2E4A"></div>
-                  <div class="apt-text" style="background:#334E6B"></div>
-                  <div class="apt-btn" style="background:#E0A842"></div>
+              <!-- Preview content -->
+              <div class="ape-browser-inner">
+                <div class="apv-promo" id="ap-prev-promo">Envío gratuito en pedidos +80 € &nbsp;·&nbsp; Código <strong>KAOS10</strong> = 10% dto</div>
+                <div class="apv-nav" id="ap-prev-header">
+                  <div style="display:flex;align-items:center">
+                    <div class="apv-logo-mark" id="ap-prev-logo">K</div>
+                    <div class="apv-logo-text">
+                      <div class="apv-brand" id="ap-prev-brand">Kaos Decoración</div>
+                      <div class="apv-subbrand" id="ap-prev-subbrand">Artesanía · Madrid</div>
+                    </div>
+                  </div>
+                  <div class="apv-nav-links">
+                    <span class="apv-nav-link" id="ap-prev-nav1">Inicio</span>
+                    <span class="apv-nav-link" id="ap-prev-nav2">Tienda</span>
+                    <span class="apv-nav-link" id="ap-prev-nav3">Nosotros</span>
+                    <span class="apv-nav-btn" id="ap-prev-btn">Comprar</span>
+                  </div>
                 </div>
-              </div>
-              <div class="ap-theme-dots">
-                <span style="background:#1A2E4A"></span><span style="background:#E0A842"></span><span style="background:#F4F8FC"></span><span style="background:#334E6B"></span>
-              </div>
-              <div class="ap-theme-name">Azul Cielo</div>
-            </div>
-
-            <div class="ap-theme-card" data-theme="tierra" onclick="applyPreset('tierra')" title="Tierra Cálida">
-              <div class="ap-theme-preview">
-                <div class="apt-bar" style="background:#5C3A1E"></div>
-                <div class="apt-body" style="background:#FDF6EE">
-                  <div class="apt-title" style="background:#5C3A1E"></div>
-                  <div class="apt-text" style="background:#7A5C3F"></div>
-                  <div class="apt-btn" style="background:#D4956A"></div>
+                <div class="apv-hero" id="ap-prev-hero">
+                  <div class="apv-eyebrow" id="ap-prev-eyebrow">Artesanía de Madrid</div>
+                  <div class="apv-title" id="ap-prev-title">Arte que vive<br>en tu hogar</div>
+                  <p class="apv-body" id="ap-prev-text">Piezas artesanales únicas, hechas a mano con amor en Madrid.</p>
+                  <div class="apv-hero-btns">
+                    <div class="apv-btn-solid" id="ap-prev-cta1">Ver colección</div>
+                    <div class="apv-btn-outline" id="ap-prev-cta2">Personalizar</div>
+                  </div>
                 </div>
-              </div>
-              <div class="ap-theme-dots">
-                <span style="background:#5C3A1E"></span><span style="background:#D4956A"></span><span style="background:#FDF6EE"></span><span style="background:#7A5C3F"></span>
-              </div>
-              <div class="ap-theme-name">Tierra Cálida</div>
-            </div>
-
-            <div class="ap-theme-card" data-theme="minimal" onclick="applyPreset('minimal')" title="Minimal Blanco">
-              <div class="ap-theme-preview">
-                <div class="apt-bar" style="background:#1A1A1A"></div>
-                <div class="apt-body" style="background:#FFFFFF">
-                  <div class="apt-title" style="background:#1A1A1A"></div>
-                  <div class="apt-text" style="background:#555"></div>
-                  <div class="apt-btn" style="background:#B8860B"></div>
+                <div class="apv-products" id="ap-prev-cards">
+                  <div class="apv-card"><div class="apv-card-img" id="ap-mini-img1"><i class="fas fa-lightbulb" style="font-size:1.6rem"></i></div><div class="apv-card-body"><div class="apv-card-name" id="ap-mini-name1">Lámpara Artesanal</div><div class="apv-card-price" id="ap-mini-price1">89,00 €</div></div></div>
+                  <div class="apv-card"><div class="apv-card-img" id="ap-mini-img2"><i class="fas fa-bag-shopping" style="font-size:1.6rem"></i></div><div class="apv-card-body"><div class="apv-card-name" id="ap-mini-name2">Bolso Cuero</div><div class="apv-card-price" id="ap-mini-price2">195,00 €</div></div></div>
+                  <div class="apv-card"><div class="apv-card-img" id="ap-mini-img3"><i class="fas fa-couch" style="font-size:1.6rem"></i></div><div class="apv-card-body"><div class="apv-card-name" id="ap-mini-name3">Cojín Bordado</div><div class="apv-card-price" id="ap-mini-price3">72,00 €</div></div></div>
                 </div>
-              </div>
-              <div class="ap-theme-dots">
-                <span style="background:#1A1A1A"></span><span style="background:#B8860B"></span><span style="background:#FFFFFF"></span><span style="background:#555"></span>
-              </div>
-              <div class="ap-theme-name">Minimal Blanco</div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Grid principal -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;margin-bottom:24px">
-
-          <!-- Colores -->
-          <div style="background:var(--c-white);border-radius:var(--radius-xl);border:1px solid var(--c-border);padding:28px">
-            <h4 style="margin:0 0 6px;font-size:1rem"><i class="fas fa-droplet" style="color:var(--c-gold);margin-right:8px"></i>Paleta de colores</h4>
-            <p style="color:var(--c-gray);font-size:.82rem;margin-bottom:22px">Haz clic en cada swatch para cambiar el color</p>
-            <div style="display:flex;flex-direction:column;gap:14px">
-
-              <div class="ap-color-row" onclick="document.getElementById('ap-color-primary').click()">
-                <div class="ap-swatch-wrap">
-                  <div class="ap-swatch" id="ap-swatch-primary"></div>
-                  <input type="color" id="ap-color-primary" value="#2C1A0E" style="position:absolute;opacity:0;width:0;height:0">
+                <div class="apv-footer" id="ap-prev-footer">
+                  <div class="apv-footer-brand" id="ap-prev-footer-brand">Kaos Decoración</div>
+                  <div class="apv-footer-text">© 2025 · Madrid, España</div>
                 </div>
-                <div style="flex:1">
-                  <strong style="font-size:.88rem;display:block">Color principal</strong>
-                  <span style="font-size:.77rem;color:var(--c-gray)">Cabecera, botones, sidebar</span>
-                </div>
-                <code id="ap-hex-primary" style="font-size:.75rem;background:var(--c-light-gray);padding:3px 8px;border-radius:6px">#2C1A0E</code>
-              </div>
-
-              <div class="ap-color-row" onclick="document.getElementById('ap-color-gold').click()">
-                <div class="ap-swatch-wrap">
-                  <div class="ap-swatch" id="ap-swatch-gold"></div>
-                  <input type="color" id="ap-color-gold" value="#C9A96E" style="position:absolute;opacity:0;width:0;height:0">
-                </div>
-                <div style="flex:1">
-                  <strong style="font-size:.88rem;display:block">Color acento</strong>
-                  <span style="font-size:.77rem;color:var(--c-gray)">Precios, badges, botones gold</span>
-                </div>
-                <code id="ap-hex-gold" style="font-size:.75rem;background:var(--c-light-gray);padding:3px 8px;border-radius:6px">#C9A96E</code>
-              </div>
-
-              <div class="ap-color-row" onclick="document.getElementById('ap-color-bg').click()">
-                <div class="ap-swatch-wrap">
-                  <div class="ap-swatch" id="ap-swatch-bg" style="border:1px solid var(--c-border)"></div>
-                  <input type="color" id="ap-color-bg" value="#FAF7F2" style="position:absolute;opacity:0;width:0;height:0">
-                </div>
-                <div style="flex:1">
-                  <strong style="font-size:.88rem;display:block">Fondo de página</strong>
-                  <span style="font-size:.77rem;color:var(--c-gray)">Color general del fondo</span>
-                </div>
-                <code id="ap-hex-bg" style="font-size:.75rem;background:var(--c-light-gray);padding:3px 8px;border-radius:6px">#FAF7F2</code>
-              </div>
-
-              <div class="ap-color-row" onclick="document.getElementById('ap-color-text').click()">
-                <div class="ap-swatch-wrap">
-                  <div class="ap-swatch" id="ap-swatch-text"></div>
-                  <input type="color" id="ap-color-text" value="#3D2B1F" style="position:absolute;opacity:0;width:0;height:0">
-                </div>
-                <div style="flex:1">
-                  <strong style="font-size:.88rem;display:block">Color de texto</strong>
-                  <span style="font-size:.77rem;color:var(--c-gray)">Párrafos y descripciones</span>
-                </div>
-                <code id="ap-hex-text" style="font-size:.75rem;background:var(--c-light-gray);padding:3px 8px;border-radius:6px">#3D2B1F</code>
-              </div>
-
-            </div>
-
-            <!-- Paleta combinada -->
-            <div style="margin-top:22px;border-top:1px solid var(--c-border);padding-top:18px">
-              <span style="font-size:.78rem;color:var(--c-gray);display:block;margin-bottom:10px">Paleta actual</span>
-              <div style="display:flex;border-radius:12px;overflow:hidden;height:36px;border:1px solid var(--c-border)">
-                <div id="ap-palette-1" style="flex:1"></div>
-                <div id="ap-palette-2" style="flex:1"></div>
-                <div id="ap-palette-3" style="flex:1;border-left:1px solid rgba(0,0,0,.08);border-right:1px solid rgba(0,0,0,.08)"></div>
-                <div id="ap-palette-4" style="flex:1"></div>
               </div>
             </div>
-          </div>
+          </div><!-- /ape-preview -->
 
-          <!-- Tipografías -->
-          <div style="background:var(--c-white);border-radius:var(--radius-xl);border:1px solid var(--c-border);padding:28px">
-            <h4 style="margin:0 0 6px;font-size:1rem"><i class="fas fa-font" style="color:var(--c-gold);margin-right:8px"></i>Tipografías</h4>
-            <p style="color:var(--c-gray);font-size:.82rem;margin-bottom:22px">Elige la fuente que mejor representa tu marca</p>
-
-            <div style="margin-bottom:22px">
-              <label style="font-size:.82rem;font-weight:700;display:block;margin-bottom:10px;color:var(--c-gray);text-transform:uppercase;letter-spacing:.06em">Títulos y encabezados</label>
-              <div style="display:flex;flex-direction:column;gap:8px" id="ap-heading-options">
-                <label class="ap-font-option" data-font="Playfair Display"><input type="radio" name="ap-font-h" value="Playfair Display"><span class="ap-font-label" style="font-family:'Playfair Display',serif">Playfair Display</span><span class="ap-font-tag">Serif elegante</span></label>
-                <label class="ap-font-option" data-font="Cormorant Garamond"><input type="radio" name="ap-font-h" value="Cormorant Garamond"><span class="ap-font-label" style="font-family:'Cormorant Garamond',serif">Cormorant Garamond</span><span class="ap-font-tag">Clásico refinado</span></label>
-                <label class="ap-font-option" data-font="Lora"><input type="radio" name="ap-font-h" value="Lora"><span class="ap-font-label" style="font-family:'Lora',serif">Lora</span><span class="ap-font-tag">Serif moderno</span></label>
-                <label class="ap-font-option" data-font="Montserrat"><input type="radio" name="ap-font-h" value="Montserrat"><span class="ap-font-label" style="font-family:'Montserrat',sans-serif">Montserrat</span><span class="ap-font-tag">Sans-serif bold</span></label>
-                <label class="ap-font-option" data-font="Raleway"><input type="radio" name="ap-font-h" value="Raleway"><span class="ap-font-label" style="font-family:'Raleway',sans-serif">Raleway</span><span class="ap-font-tag">Geométrica</span></label>
-                <label class="ap-font-option" data-font="Josefin Sans"><input type="radio" name="ap-font-h" value="Josefin Sans"><span class="ap-font-label" style="font-family:'Josefin Sans',sans-serif">Josefin Sans</span><span class="ap-font-tag">Minimalista</span></label>
-              </div>
-            </div>
-            <input type="hidden" id="ap-font-heading" value="Playfair Display">
-
-            <div style="border-top:1px solid var(--c-border);padding-top:20px">
-              <label style="font-size:.82rem;font-weight:700;display:block;margin-bottom:10px;color:var(--c-gray);text-transform:uppercase;letter-spacing:.06em">Texto y cuerpo</label>
-              <div style="display:flex;flex-direction:column;gap:8px" id="ap-body-options">
-                <label class="ap-font-option" data-font="Lato"><input type="radio" name="ap-font-b" value="Lato"><span class="ap-font-label" style="font-family:'Lato',sans-serif">Lato</span><span class="ap-font-tag">Neutral limpio</span></label>
-                <label class="ap-font-option" data-font="Open Sans"><input type="radio" name="ap-font-b" value="Open Sans"><span class="ap-font-label" style="font-family:'Open Sans',sans-serif">Open Sans</span><span class="ap-font-tag">Muy legible</span></label>
-                <label class="ap-font-option" data-font="Nunito"><input type="radio" name="ap-font-b" value="Nunito"><span class="ap-font-label" style="font-family:'Nunito',sans-serif">Nunito</span><span class="ap-font-tag">Amigable</span></label>
-                <label class="ap-font-option" data-font="Poppins"><input type="radio" name="ap-font-b" value="Poppins"><span class="ap-font-label" style="font-family:'Poppins',sans-serif">Poppins</span><span class="ap-font-tag">Moderna</span></label>
-                <label class="ap-font-option" data-font="Inter"><input type="radio" name="ap-font-b" value="Inter"><span class="ap-font-label" style="font-family:'Inter',sans-serif">Inter</span><span class="ap-font-tag">Digital</span></label>
-              </div>
-            </div>
-            <input type="hidden" id="ap-font-body" value="Lato">
-          </div>
-
-        </div>
-
-        <!-- Vista previa en vivo -->
-        <div style="background:var(--c-white);border-radius:var(--radius-xl);border:1px solid var(--c-border);padding:28px;margin-bottom:24px">
-          <h4 style="margin:0 0 6px;font-size:1rem"><i class="fas fa-display" style="color:var(--c-gold);margin-right:8px"></i>Vista previa en vivo</h4>
-          <p style="color:var(--c-gray);font-size:.82rem;margin-bottom:20px">Así se verá tu tienda con los ajustes actuales</p>
-
-          <!-- Mockup browser -->
-          <div style="border:2px solid var(--c-border);border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.08)">
-            <!-- Browser chrome -->
-            <div style="background:#E8E8E8;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ccc">
-              <div style="display:flex;gap:6px"><div style="width:12px;height:12px;background:#FF5F57;border-radius:50%"></div><div style="width:12px;height:12px;background:#FFBD2E;border-radius:50%"></div><div style="width:12px;height:12px;background:#28CA41;border-radius:50%"></div></div>
-              <div style="flex:1;background:#fff;border-radius:20px;padding:4px 14px;font-size:.72rem;color:#888;border:1px solid #ddd">kaos-decoracion.com</div>
-            </div>
-            <!-- Promo bar -->
-            <div id="ap-prev-promo" style="padding:7px;text-align:center;font-size:.72rem;font-weight:600"></div>
-            <!-- Header -->
-            <div id="ap-prev-header" style="padding:14px 24px;display:flex;align-items:center;justify-content:space-between">
-              <div style="display:flex;align-items:center;gap:10px">
-                <div id="ap-prev-logo" style="width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.15rem">K</div>
-                <div>
-                  <div id="ap-prev-brand" style="font-weight:700;font-size:.92rem;line-height:1.2">Kaos Decoración</div>
-                  <div id="ap-prev-subbrand" style="font-size:.66rem;opacity:.5">Artesanía · Madrid</div>
-                </div>
-              </div>
-              <div style="display:flex;align-items:center;gap:8px">
-                <div id="ap-prev-nav1" style="font-size:.75rem;font-weight:600;opacity:.7">Tienda</div>
-                <div id="ap-prev-nav2" style="font-size:.75rem;font-weight:600;opacity:.7;margin-left:12px">Nosotros</div>
-                <div id="ap-prev-btn" style="padding:6px 18px;border-radius:20px;font-size:.72rem;font-weight:700;margin-left:16px;cursor:default">Comprar</div>
-              </div>
-            </div>
-            <!-- Hero -->
-            <div id="ap-prev-hero" style="padding:36px 24px;text-align:center">
-              <div id="ap-prev-eyebrow" style="font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;opacity:.6">Artesanía de Madrid</div>
-              <div id="ap-prev-title" style="font-size:1.9rem;font-weight:700;line-height:1.2;margin-bottom:12px">Arte que vive<br>en tu hogar</div>
-              <p id="ap-prev-text" style="font-size:.83rem;margin:0 auto 20px;max-width:320px;opacity:.7;line-height:1.6">Piezas artesanales únicas, hechas a mano con amor en Madrid.</p>
-              <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
-                <div id="ap-prev-cta1" style="padding:10px 24px;border-radius:8px;font-size:.78rem;font-weight:700;cursor:default">Ver colección</div>
-                <div id="ap-prev-cta2" style="padding:10px 24px;border-radius:8px;font-size:.78rem;font-weight:700;cursor:default;border:2px solid">Personalizar</div>
-              </div>
-            </div>
-            <!-- Product cards row -->
-            <div id="ap-prev-cards" style="padding:20px 24px 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
-              <div class="ap-mini-card">
-                <div id="ap-mini-img1" style="height:90px;border-radius:8px;margin-bottom:8px;display:flex;align-items:center;justify-content:center"><i class="fas fa-lightbulb" style="font-size:1.8rem;opacity:.25"></i></div>
-                <div id="ap-mini-name1" style="font-size:.75rem;font-weight:700;margin-bottom:4px">Lámpara Artesanal</div>
-                <div id="ap-mini-price1" style="font-size:.82rem;font-weight:700">89,00 €</div>
-              </div>
-              <div class="ap-mini-card">
-                <div id="ap-mini-img2" style="height:90px;border-radius:8px;margin-bottom:8px;display:flex;align-items:center;justify-content:center"><i class="fas fa-bag-shopping" style="font-size:1.8rem;opacity:.25"></i></div>
-                <div id="ap-mini-name2" style="font-size:.75rem;font-weight:700;margin-bottom:4px">Bolso Cuero</div>
-                <div id="ap-mini-price2" style="font-size:.82rem;font-weight:700">195,00 €</div>
-              </div>
-              <div class="ap-mini-card">
-                <div id="ap-mini-img3" style="height:90px;border-radius:8px;margin-bottom:8px;display:flex;align-items:center;justify-content:center"><i class="fas fa-couch" style="font-size:1.8rem;opacity:.25"></i></div>
-                <div id="ap-mini-name3" style="font-size:.75rem;font-weight:700;margin-bottom:4px">Cojín Bordado</div>
-                <div id="ap-mini-price3" style="font-size:.82rem;font-weight:700">72,00 €</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Acciones -->
-        <div style="background:var(--c-white);border-radius:var(--radius-xl);border:1px solid var(--c-border);padding:22px 28px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-          <button onclick="saveAppearance()" style="display:flex;align-items:center;gap:8px;padding:12px 28px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--radius-md);font-weight:700;font-size:.9rem;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-            <i class="fas fa-cloud-arrow-up"></i> Guardar y aplicar en toda la web
-          </button>
-          <button onclick="previewAppearance()" style="display:flex;align-items:center;gap:8px;padding:12px 22px;background:none;border:2px solid var(--c-primary);color:var(--c-primary);border-radius:var(--radius-md);font-weight:700;font-size:.88rem;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
-            <i class="fas fa-eye"></i> Previsualizar en esta página
-          </button>
-          <div style="flex:1"></div>
-          <button onclick="resetAppearance()" style="display:flex;align-items:center;gap:7px;padding:11px 20px;background:none;border:1.5px solid var(--c-error);color:var(--c-error);border-radius:var(--radius-md);font-weight:700;font-size:.83rem;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
-            <i class="fas fa-rotate-left"></i> Restablecer por defecto
-          </button>
-        </div>
-
+        </div><!-- /ape-body -->
       </div>
 
     </div><!-- /admin-content -->
@@ -1811,12 +1815,11 @@ function clearDemoData() {
 }
 
 /* ══════════════════════════════════════════
-   APARIENCIA
+   APARIENCIA — Professional Editor
 ══════════════════════════════════════════ */
 const THEME_KEY = 'kaos_theme';
 const DEFAULTS  = { colorPrimary:'#2C1A0E', colorGold:'#C9A96E', colorBg:'#FAF7F2', colorText:'#3D2B1F', fontHeading:'Playfair Display', fontBody:'Lato' };
-
-const PRESETS = {
+const PRESETS   = {
   kaos:     { colorPrimary:'#2C1A0E', colorGold:'#C9A96E', colorBg:'#FAF7F2', colorText:'#3D2B1F', fontHeading:'Playfair Display', fontBody:'Lato' },
   noche:    { colorPrimary:'#0D1117', colorGold:'#C0A060', colorBg:'#161B22', colorText:'#E6EDF3', fontHeading:'Cormorant Garamond', fontBody:'Inter' },
   botanico: { colorPrimary:'#1B3A2D', colorGold:'#B5834A', colorBg:'#F2F7F5', colorText:'#3D5A50', fontHeading:'Lora', fontBody:'Nunito' },
@@ -1825,50 +1828,84 @@ const PRESETS = {
   minimal:  { colorPrimary:'#1A1A1A', colorGold:'#B8860B', colorBg:'#FFFFFF', colorText:'#555555', fontHeading:'Josefin Sans', fontBody:'Lato' },
 };
 
+/* ── Tab switching ── */
+function switchApTab(tab, btn) {
+  ['themes','colors','fonts'].forEach(t => {
+    const panel = document.getElementById('ape-tab-' + t);
+    if (panel) panel.style.display = t === tab ? '' : 'none';
+  });
+  document.querySelectorAll('.ape-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+}
+
+/* ── Device switcher ── */
+function switchDevice(dev, btn) {
+  const browser = document.getElementById('ape-browser');
+  if (browser) { browser.className = 'ape-browser ' + dev; }
+  document.querySelectorAll('.ape-device-btn').forEach(b => b.classList.toggle('active', b === btn));
+}
+
+/* ── Mark unsaved ── */
+function markUnsaved() {
+  const st = document.getElementById('ape-save-status');
+  if (st) { st.className = 'ape-status unsaved'; st.innerHTML = '<i class="fas fa-circle-exclamation"></i> Cambios sin guardar'; }
+}
+function markSaved() {
+  const st = document.getElementById('ape-save-status');
+  if (st) { st.className = 'ape-status saved'; st.innerHTML = '<i class="fas fa-check-circle"></i> Guardado'; }
+}
+
+/* ── Apply preset ── */
 function applyPreset(name) {
   const p = PRESETS[name];
   if (!p) return;
   setAppearanceValues(p);
   document.querySelectorAll('.ap-theme-card').forEach(c => c.classList.toggle('active', c.dataset.theme === name));
   updatePreview();
-  showToast(`Tema "${name}" aplicado — guarda para hacerlo permanente`, 'info');
+  markUnsaved();
+  /* Switch to colors tab to show changes */
+  switchApTab('colors', document.querySelector('.ape-tab[data-tab="colors"]'));
+  showToast(`Tema aplicado — guarda para hacerlo permanente`, 'info');
 }
 
+/* ── Set all controls from values object ── */
 function setAppearanceValues(p) {
-  document.getElementById('ap-color-primary').value = p.colorPrimary;
-  document.getElementById('ap-color-gold').value    = p.colorGold;
-  document.getElementById('ap-color-bg').value      = p.colorBg;
-  document.getElementById('ap-color-text').value    = p.colorText;
-  document.getElementById('ap-font-heading').value  = p.fontHeading;
-  document.getElementById('ap-font-body').value     = p.fontBody;
-  /* sync radio buttons */
-  document.querySelectorAll('#ap-heading-options .ap-font-option').forEach(opt => {
-    const radio = opt.querySelector('input[type=radio]');
-    const active = radio.value === p.fontHeading;
-    opt.classList.toggle('selected', active);
-  });
-  document.querySelectorAll('#ap-body-options .ap-font-option').forEach(opt => {
-    const radio = opt.querySelector('input[type=radio]');
-    const active = radio.value === p.fontBody;
-    opt.classList.toggle('selected', active);
-  });
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
+  set('ap-color-primary', p.colorPrimary);
+  set('ap-color-gold',    p.colorGold);
+  set('ap-color-bg',      p.colorBg);
+  set('ap-color-text',    p.colorText);
+  set('ap-font-heading',  p.fontHeading);
+  set('ap-font-body',     p.fontBody);
+  document.querySelectorAll('#ap-heading-options .ap-font-option').forEach(opt =>
+    opt.classList.toggle('selected', opt.querySelector('input').value === p.fontHeading));
+  document.querySelectorAll('#ap-body-options .ap-font-option').forEach(opt =>
+    opt.classList.toggle('selected', opt.querySelector('input').value === p.fontBody));
 }
 
+/* ── Detect & highlight active preset ── */
+function detectActivePreset(vals) {
+  let found = null;
+  Object.entries(PRESETS).forEach(([name, p]) => {
+    if (p.colorPrimary === vals.colorPrimary && p.colorGold === vals.colorGold) found = name;
+  });
+  document.querySelectorAll('.ap-theme-card').forEach(c => c.classList.toggle('active', c.dataset.theme === found));
+}
+
+/* ── Init panel ── */
 function initAppearancePanel() {
   const saved = Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem(THEME_KEY) || '{}'));
   setAppearanceValues(saved);
   updatePreview();
+  detectActivePreset(saved);
 
-  /* Color pickers → update swatch + hex + preview */
+  /* Color pickers */
   ['primary','gold','bg','text'].forEach(key => {
     const inp = document.getElementById('ap-color-' + key);
-    inp.addEventListener('input', () => {
-      document.getElementById('ap-hex-' + key).textContent = inp.value.toUpperCase();
-      updatePreview();
-    });
+    if (!inp) return;
+    inp.addEventListener('input', () => { updatePreview(); markUnsaved(); });
   });
 
-  /* Font radio buttons */
+  /* Font options */
   document.querySelectorAll('#ap-heading-options .ap-font-option').forEach(opt => {
     opt.addEventListener('click', () => {
       const val = opt.querySelector('input').value;
@@ -1876,6 +1913,7 @@ function initAppearancePanel() {
       document.querySelectorAll('#ap-heading-options .ap-font-option').forEach(o => o.classList.remove('selected'));
       opt.classList.add('selected');
       loadGoogleFont(val, updatePreview);
+      markUnsaved();
     });
   });
   document.querySelectorAll('#ap-body-options .ap-font-option').forEach(opt => {
@@ -1885,93 +1923,115 @@ function initAppearancePanel() {
       document.querySelectorAll('#ap-body-options .ap-font-option').forEach(o => o.classList.remove('selected'));
       opt.classList.add('selected');
       loadGoogleFont(val, updatePreview);
+      markUnsaved();
     });
   });
 
-  /* Detect active preset */
-  detectActivePreset(saved);
-}
-
-function detectActivePreset(vals) {
-  let found = null;
-  Object.entries(PRESETS).forEach(([name, p]) => {
-    if (p.colorPrimary === vals.colorPrimary && p.colorGold === vals.colorGold) found = name;
+  /* Keyboard shortcut Ctrl/Cmd+S */
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 's' && document.getElementById('section-appearance')?.classList.contains('active')) {
+      e.preventDefault(); saveAppearance();
+    }
   });
-  document.querySelectorAll('.ap-theme-card').forEach(c => c.classList.toggle('active', c.dataset.theme === found));
 }
 
+/* ── Update live preview ── */
 function updatePreview() {
-  const primary  = document.getElementById('ap-color-primary').value;
-  const gold     = document.getElementById('ap-color-gold').value;
-  const bg       = document.getElementById('ap-color-bg').value;
-  const text     = document.getElementById('ap-color-text').value;
-  const fHeading = document.getElementById('ap-font-heading').value;
-  const fBody    = document.getElementById('ap-font-body').value;
+  const primary  = document.getElementById('ap-color-primary')?.value || DEFAULTS.colorPrimary;
+  const gold     = document.getElementById('ap-color-gold')?.value    || DEFAULTS.colorGold;
+  const bg       = document.getElementById('ap-color-bg')?.value      || DEFAULTS.colorBg;
+  const text     = document.getElementById('ap-color-text')?.value    || DEFAULTS.colorText;
+  const fHeading = document.getElementById('ap-font-heading')?.value  || DEFAULTS.fontHeading;
+  const fBody    = document.getElementById('ap-font-body')?.value     || DEFAULTS.fontBody;
 
-  /* Swatches */
-  const setS = (id, val) => { const el = document.getElementById(id); if(el) el.style.background = val; };
-  setS('ap-swatch-primary', primary);
-  setS('ap-swatch-gold',    gold);
-  setS('ap-swatch-bg',      bg);
-  setS('ap-swatch-text',    text);
+  const $ = id => document.getElementById(id);
+  const bg10 = primary + '18';
 
-  /* Hex codes */
-  const setH = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val.toUpperCase(); };
-  setH('ap-hex-primary', primary);
-  setH('ap-hex-gold',    gold);
-  setH('ap-hex-bg',      bg);
-  setH('ap-hex-text',    text);
+  /* Swatches + hex */
+  ['primary','gold','bg','text'].forEach(k => {
+    const colors = { primary, gold, bg, text };
+    const sw = $('ap-swatch-'+k); if (sw) sw.style.background = colors[k];
+    const hx = $('ap-hex-'+k);   if (hx) hx.textContent = colors[k].toUpperCase();
+  });
 
-  /* Palette strip */
-  setS('ap-palette-1', primary);
-  setS('ap-palette-2', gold);
-  setS('ap-palette-3', bg);
-  setS('ap-palette-4', text);
+  /* Palette bar */
+  [$('ap-palette-1'),$('ap-palette-2'),$('ap-palette-3'),$('ap-palette-4')].forEach((el,i) => {
+    if (el) el.style.background = [primary,gold,bg,text][i];
+  });
 
-  /* Promo bar */
-  const promo = document.getElementById('ap-prev-promo');
-  if (promo) { promo.style.background = gold; promo.style.color = primary; promo.textContent = 'Envío gratuito en pedidos +80 €  ·  Código KAOS10 = 10% dto'; }
+  /* Promo */
+  const promo = $('ap-prev-promo');
+  if (promo) { promo.style.background = gold; promo.style.color = primary; promo.style.fontFamily = `'${fBody}',sans-serif`; }
 
-  /* Header */
-  const header = document.getElementById('ap-prev-header');
-  if (header) header.style.background = primary;
-  const logo = document.getElementById('ap-prev-logo');
+  /* Nav */
+  const nav = $('ap-prev-header');
+  if (nav) nav.style.background = primary;
+  const logo = $('ap-prev-logo');
   if (logo) { logo.style.background = gold; logo.style.color = primary; logo.style.fontFamily = `'${fHeading}',serif`; }
-  const brand = document.getElementById('ap-prev-brand');
+  const brand = $('ap-prev-brand');
   if (brand) { brand.style.color = '#fff'; brand.style.fontFamily = `'${fHeading}',serif`; }
-  const sub = document.getElementById('ap-prev-subbrand');
-  if (sub) sub.style.color = 'rgba(255,255,255,.5)';
-  ['ap-prev-nav1','ap-prev-nav2'].forEach(id => { const el = document.getElementById(id); if(el){ el.style.color='rgba(255,255,255,.8)'; el.style.fontFamily=`'${fBody}',sans-serif`; } });
-  const btn = document.getElementById('ap-prev-btn');
-  if (btn) { btn.style.background = gold; btn.style.color = primary; btn.style.fontFamily = `'${fBody}',sans-serif`; }
+  const sub = $('ap-prev-subbrand'); if (sub) sub.style.color = 'rgba(255,255,255,.45)';
+  ['ap-prev-nav1','ap-prev-nav2','ap-prev-nav3'].forEach(id => {
+    const el = $(id); if (el) { el.style.color = 'rgba(255,255,255,.75)'; el.style.fontFamily = `'${fBody}',sans-serif`; }
+  });
+  const navBtn = $('ap-prev-btn');
+  if (navBtn) { navBtn.style.background = gold; navBtn.style.color = primary; navBtn.style.fontFamily = `'${fBody}',sans-serif`; }
 
   /* Hero */
-  const hero = document.getElementById('ap-prev-hero');
-  if (hero) hero.style.background = bg;
-  const eyebrow = document.getElementById('ap-prev-eyebrow');
-  if (eyebrow) { eyebrow.style.color = gold; eyebrow.style.fontFamily = `'${fBody}',sans-serif`; }
-  const title = document.getElementById('ap-prev-title');
-  if (title) { title.style.color = primary; title.style.fontFamily = `'${fHeading}',serif`; }
-  const ptext = document.getElementById('ap-prev-text');
-  if (ptext) { ptext.style.color = text; ptext.style.fontFamily = `'${fBody}',sans-serif`; }
-  const cta1 = document.getElementById('ap-prev-cta1');
-  if (cta1) { cta1.style.background = primary; cta1.style.color = '#fff'; cta1.style.fontFamily = `'${fBody}',sans-serif`; }
-  const cta2 = document.getElementById('ap-prev-cta2');
-  if (cta2) { cta2.style.borderColor = primary; cta2.style.color = primary; cta2.style.fontFamily = `'${fBody}',sans-serif`; cta2.style.background = 'transparent'; }
+  const hero = $('ap-prev-hero'); if (hero) hero.style.background = bg;
+  const eyebrow = $('ap-prev-eyebrow'); if (eyebrow) { eyebrow.style.color = gold; eyebrow.style.fontFamily = `'${fBody}',sans-serif`; }
+  const title = $('ap-prev-title'); if (title) { title.style.color = primary; title.style.fontFamily = `'${fHeading}',serif`; }
+  const ptext = $('ap-prev-text'); if (ptext) { ptext.style.color = text; ptext.style.fontFamily = `'${fBody}',sans-serif`; }
+  const cta1 = $('ap-prev-cta1'); if (cta1) { cta1.style.background = primary; cta1.style.color = '#fff'; cta1.style.fontFamily = `'${fBody}',sans-serif`; }
+  const cta2 = $('ap-prev-cta2'); if (cta2) { cta2.style.borderColor = primary; cta2.style.color = primary; cta2.style.background = 'transparent'; cta2.style.fontFamily = `'${fBody}',sans-serif`; }
 
   /* Product cards */
-  const cards = document.getElementById('ap-prev-cards');
-  if (cards) cards.style.background = bg;
+  const cards = $('ap-prev-cards'); if (cards) cards.style.background = bg;
   [1,2,3].forEach(i => {
-    const img = document.getElementById('ap-mini-img'+i);
-    if (img) { img.style.background = primary + '14'; img.querySelector('i').style.color = gold; }
-    const name = document.getElementById('ap-mini-name'+i);
-    if (name) { name.style.color = primary; name.style.fontFamily = `'${fHeading}',serif`; }
-    const price = document.getElementById('ap-mini-price'+i);
-    if (price) { price.style.color = gold; price.style.fontFamily = `'${fBody}',sans-serif`; }
+    const img = $('ap-mini-img'+i); if (img) { img.style.background = bg10; const ic = img.querySelector('i'); if (ic) ic.style.color = gold + 'cc'; }
+    const nm  = $('ap-mini-name'+i); if (nm) { nm.style.color = primary; nm.style.fontFamily = `'${fHeading}',serif`; }
+    const pr  = $('ap-mini-price'+i); if (pr) { pr.style.color = gold; pr.style.fontFamily = `'${fBody}',sans-serif`; }
   });
+
+  /* Footer */
+  const footer = $('ap-prev-footer'); if (footer) { footer.style.background = primary; }
+  const fbrand = $('ap-prev-footer-brand'); if (fbrand) { fbrand.style.color = gold; fbrand.style.fontFamily = `'${fHeading}',serif`; }
 }
 
+/* ── Save ── */
+function saveAppearance() {
+  const btn = document.getElementById('ape-save-btn');
+  if (btn) { btn.classList.add('saving'); btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando…'; }
+  const theme = {
+    colorPrimary: document.getElementById('ap-color-primary').value,
+    colorGold:    document.getElementById('ap-color-gold').value,
+    colorBg:      document.getElementById('ap-color-bg').value,
+    colorText:    document.getElementById('ap-color-text').value,
+    fontHeading:  document.getElementById('ap-font-heading').value,
+    fontBody:     document.getElementById('ap-font-body').value
+  };
+  setTimeout(() => {
+    localStorage.setItem(THEME_KEY, JSON.stringify(theme));
+    applyThemeToPage(theme.colorPrimary, theme.colorGold, theme.colorBg, theme.colorText, theme.fontHeading, theme.fontBody);
+    markSaved();
+    if (btn) { btn.classList.remove('saving'); btn.innerHTML = '<i class="fas fa-cloud-arrow-up"></i> Guardar cambios'; }
+    showToast('Apariencia guardada y aplicada en toda la web ✓','success');
+  }, 600);
+}
+
+/* ── Reset ── */
+function resetAppearance() {
+  if (!confirm('¿Restablecer los colores y tipografías por defecto?')) return;
+  localStorage.removeItem(THEME_KEY);
+  setAppearanceValues(DEFAULTS);
+  updatePreview();
+  applyThemeToPage(DEFAULTS.colorPrimary, DEFAULTS.colorGold, DEFAULTS.colorBg, DEFAULTS.colorText, DEFAULTS.fontHeading, DEFAULTS.fontBody);
+  detectActivePreset(DEFAULTS);
+  markSaved();
+  showToast('Apariencia restablecida por defecto ✓','success');
+}
+
+/* ── Preview on this page ── */
 function previewAppearance() {
   applyThemeToPage(
     document.getElementById('ap-color-primary').value,
@@ -1984,30 +2044,7 @@ function previewAppearance() {
   showToast('Vista previa aplicada en esta página ✓','success');
 }
 
-function saveAppearance() {
-  const theme = {
-    colorPrimary: document.getElementById('ap-color-primary').value,
-    colorGold:    document.getElementById('ap-color-gold').value,
-    colorBg:      document.getElementById('ap-color-bg').value,
-    colorText:    document.getElementById('ap-color-text').value,
-    fontHeading:  document.getElementById('ap-font-heading').value,
-    fontBody:     document.getElementById('ap-font-body').value
-  };
-  localStorage.setItem(THEME_KEY, JSON.stringify(theme));
-  applyThemeToPage(theme.colorPrimary, theme.colorGold, theme.colorBg, theme.colorText, theme.fontHeading, theme.fontBody);
-  showToast('Apariencia guardada y aplicada en toda la web ✓','success');
-}
-
-function resetAppearance() {
-  if (!confirm('¿Restablecer los colores y tipografías por defecto?')) return;
-  localStorage.removeItem(THEME_KEY);
-  setAppearanceValues(DEFAULTS);
-  updatePreview();
-  applyThemeToPage(DEFAULTS.colorPrimary, DEFAULTS.colorGold, DEFAULTS.colorBg, DEFAULTS.colorText, DEFAULTS.fontHeading, DEFAULTS.fontBody);
-  detectActivePreset(DEFAULTS);
-  showToast('Apariencia restablecida por defecto ✓','success');
-}
-
+/* ── Apply theme to page CSS vars ── */
 function applyThemeToPage(primary, gold, bg, text, fHeading, fBody) {
   const r = document.documentElement;
   r.style.setProperty('--c-primary', primary);
@@ -2019,12 +2056,13 @@ function applyThemeToPage(primary, gold, bg, text, fHeading, fBody) {
   loadGoogleFont(fBody,    () => r.style.setProperty('--ff-body',    `'${fBody}', sans-serif`));
 }
 
+/* ── Load Google Font ── */
 function loadGoogleFont(family, cb) {
   const id = 'gf-' + family.replace(/ /g,'-');
   if (!document.getElementById(id)) {
     const l = document.createElement('link');
     l.id = id; l.rel = 'stylesheet';
-    l.href = `https://fonts.googleapis.com/css2?family=${family.replace(/ /g,'+')}:wght@400;700&display=swap`;
+    l.href = `https://fonts.googleapis.com/css2?family=${family.replace(/ /g,'+')}:ital,wght@0,400;0,700;1,400&display=swap`;
     l.onload = cb;
     document.head.appendChild(l);
   } else if (cb) { cb(); }
