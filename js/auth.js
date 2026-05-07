@@ -59,7 +59,16 @@ const Admin = {
   },
 
   isLoggedIn() {
-    return !!localStorage.getItem(this._sessionKey);
+    try {
+      const s = JSON.parse(localStorage.getItem(this._sessionKey));
+      if (!s || !s.username) return false;
+      const allowed = this._ACCOUNTS.map(a => a.username.toLowerCase());
+      if (!allowed.includes(s.username.toLowerCase())) {
+        localStorage.removeItem(this._sessionKey);
+        return false;
+      }
+      return true;
+    } catch { return false; }
   },
 
   current() {

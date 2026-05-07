@@ -2966,6 +2966,7 @@ function resetContent() {
 ══════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
   if (Admin.isLoggedIn()) showAdminPanel();
+  else { localStorage.removeItem('kaos_admin_session'); }
   /* Mostrar toggle sidebar en móvil */
   if (window.innerWidth < 960) {
     const t = document.getElementById('sidebar-toggle');
