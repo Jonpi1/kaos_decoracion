@@ -106,6 +106,47 @@
       flex-shrink: 0;
     }
 
+    /* ─── Appearance section ─── */
+    .ap-theme-card {
+      border: 2px solid var(--c-border); border-radius: 14px; overflow: hidden;
+      cursor: pointer; transition: all .2s; padding-bottom: 12px;
+      background: var(--c-white);
+    }
+    .ap-theme-card:hover { border-color: var(--c-gold); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+    .ap-theme-card.active { border-color: var(--c-gold); box-shadow: 0 0 0 3px rgba(201,169,110,.25); }
+    .ap-theme-preview { height: 80px; overflow: hidden; display: flex; flex-direction: column; }
+    .apt-bar { height: 22px; flex-shrink: 0; }
+    .apt-body { flex: 1; padding: 8px 10px; display: flex; flex-direction: column; gap: 5px; }
+    .apt-title { height: 8px; border-radius: 4px; width: 70%; }
+    .apt-text  { height: 5px; border-radius: 3px; width: 90%; opacity: .5; }
+    .apt-btn   { height: 12px; border-radius: 4px; width: 40%; margin-top: 2px; }
+    .ap-theme-dots { display: flex; gap: 5px; padding: 10px 12px 6px; }
+    .ap-theme-dots span { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,.08); }
+    .ap-theme-name { font-size: .78rem; font-weight: 700; text-align: center; color: var(--c-primary); padding: 0 8px; }
+
+    .ap-color-row {
+      display: flex; align-items: center; gap: 14px; padding: 12px 14px;
+      border: 1.5px solid var(--c-border); border-radius: 12px; cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .ap-color-row:hover { border-color: var(--c-gold); background: rgba(201,169,110,.04); }
+    .ap-swatch-wrap { position: relative; width: 44px; height: 44px; flex-shrink: 0; }
+    .ap-swatch { width: 44px; height: 44px; border-radius: 10px; transition: transform .2s; }
+    .ap-color-row:hover .ap-swatch { transform: scale(1.08); }
+
+    .ap-font-option {
+      display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+      border: 1.5px solid var(--c-border); border-radius: 10px; cursor: pointer;
+      transition: all .18s; user-select: none;
+    }
+    .ap-font-option:hover { border-color: var(--c-gold); background: rgba(201,169,110,.04); }
+    .ap-font-option input[type=radio] { display: none; }
+    .ap-font-option.selected { border-color: var(--c-gold); background: rgba(201,169,110,.08); }
+    .ap-font-label { flex: 1; font-size: .95rem; font-weight: 700; }
+    .ap-font-tag { font-size: .68rem; background: var(--c-light-gray); color: var(--c-gray); padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+
+    .ap-mini-card { border: 1px solid var(--c-border); border-radius: 10px; padding: 10px; }
+
     /* ─── Main ─── */
     .admin-main { margin-left: 250px; min-height: 100vh; background: var(--c-bg); }
     .admin-topbar {
@@ -686,127 +727,307 @@
       </div>
 
       <!-- ══ APARIENCIA ══ -->
-      <div class="admin-page-section" id="section-appearance">
-        <h3 style="margin-bottom:6px">Apariencia de la tienda</h3>
-        <p style="color:var(--c-gray);font-size:.88rem;margin-bottom:28px">Personaliza los colores y tipografías que se muestran en toda la web.</p>
+      <div class="admin-page-section" id="section-appearance" style="padding:0;background:none;border:none;box-shadow:none">
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start">
+        <!-- Banner -->
+        <div style="background:linear-gradient(135deg,#2C1A0E 0%,#4a2e1a 60%,#6b4226 100%);border-radius:var(--radius-xl);padding:36px 40px;margin-bottom:28px;position:relative;overflow:hidden">
+          <div style="position:absolute;right:-20px;top:-20px;width:220px;height:220px;background:rgba(201,169,110,.08);border-radius:50%"></div>
+          <div style="position:absolute;right:60px;bottom:-40px;width:140px;height:140px;background:rgba(201,169,110,.05);border-radius:50%"></div>
+          <div style="position:relative;z-index:1">
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
+              <div style="width:48px;height:48px;background:rgba(201,169,110,.2);border-radius:14px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(201,169,110,.3)">
+                <i class="fas fa-palette" style="color:#C9A96E;font-size:1.3rem"></i>
+              </div>
+              <div>
+                <h3 style="color:#fff;margin:0;font-size:1.35rem">Diseño Visual de la Tienda</h3>
+                <p style="color:rgba(255,255,255,.5);margin:0;font-size:.83rem">Personaliza colores, tipografías y estilo en tiempo real</p>
+              </div>
+            </div>
+            <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:20px">
+              <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.7);font-size:.8rem"><i class="fas fa-bolt" style="color:#C9A96E"></i>Cambios instantáneos</div>
+              <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.7);font-size:.8rem"><i class="fas fa-globe" style="color:#C9A96E"></i>Se aplica en toda la web</div>
+              <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.7);font-size:.8rem"><i class="fas fa-rotate-left" style="color:#C9A96E"></i>Siempre reversible</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Temas predefinidos -->
+        <div style="background:var(--c-white);border-radius:var(--radius-xl);border:1px solid var(--c-border);padding:28px;margin-bottom:24px">
+          <h4 style="margin:0 0 6px;font-size:1rem"><i class="fas fa-swatchbook" style="color:var(--c-gold);margin-right:8px"></i>Temas predefinidos</h4>
+          <p style="color:var(--c-gray);font-size:.82rem;margin-bottom:20px">Haz clic en un tema para aplicarlo al instante</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px" id="ap-themes-grid">
+
+            <div class="ap-theme-card" data-theme="kaos" onclick="applyPreset('kaos')" title="Kaos Original">
+              <div class="ap-theme-preview">
+                <div class="apt-bar" style="background:#2C1A0E"></div>
+                <div class="apt-body" style="background:#FAF7F2">
+                  <div class="apt-title" style="background:#2C1A0E"></div>
+                  <div class="apt-text" style="background:#3D2B1F"></div>
+                  <div class="apt-btn" style="background:#C9A96E"></div>
+                </div>
+              </div>
+              <div class="ap-theme-dots">
+                <span style="background:#2C1A0E"></span><span style="background:#C9A96E"></span><span style="background:#FAF7F2"></span><span style="background:#3D2B1F"></span>
+              </div>
+              <div class="ap-theme-name">Kaos Original</div>
+            </div>
+
+            <div class="ap-theme-card" data-theme="noche" onclick="applyPreset('noche')" title="Noche Elegante">
+              <div class="ap-theme-preview">
+                <div class="apt-bar" style="background:#0D1117"></div>
+                <div class="apt-body" style="background:#161B22">
+                  <div class="apt-title" style="background:#E6EDF3"></div>
+                  <div class="apt-text" style="background:#8B949E"></div>
+                  <div class="apt-btn" style="background:#C0A060"></div>
+                </div>
+              </div>
+              <div class="ap-theme-dots">
+                <span style="background:#0D1117"></span><span style="background:#C0A060"></span><span style="background:#161B22"></span><span style="background:#E6EDF3"></span>
+              </div>
+              <div class="ap-theme-name">Noche Elegante</div>
+            </div>
+
+            <div class="ap-theme-card" data-theme="botanico" onclick="applyPreset('botanico')" title="Verde Botánico">
+              <div class="ap-theme-preview">
+                <div class="apt-bar" style="background:#1B3A2D"></div>
+                <div class="apt-body" style="background:#F2F7F5">
+                  <div class="apt-title" style="background:#1B3A2D"></div>
+                  <div class="apt-text" style="background:#3D5A50"></div>
+                  <div class="apt-btn" style="background:#B5834A"></div>
+                </div>
+              </div>
+              <div class="ap-theme-dots">
+                <span style="background:#1B3A2D"></span><span style="background:#B5834A"></span><span style="background:#F2F7F5"></span><span style="background:#3D5A50"></span>
+              </div>
+              <div class="ap-theme-name">Verde Botánico</div>
+            </div>
+
+            <div class="ap-theme-card" data-theme="cielo" onclick="applyPreset('cielo')" title="Azul Cielo">
+              <div class="ap-theme-preview">
+                <div class="apt-bar" style="background:#1A2E4A"></div>
+                <div class="apt-body" style="background:#F4F8FC">
+                  <div class="apt-title" style="background:#1A2E4A"></div>
+                  <div class="apt-text" style="background:#334E6B"></div>
+                  <div class="apt-btn" style="background:#E0A842"></div>
+                </div>
+              </div>
+              <div class="ap-theme-dots">
+                <span style="background:#1A2E4A"></span><span style="background:#E0A842"></span><span style="background:#F4F8FC"></span><span style="background:#334E6B"></span>
+              </div>
+              <div class="ap-theme-name">Azul Cielo</div>
+            </div>
+
+            <div class="ap-theme-card" data-theme="tierra" onclick="applyPreset('tierra')" title="Tierra Cálida">
+              <div class="ap-theme-preview">
+                <div class="apt-bar" style="background:#5C3A1E"></div>
+                <div class="apt-body" style="background:#FDF6EE">
+                  <div class="apt-title" style="background:#5C3A1E"></div>
+                  <div class="apt-text" style="background:#7A5C3F"></div>
+                  <div class="apt-btn" style="background:#D4956A"></div>
+                </div>
+              </div>
+              <div class="ap-theme-dots">
+                <span style="background:#5C3A1E"></span><span style="background:#D4956A"></span><span style="background:#FDF6EE"></span><span style="background:#7A5C3F"></span>
+              </div>
+              <div class="ap-theme-name">Tierra Cálida</div>
+            </div>
+
+            <div class="ap-theme-card" data-theme="minimal" onclick="applyPreset('minimal')" title="Minimal Blanco">
+              <div class="ap-theme-preview">
+                <div class="apt-bar" style="background:#1A1A1A"></div>
+                <div class="apt-body" style="background:#FFFFFF">
+                  <div class="apt-title" style="background:#1A1A1A"></div>
+                  <div class="apt-text" style="background:#555"></div>
+                  <div class="apt-btn" style="background:#B8860B"></div>
+                </div>
+              </div>
+              <div class="ap-theme-dots">
+                <span style="background:#1A1A1A"></span><span style="background:#B8860B"></span><span style="background:#FFFFFF"></span><span style="background:#555"></span>
+              </div>
+              <div class="ap-theme-name">Minimal Blanco</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Grid principal -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;margin-bottom:24px">
 
           <!-- Colores -->
-          <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px">
-            <h4 style="margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">
-              <i class="fas fa-droplet" style="color:var(--c-gold);margin-right:8px"></i>Colores
-            </h4>
-            <div style="display:flex;flex-direction:column;gap:16px">
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <div>
-                  <strong style="display:block;font-size:.88rem">Color principal</strong>
-                  <span style="font-size:.78rem;color:var(--c-gray)">Cabecera, botones, textos</span>
+          <div style="background:var(--c-white);border-radius:var(--radius-xl);border:1px solid var(--c-border);padding:28px">
+            <h4 style="margin:0 0 6px;font-size:1rem"><i class="fas fa-droplet" style="color:var(--c-gold);margin-right:8px"></i>Paleta de colores</h4>
+            <p style="color:var(--c-gray);font-size:.82rem;margin-bottom:22px">Haz clic en cada swatch para cambiar el color</p>
+            <div style="display:flex;flex-direction:column;gap:14px">
+
+              <div class="ap-color-row" onclick="document.getElementById('ap-color-primary').click()">
+                <div class="ap-swatch-wrap">
+                  <div class="ap-swatch" id="ap-swatch-primary"></div>
+                  <input type="color" id="ap-color-primary" value="#2C1A0E" style="position:absolute;opacity:0;width:0;height:0">
                 </div>
-                <input type="color" id="ap-color-primary" value="#2C1A0E"
-                  style="width:48px;height:36px;border:2px solid var(--c-border);border-radius:var(--radius-sm);cursor:pointer;padding:2px">
+                <div style="flex:1">
+                  <strong style="font-size:.88rem;display:block">Color principal</strong>
+                  <span style="font-size:.77rem;color:var(--c-gray)">Cabecera, botones, sidebar</span>
+                </div>
+                <code id="ap-hex-primary" style="font-size:.75rem;background:var(--c-light-gray);padding:3px 8px;border-radius:6px">#2C1A0E</code>
               </div>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <div>
-                  <strong style="display:block;font-size:.88rem">Color acento / dorado</strong>
-                  <span style="font-size:.78rem;color:var(--c-gray)">Precios, badges, botones gold</span>
+
+              <div class="ap-color-row" onclick="document.getElementById('ap-color-gold').click()">
+                <div class="ap-swatch-wrap">
+                  <div class="ap-swatch" id="ap-swatch-gold"></div>
+                  <input type="color" id="ap-color-gold" value="#C9A96E" style="position:absolute;opacity:0;width:0;height:0">
                 </div>
-                <input type="color" id="ap-color-gold" value="#C9A96E"
-                  style="width:48px;height:36px;border:2px solid var(--c-border);border-radius:var(--radius-sm);cursor:pointer;padding:2px">
+                <div style="flex:1">
+                  <strong style="font-size:.88rem;display:block">Color acento</strong>
+                  <span style="font-size:.77rem;color:var(--c-gray)">Precios, badges, botones gold</span>
+                </div>
+                <code id="ap-hex-gold" style="font-size:.75rem;background:var(--c-light-gray);padding:3px 8px;border-radius:6px">#C9A96E</code>
               </div>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <div>
-                  <strong style="display:block;font-size:.88rem">Color de fondo</strong>
-                  <span style="font-size:.78rem;color:var(--c-gray)">Fondo general de la web</span>
+
+              <div class="ap-color-row" onclick="document.getElementById('ap-color-bg').click()">
+                <div class="ap-swatch-wrap">
+                  <div class="ap-swatch" id="ap-swatch-bg" style="border:1px solid var(--c-border)"></div>
+                  <input type="color" id="ap-color-bg" value="#FAF7F2" style="position:absolute;opacity:0;width:0;height:0">
                 </div>
-                <input type="color" id="ap-color-bg" value="#FAF7F2"
-                  style="width:48px;height:36px;border:2px solid var(--c-border);border-radius:var(--radius-sm);cursor:pointer;padding:2px">
+                <div style="flex:1">
+                  <strong style="font-size:.88rem;display:block">Fondo de página</strong>
+                  <span style="font-size:.77rem;color:var(--c-gray)">Color general del fondo</span>
+                </div>
+                <code id="ap-hex-bg" style="font-size:.75rem;background:var(--c-light-gray);padding:3px 8px;border-radius:6px">#FAF7F2</code>
               </div>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <div>
-                  <strong style="display:block;font-size:.88rem">Color de texto</strong>
-                  <span style="font-size:.78rem;color:var(--c-gray)">Párrafos y descripciones</span>
+
+              <div class="ap-color-row" onclick="document.getElementById('ap-color-text').click()">
+                <div class="ap-swatch-wrap">
+                  <div class="ap-swatch" id="ap-swatch-text"></div>
+                  <input type="color" id="ap-color-text" value="#3D2B1F" style="position:absolute;opacity:0;width:0;height:0">
                 </div>
-                <input type="color" id="ap-color-text" value="#3D2B1F"
-                  style="width:48px;height:36px;border:2px solid var(--c-border);border-radius:var(--radius-sm);cursor:pointer;padding:2px">
+                <div style="flex:1">
+                  <strong style="font-size:.88rem;display:block">Color de texto</strong>
+                  <span style="font-size:.77rem;color:var(--c-gray)">Párrafos y descripciones</span>
+                </div>
+                <code id="ap-hex-text" style="font-size:.75rem;background:var(--c-light-gray);padding:3px 8px;border-radius:6px">#3D2B1F</code>
+              </div>
+
+            </div>
+
+            <!-- Paleta combinada -->
+            <div style="margin-top:22px;border-top:1px solid var(--c-border);padding-top:18px">
+              <span style="font-size:.78rem;color:var(--c-gray);display:block;margin-bottom:10px">Paleta actual</span>
+              <div style="display:flex;border-radius:12px;overflow:hidden;height:36px;border:1px solid var(--c-border)">
+                <div id="ap-palette-1" style="flex:1"></div>
+                <div id="ap-palette-2" style="flex:1"></div>
+                <div id="ap-palette-3" style="flex:1;border-left:1px solid rgba(0,0,0,.08);border-right:1px solid rgba(0,0,0,.08)"></div>
+                <div id="ap-palette-4" style="flex:1"></div>
               </div>
             </div>
           </div>
 
           <!-- Tipografías -->
-          <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px">
-            <h4 style="margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">
-              <i class="fas fa-font" style="color:var(--c-gold);margin-right:8px"></i>Tipografías
-            </h4>
-            <div class="form-group" style="margin-bottom:18px">
-              <label>Fuente de títulos</label>
-              <select id="ap-font-heading" style="width:100%">
-                <option value="Playfair Display">Playfair Display (por defecto)</option>
-                <option value="Cormorant Garamond">Cormorant Garamond</option>
-                <option value="Lora">Lora</option>
-                <option value="Merriweather">Merriweather</option>
-                <option value="Libre Baskerville">Libre Baskerville</option>
-                <option value="Raleway">Raleway</option>
-                <option value="Montserrat">Montserrat</option>
-                <option value="Josefin Sans">Josefin Sans</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Fuente de cuerpo</label>
-              <select id="ap-font-body" style="width:100%">
-                <option value="Lato">Lato (por defecto)</option>
-                <option value="Open Sans">Open Sans</option>
-                <option value="Nunito">Nunito</option>
-                <option value="Raleway">Raleway</option>
-                <option value="Montserrat">Montserrat</option>
-                <option value="Poppins">Poppins</option>
-                <option value="Inter">Inter</option>
-                <option value="Source Sans 3">Source Sans 3</option>
-              </select>
-            </div>
-          </div>
+          <div style="background:var(--c-white);border-radius:var(--radius-xl);border:1px solid var(--c-border);padding:28px">
+            <h4 style="margin:0 0 6px;font-size:1rem"><i class="fas fa-font" style="color:var(--c-gold);margin-right:8px"></i>Tipografías</h4>
+            <p style="color:var(--c-gray);font-size:.82rem;margin-bottom:22px">Elige la fuente que mejor representa tu marca</p>
 
-          <!-- Preview -->
-          <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px;grid-column:1/-1">
-            <h4 style="margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">
-              <i class="fas fa-eye" style="color:var(--c-gold);margin-right:8px"></i>Vista previa
-            </h4>
-            <div id="ap-preview" style="border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--c-border)">
-              <div id="ap-prev-header" style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between">
-                <div style="display:flex;align-items:center;gap:10px">
-                  <div id="ap-prev-logo" style="width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1rem">K</div>
-                  <div>
-                    <div id="ap-prev-brand" style="font-weight:700;font-size:.9rem">Kaos Decoración</div>
-                    <div style="font-size:.7rem;opacity:.5">Artesanía · Madrid</div>
-                  </div>
-                </div>
-                <div id="ap-prev-btn" style="padding:6px 16px;border-radius:6px;font-size:.78rem;font-weight:700;cursor:default">Ver tienda</div>
-              </div>
-              <div id="ap-prev-body" style="padding:24px 20px">
-                <div id="ap-prev-title" style="font-size:1.4rem;font-weight:700;margin-bottom:8px">Arte que vive en tu hogar</div>
-                <p id="ap-prev-text" style="font-size:.85rem;margin-bottom:16px;opacity:.7">Piezas artesanales únicas, hechas a mano con amor en Madrid.</p>
-                <div style="display:flex;gap:10px">
-                  <div id="ap-prev-price" style="font-size:1rem;font-weight:700">89,00 €</div>
-                  <div id="ap-prev-badge" style="padding:3px 10px;border-radius:12px;font-size:.72rem;font-weight:700">Nuevo</div>
-                </div>
+            <div style="margin-bottom:22px">
+              <label style="font-size:.82rem;font-weight:700;display:block;margin-bottom:10px;color:var(--c-gray);text-transform:uppercase;letter-spacing:.06em">Títulos y encabezados</label>
+              <div style="display:flex;flex-direction:column;gap:8px" id="ap-heading-options">
+                <label class="ap-font-option" data-font="Playfair Display"><input type="radio" name="ap-font-h" value="Playfair Display"><span class="ap-font-label" style="font-family:'Playfair Display',serif">Playfair Display</span><span class="ap-font-tag">Serif elegante</span></label>
+                <label class="ap-font-option" data-font="Cormorant Garamond"><input type="radio" name="ap-font-h" value="Cormorant Garamond"><span class="ap-font-label" style="font-family:'Cormorant Garamond',serif">Cormorant Garamond</span><span class="ap-font-tag">Clásico refinado</span></label>
+                <label class="ap-font-option" data-font="Lora"><input type="radio" name="ap-font-h" value="Lora"><span class="ap-font-label" style="font-family:'Lora',serif">Lora</span><span class="ap-font-tag">Serif moderno</span></label>
+                <label class="ap-font-option" data-font="Montserrat"><input type="radio" name="ap-font-h" value="Montserrat"><span class="ap-font-label" style="font-family:'Montserrat',sans-serif">Montserrat</span><span class="ap-font-tag">Sans-serif bold</span></label>
+                <label class="ap-font-option" data-font="Raleway"><input type="radio" name="ap-font-h" value="Raleway"><span class="ap-font-label" style="font-family:'Raleway',sans-serif">Raleway</span><span class="ap-font-tag">Geométrica</span></label>
+                <label class="ap-font-option" data-font="Josefin Sans"><input type="radio" name="ap-font-h" value="Josefin Sans"><span class="ap-font-label" style="font-family:'Josefin Sans',sans-serif">Josefin Sans</span><span class="ap-font-tag">Minimalista</span></label>
               </div>
             </div>
-          </div>
+            <input type="hidden" id="ap-font-heading" value="Playfair Display">
 
-          <!-- Botones -->
-          <div style="grid-column:1/-1;display:flex;gap:12px;flex-wrap:wrap">
-            <button onclick="saveAppearance()" class="btn btn--primary btn--lg">
-              <i class="fas fa-save"></i> Guardar y aplicar
-            </button>
-            <button onclick="previewAppearance()" class="btn btn--outline">
-              <i class="fas fa-eye"></i> Ver previa en tiempo real
-            </button>
-            <button onclick="resetAppearance()" style="margin-left:auto;padding:10px 20px;border:1px solid var(--c-error);border-radius:var(--radius-sm);color:var(--c-error);background:none;cursor:pointer;font-weight:700">
-              <i class="fas fa-rotate-left"></i> Restablecer por defecto
-            </button>
+            <div style="border-top:1px solid var(--c-border);padding-top:20px">
+              <label style="font-size:.82rem;font-weight:700;display:block;margin-bottom:10px;color:var(--c-gray);text-transform:uppercase;letter-spacing:.06em">Texto y cuerpo</label>
+              <div style="display:flex;flex-direction:column;gap:8px" id="ap-body-options">
+                <label class="ap-font-option" data-font="Lato"><input type="radio" name="ap-font-b" value="Lato"><span class="ap-font-label" style="font-family:'Lato',sans-serif">Lato</span><span class="ap-font-tag">Neutral limpio</span></label>
+                <label class="ap-font-option" data-font="Open Sans"><input type="radio" name="ap-font-b" value="Open Sans"><span class="ap-font-label" style="font-family:'Open Sans',sans-serif">Open Sans</span><span class="ap-font-tag">Muy legible</span></label>
+                <label class="ap-font-option" data-font="Nunito"><input type="radio" name="ap-font-b" value="Nunito"><span class="ap-font-label" style="font-family:'Nunito',sans-serif">Nunito</span><span class="ap-font-tag">Amigable</span></label>
+                <label class="ap-font-option" data-font="Poppins"><input type="radio" name="ap-font-b" value="Poppins"><span class="ap-font-label" style="font-family:'Poppins',sans-serif">Poppins</span><span class="ap-font-tag">Moderna</span></label>
+                <label class="ap-font-option" data-font="Inter"><input type="radio" name="ap-font-b" value="Inter"><span class="ap-font-label" style="font-family:'Inter',sans-serif">Inter</span><span class="ap-font-tag">Digital</span></label>
+              </div>
+            </div>
+            <input type="hidden" id="ap-font-body" value="Lato">
           </div>
 
         </div>
+
+        <!-- Vista previa en vivo -->
+        <div style="background:var(--c-white);border-radius:var(--radius-xl);border:1px solid var(--c-border);padding:28px;margin-bottom:24px">
+          <h4 style="margin:0 0 6px;font-size:1rem"><i class="fas fa-display" style="color:var(--c-gold);margin-right:8px"></i>Vista previa en vivo</h4>
+          <p style="color:var(--c-gray);font-size:.82rem;margin-bottom:20px">Así se verá tu tienda con los ajustes actuales</p>
+
+          <!-- Mockup browser -->
+          <div style="border:2px solid var(--c-border);border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.08)">
+            <!-- Browser chrome -->
+            <div style="background:#E8E8E8;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ccc">
+              <div style="display:flex;gap:6px"><div style="width:12px;height:12px;background:#FF5F57;border-radius:50%"></div><div style="width:12px;height:12px;background:#FFBD2E;border-radius:50%"></div><div style="width:12px;height:12px;background:#28CA41;border-radius:50%"></div></div>
+              <div style="flex:1;background:#fff;border-radius:20px;padding:4px 14px;font-size:.72rem;color:#888;border:1px solid #ddd">kaos-decoracion.com</div>
+            </div>
+            <!-- Promo bar -->
+            <div id="ap-prev-promo" style="padding:7px;text-align:center;font-size:.72rem;font-weight:600"></div>
+            <!-- Header -->
+            <div id="ap-prev-header" style="padding:14px 24px;display:flex;align-items:center;justify-content:space-between">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div id="ap-prev-logo" style="width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.15rem">K</div>
+                <div>
+                  <div id="ap-prev-brand" style="font-weight:700;font-size:.92rem;line-height:1.2">Kaos Decoración</div>
+                  <div id="ap-prev-subbrand" style="font-size:.66rem;opacity:.5">Artesanía · Madrid</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <div id="ap-prev-nav1" style="font-size:.75rem;font-weight:600;opacity:.7">Tienda</div>
+                <div id="ap-prev-nav2" style="font-size:.75rem;font-weight:600;opacity:.7;margin-left:12px">Nosotros</div>
+                <div id="ap-prev-btn" style="padding:6px 18px;border-radius:20px;font-size:.72rem;font-weight:700;margin-left:16px;cursor:default">Comprar</div>
+              </div>
+            </div>
+            <!-- Hero -->
+            <div id="ap-prev-hero" style="padding:36px 24px;text-align:center">
+              <div id="ap-prev-eyebrow" style="font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;opacity:.6">Artesanía de Madrid</div>
+              <div id="ap-prev-title" style="font-size:1.9rem;font-weight:700;line-height:1.2;margin-bottom:12px">Arte que vive<br>en tu hogar</div>
+              <p id="ap-prev-text" style="font-size:.83rem;margin:0 auto 20px;max-width:320px;opacity:.7;line-height:1.6">Piezas artesanales únicas, hechas a mano con amor en Madrid.</p>
+              <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
+                <div id="ap-prev-cta1" style="padding:10px 24px;border-radius:8px;font-size:.78rem;font-weight:700;cursor:default">Ver colección</div>
+                <div id="ap-prev-cta2" style="padding:10px 24px;border-radius:8px;font-size:.78rem;font-weight:700;cursor:default;border:2px solid">Personalizar</div>
+              </div>
+            </div>
+            <!-- Product cards row -->
+            <div id="ap-prev-cards" style="padding:20px 24px 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+              <div class="ap-mini-card">
+                <div id="ap-mini-img1" style="height:90px;border-radius:8px;margin-bottom:8px;display:flex;align-items:center;justify-content:center"><i class="fas fa-lightbulb" style="font-size:1.8rem;opacity:.25"></i></div>
+                <div id="ap-mini-name1" style="font-size:.75rem;font-weight:700;margin-bottom:4px">Lámpara Artesanal</div>
+                <div id="ap-mini-price1" style="font-size:.82rem;font-weight:700">89,00 €</div>
+              </div>
+              <div class="ap-mini-card">
+                <div id="ap-mini-img2" style="height:90px;border-radius:8px;margin-bottom:8px;display:flex;align-items:center;justify-content:center"><i class="fas fa-bag-shopping" style="font-size:1.8rem;opacity:.25"></i></div>
+                <div id="ap-mini-name2" style="font-size:.75rem;font-weight:700;margin-bottom:4px">Bolso Cuero</div>
+                <div id="ap-mini-price2" style="font-size:.82rem;font-weight:700">195,00 €</div>
+              </div>
+              <div class="ap-mini-card">
+                <div id="ap-mini-img3" style="height:90px;border-radius:8px;margin-bottom:8px;display:flex;align-items:center;justify-content:center"><i class="fas fa-couch" style="font-size:1.8rem;opacity:.25"></i></div>
+                <div id="ap-mini-name3" style="font-size:.75rem;font-weight:700;margin-bottom:4px">Cojín Bordado</div>
+                <div id="ap-mini-price3" style="font-size:.82rem;font-weight:700">72,00 €</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Acciones -->
+        <div style="background:var(--c-white);border-radius:var(--radius-xl);border:1px solid var(--c-border);padding:22px 28px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <button onclick="saveAppearance()" style="display:flex;align-items:center;gap:8px;padding:12px 28px;background:var(--c-primary);color:#fff;border:none;border-radius:var(--radius-md);font-weight:700;font-size:.9rem;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+            <i class="fas fa-cloud-arrow-up"></i> Guardar y aplicar en toda la web
+          </button>
+          <button onclick="previewAppearance()" style="display:flex;align-items:center;gap:8px;padding:12px 22px;background:none;border:2px solid var(--c-primary);color:var(--c-primary);border-radius:var(--radius-md);font-weight:700;font-size:.88rem;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+            <i class="fas fa-eye"></i> Previsualizar en esta página
+          </button>
+          <div style="flex:1"></div>
+          <button onclick="resetAppearance()" style="display:flex;align-items:center;gap:7px;padding:11px 20px;background:none;border:1.5px solid var(--c-error);color:var(--c-error);border-radius:var(--radius-md);font-weight:700;font-size:.83rem;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+            <i class="fas fa-rotate-left"></i> Restablecer por defecto
+          </button>
+        </div>
+
       </div>
 
     </div><!-- /admin-content -->
@@ -1595,19 +1816,88 @@ function clearDemoData() {
 const THEME_KEY = 'kaos_theme';
 const DEFAULTS  = { colorPrimary:'#2C1A0E', colorGold:'#C9A96E', colorBg:'#FAF7F2', colorText:'#3D2B1F', fontHeading:'Playfair Display', fontBody:'Lato' };
 
+const PRESETS = {
+  kaos:     { colorPrimary:'#2C1A0E', colorGold:'#C9A96E', colorBg:'#FAF7F2', colorText:'#3D2B1F', fontHeading:'Playfair Display', fontBody:'Lato' },
+  noche:    { colorPrimary:'#0D1117', colorGold:'#C0A060', colorBg:'#161B22', colorText:'#E6EDF3', fontHeading:'Cormorant Garamond', fontBody:'Inter' },
+  botanico: { colorPrimary:'#1B3A2D', colorGold:'#B5834A', colorBg:'#F2F7F5', colorText:'#3D5A50', fontHeading:'Lora', fontBody:'Nunito' },
+  cielo:    { colorPrimary:'#1A2E4A', colorGold:'#E0A842', colorBg:'#F4F8FC', colorText:'#334E6B', fontHeading:'Raleway', fontBody:'Open Sans' },
+  tierra:   { colorPrimary:'#5C3A1E', colorGold:'#D4956A', colorBg:'#FDF6EE', colorText:'#7A5C3F', fontHeading:'Montserrat', fontBody:'Poppins' },
+  minimal:  { colorPrimary:'#1A1A1A', colorGold:'#B8860B', colorBg:'#FFFFFF', colorText:'#555555', fontHeading:'Josefin Sans', fontBody:'Lato' },
+};
+
+function applyPreset(name) {
+  const p = PRESETS[name];
+  if (!p) return;
+  setAppearanceValues(p);
+  document.querySelectorAll('.ap-theme-card').forEach(c => c.classList.toggle('active', c.dataset.theme === name));
+  updatePreview();
+  showToast(`Tema "${name}" aplicado — guarda para hacerlo permanente`, 'info');
+}
+
+function setAppearanceValues(p) {
+  document.getElementById('ap-color-primary').value = p.colorPrimary;
+  document.getElementById('ap-color-gold').value    = p.colorGold;
+  document.getElementById('ap-color-bg').value      = p.colorBg;
+  document.getElementById('ap-color-text').value    = p.colorText;
+  document.getElementById('ap-font-heading').value  = p.fontHeading;
+  document.getElementById('ap-font-body').value     = p.fontBody;
+  /* sync radio buttons */
+  document.querySelectorAll('#ap-heading-options .ap-font-option').forEach(opt => {
+    const radio = opt.querySelector('input[type=radio]');
+    const active = radio.value === p.fontHeading;
+    opt.classList.toggle('selected', active);
+  });
+  document.querySelectorAll('#ap-body-options .ap-font-option').forEach(opt => {
+    const radio = opt.querySelector('input[type=radio]');
+    const active = radio.value === p.fontBody;
+    opt.classList.toggle('selected', active);
+  });
+}
+
 function initAppearancePanel() {
   const saved = Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem(THEME_KEY) || '{}'));
-  document.getElementById('ap-color-primary').value = saved.colorPrimary;
-  document.getElementById('ap-color-gold').value    = saved.colorGold;
-  document.getElementById('ap-color-bg').value      = saved.colorBg;
-  document.getElementById('ap-color-text').value    = saved.colorText;
-  document.getElementById('ap-font-heading').value  = saved.fontHeading;
-  document.getElementById('ap-font-body').value     = saved.fontBody;
+  setAppearanceValues(saved);
   updatePreview();
 
-  /* Actualizar preview en tiempo real al mover los pickers */
-  ['ap-color-primary','ap-color-gold','ap-color-bg','ap-color-text','ap-font-heading','ap-font-body']
-    .forEach(id => document.getElementById(id).addEventListener('input', updatePreview));
+  /* Color pickers → update swatch + hex + preview */
+  ['primary','gold','bg','text'].forEach(key => {
+    const inp = document.getElementById('ap-color-' + key);
+    inp.addEventListener('input', () => {
+      document.getElementById('ap-hex-' + key).textContent = inp.value.toUpperCase();
+      updatePreview();
+    });
+  });
+
+  /* Font radio buttons */
+  document.querySelectorAll('#ap-heading-options .ap-font-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const val = opt.querySelector('input').value;
+      document.getElementById('ap-font-heading').value = val;
+      document.querySelectorAll('#ap-heading-options .ap-font-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      loadGoogleFont(val, updatePreview);
+    });
+  });
+  document.querySelectorAll('#ap-body-options .ap-font-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const val = opt.querySelector('input').value;
+      document.getElementById('ap-font-body').value = val;
+      document.querySelectorAll('#ap-body-options .ap-font-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      loadGoogleFont(val, updatePreview);
+    });
+  });
+
+  /* Detect active preset */
+  detectActivePreset(saved);
+}
+
+function detectActivePreset(vals) {
+  let found = null;
+  Object.entries(PRESETS).forEach(([name, p]) => {
+    if (p.colorPrimary === vals.colorPrimary && p.colorGold === vals.colorGold) found = name;
+  });
+  document.querySelectorAll('.ap-theme-card').forEach(c => c.classList.toggle('active', c.dataset.theme === found));
 }
 
 function updatePreview() {
@@ -1618,25 +1908,68 @@ function updatePreview() {
   const fHeading = document.getElementById('ap-font-heading').value;
   const fBody    = document.getElementById('ap-font-body').value;
 
-  const header = document.getElementById('ap-prev-header');
-  const body   = document.getElementById('ap-prev-body');
-  const logo   = document.getElementById('ap-prev-logo');
-  const brand  = document.getElementById('ap-prev-brand');
-  const btn    = document.getElementById('ap-prev-btn');
-  const title  = document.getElementById('ap-prev-title');
-  const ptext  = document.getElementById('ap-prev-text');
-  const price  = document.getElementById('ap-prev-price');
-  const badge  = document.getElementById('ap-prev-badge');
+  /* Swatches */
+  const setS = (id, val) => { const el = document.getElementById(id); if(el) el.style.background = val; };
+  setS('ap-swatch-primary', primary);
+  setS('ap-swatch-gold',    gold);
+  setS('ap-swatch-bg',      bg);
+  setS('ap-swatch-text',    text);
 
+  /* Hex codes */
+  const setH = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val.toUpperCase(); };
+  setH('ap-hex-primary', primary);
+  setH('ap-hex-gold',    gold);
+  setH('ap-hex-bg',      bg);
+  setH('ap-hex-text',    text);
+
+  /* Palette strip */
+  setS('ap-palette-1', primary);
+  setS('ap-palette-2', gold);
+  setS('ap-palette-3', bg);
+  setS('ap-palette-4', text);
+
+  /* Promo bar */
+  const promo = document.getElementById('ap-prev-promo');
+  if (promo) { promo.style.background = gold; promo.style.color = primary; promo.textContent = 'Envío gratuito en pedidos +80 €  ·  Código KAOS10 = 10% dto'; }
+
+  /* Header */
+  const header = document.getElementById('ap-prev-header');
   if (header) header.style.background = primary;
-  if (logo)   { logo.style.background = gold; logo.style.color = primary; }
-  if (brand)  { brand.style.color = '#fff'; brand.style.fontFamily = `'${fHeading}', serif`; }
-  if (btn)    { btn.style.background = gold; btn.style.color = primary; btn.style.fontFamily = `'${fBody}', sans-serif`; }
-  if (body)   body.style.background = bg;
-  if (title)  { title.style.color = primary; title.style.fontFamily = `'${fHeading}', serif`; }
-  if (ptext)  { ptext.style.color = text; ptext.style.fontFamily = `'${fBody}', sans-serif`; }
-  if (price)  { price.style.color = primary; price.style.fontFamily = `'${fBody}', sans-serif`; }
-  if (badge)  { badge.style.background = gold + '33'; badge.style.color = gold; }
+  const logo = document.getElementById('ap-prev-logo');
+  if (logo) { logo.style.background = gold; logo.style.color = primary; logo.style.fontFamily = `'${fHeading}',serif`; }
+  const brand = document.getElementById('ap-prev-brand');
+  if (brand) { brand.style.color = '#fff'; brand.style.fontFamily = `'${fHeading}',serif`; }
+  const sub = document.getElementById('ap-prev-subbrand');
+  if (sub) sub.style.color = 'rgba(255,255,255,.5)';
+  ['ap-prev-nav1','ap-prev-nav2'].forEach(id => { const el = document.getElementById(id); if(el){ el.style.color='rgba(255,255,255,.8)'; el.style.fontFamily=`'${fBody}',sans-serif`; } });
+  const btn = document.getElementById('ap-prev-btn');
+  if (btn) { btn.style.background = gold; btn.style.color = primary; btn.style.fontFamily = `'${fBody}',sans-serif`; }
+
+  /* Hero */
+  const hero = document.getElementById('ap-prev-hero');
+  if (hero) hero.style.background = bg;
+  const eyebrow = document.getElementById('ap-prev-eyebrow');
+  if (eyebrow) { eyebrow.style.color = gold; eyebrow.style.fontFamily = `'${fBody}',sans-serif`; }
+  const title = document.getElementById('ap-prev-title');
+  if (title) { title.style.color = primary; title.style.fontFamily = `'${fHeading}',serif`; }
+  const ptext = document.getElementById('ap-prev-text');
+  if (ptext) { ptext.style.color = text; ptext.style.fontFamily = `'${fBody}',sans-serif`; }
+  const cta1 = document.getElementById('ap-prev-cta1');
+  if (cta1) { cta1.style.background = primary; cta1.style.color = '#fff'; cta1.style.fontFamily = `'${fBody}',sans-serif`; }
+  const cta2 = document.getElementById('ap-prev-cta2');
+  if (cta2) { cta2.style.borderColor = primary; cta2.style.color = primary; cta2.style.fontFamily = `'${fBody}',sans-serif`; cta2.style.background = 'transparent'; }
+
+  /* Product cards */
+  const cards = document.getElementById('ap-prev-cards');
+  if (cards) cards.style.background = bg;
+  [1,2,3].forEach(i => {
+    const img = document.getElementById('ap-mini-img'+i);
+    if (img) { img.style.background = primary + '14'; img.querySelector('i').style.color = gold; }
+    const name = document.getElementById('ap-mini-name'+i);
+    if (name) { name.style.color = primary; name.style.fontFamily = `'${fHeading}',serif`; }
+    const price = document.getElementById('ap-mini-price'+i);
+    if (price) { price.style.color = gold; price.style.fontFamily = `'${fBody}',sans-serif`; }
+  });
 }
 
 function previewAppearance() {
@@ -1668,14 +2001,10 @@ function saveAppearance() {
 function resetAppearance() {
   if (!confirm('¿Restablecer los colores y tipografías por defecto?')) return;
   localStorage.removeItem(THEME_KEY);
-  applyThemeToPage(DEFAULTS.colorPrimary, DEFAULTS.colorGold, DEFAULTS.colorBg, DEFAULTS.colorText, DEFAULTS.fontHeading, DEFAULTS.fontBody);
-  document.getElementById('ap-color-primary').value = DEFAULTS.colorPrimary;
-  document.getElementById('ap-color-gold').value    = DEFAULTS.colorGold;
-  document.getElementById('ap-color-bg').value      = DEFAULTS.colorBg;
-  document.getElementById('ap-color-text').value    = DEFAULTS.colorText;
-  document.getElementById('ap-font-heading').value  = DEFAULTS.fontHeading;
-  document.getElementById('ap-font-body').value     = DEFAULTS.fontBody;
+  setAppearanceValues(DEFAULTS);
   updatePreview();
+  applyThemeToPage(DEFAULTS.colorPrimary, DEFAULTS.colorGold, DEFAULTS.colorBg, DEFAULTS.colorText, DEFAULTS.fontHeading, DEFAULTS.fontBody);
+  detectActivePreset(DEFAULTS);
   showToast('Apariencia restablecida por defecto ✓','success');
 }
 
@@ -1698,7 +2027,7 @@ function loadGoogleFont(family, cb) {
     l.href = `https://fonts.googleapis.com/css2?family=${family.replace(/ /g,'+')}:wght@400;700&display=swap`;
     l.onload = cb;
     document.head.appendChild(l);
-  } else { cb(); }
+  } else if (cb) { cb(); }
 }
 
 /* ══════════════════════════════════════════
