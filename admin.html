@@ -1073,6 +1073,21 @@
             </div>
             <button onclick="showToast('Configuración de envíos guardada ✓','success')" class="btn btn--primary" style="margin-top:16px"><i class="fas fa-save"></i> Guardar</button>
           </div>
+
+          <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px;margin-top:20px">
+            <h4 style="margin-bottom:4px;padding-bottom:12px;border-bottom:1px solid var(--c-border)"><i class="fas fa-envelope" style="color:var(--c-gold);margin-right:8px"></i>Email de bienvenida</h4>
+            <p style="color:var(--c-gray);font-size:.84rem;margin:12px 0 16px">Envía un email de prueba para verificar que el sistema de correo funciona correctamente.</p>
+            <div style="display:flex;gap:10px;align-items:flex-end">
+              <div style="flex:1">
+                <label style="font-size:.82rem;font-weight:600;margin-bottom:6px;display:block">Email de prueba</label>
+                <input type="email" id="test-email-input" placeholder="tu@email.com" style="width:100%;padding:9px 12px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);font-size:.88rem">
+              </div>
+              <button onclick="sendTestEmail()" class="btn btn--primary" style="white-space:nowrap">
+                <i class="fas fa-paper-plane"></i> Enviar prueba
+              </button>
+            </div>
+            <div id="test-email-result" style="margin-top:12px;font-size:.82rem;display:none"></div>
+          </div>
         </div>
       </div>
 
@@ -2441,6 +2456,41 @@ function clearDemoData() {
   localStorage.removeItem(Auth._usersKey);
   showToast('Datos demo eliminados. Recarga.','success');
   setTimeout(() => location.reload(), 1500);
+}
+
+async function sendTestEmail() {
+  const input = document.getElementById('test-email-input');
+  const resultEl = document.getElementById('test-email-result');
+  const email = input ? input.value.trim() : '';
+  if (!email || !email.includes('@')) {
+    showToast('Introduce un email válido', 'error');
+    return;
+  }
+  resultEl.style.display = 'block';
+  resultEl.style.color = 'var(--c-gray)';
+  resultEl.textContent = 'Enviando…';
+  try {
+    const res = await fetch('/.netlify/functions/send-welcome', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'Test', email })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      resultEl.style.color = '#2e7d32';
+      resultEl.textContent = '✓ Email enviado correctamente. Revisa la bandeja de entrada.';
+      showToast('Email de prueba enviado ✓', 'success');
+    } else {
+      resultEl.style.color = 'var(--c-error)';
+      const errMsg = data.error ? JSON.parse(data.error || '{}')?.message || data.error : 'Error desconocido';
+      resultEl.textContent = '✗ Error: ' + errMsg + (data.statusCode ? ' (HTTP ' + data.statusCode + ')' : '');
+      showToast('Error al enviar. Ver detalle abajo.', 'error');
+    }
+  } catch(e) {
+    resultEl.style.color = 'var(--c-error)';
+    resultEl.textContent = '✗ No se pudo conectar con la función: ' + e.message;
+    showToast('Error de conexión con la función', 'error');
+  }
 }
 
 /* ══════════════════════════════════════════
