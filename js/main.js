@@ -2,6 +2,32 @@
    KAOS DECORACIÓN — Main JS
 =================================================== */
 
+/* ─── Tema personalizado (se aplica inmediatamente) ─── */
+(function applyKaosTheme() {
+  try {
+    const t = JSON.parse(localStorage.getItem('kaos_theme') || '{}');
+    const r = document.documentElement;
+    if (t.colorPrimary) r.style.setProperty('--c-primary', t.colorPrimary);
+    if (t.colorGold)    { r.style.setProperty('--c-gold', t.colorGold); r.style.setProperty('--c-secondary', t.colorGold); }
+    if (t.colorBg)      r.style.setProperty('--c-bg', t.colorBg);
+    if (t.colorText)    r.style.setProperty('--c-text', t.colorText);
+    if (t.fontHeading) {
+      const l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.href = 'https://fonts.googleapis.com/css2?family=' + t.fontHeading.replace(/ /g,'+') + ':ital,wght@0,400;0,700;1,400&display=swap';
+      document.head.appendChild(l);
+      r.style.setProperty('--ff-heading', "'" + t.fontHeading + "', Georgia, serif");
+    }
+    if (t.fontBody) {
+      const l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.href = 'https://fonts.googleapis.com/css2?family=' + t.fontBody.replace(/ /g,'+') + ':wght@400;700&display=swap';
+      document.head.appendChild(l);
+      r.style.setProperty('--ff-body', "'" + t.fontBody + "', sans-serif");
+    }
+  } catch(e) {}
+})();
+
 /* ─── Toast Notifications ─── */
 function showToast(msg, type = 'info') {
   let container = document.querySelector('.toast-container');

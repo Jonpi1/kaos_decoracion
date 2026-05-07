@@ -266,6 +266,7 @@
 
     <div class="admin-nav-section">Cuenta</div>
     <div class="admin-nav-item" data-section="settings"><i class="fas fa-cog"></i> Ajustes tienda</div>
+    <div class="admin-nav-item" data-section="appearance"><i class="fas fa-palette"></i> Apariencia</div>
     <div class="admin-nav-item" data-section="security"><i class="fas fa-lock"></i> Seguridad</div>
 
     <div style="margin-top:auto;padding:16px 12px 0;border-top:1px solid rgba(255,255,255,.1)">
@@ -682,6 +683,130 @@
         </div>
       </div>
 
+      <!-- ══ APARIENCIA ══ -->
+      <div class="admin-page-section" id="section-appearance">
+        <h3 style="margin-bottom:6px">Apariencia de la tienda</h3>
+        <p style="color:var(--c-gray);font-size:.88rem;margin-bottom:28px">Personaliza los colores y tipografías que se muestran en toda la web.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start">
+
+          <!-- Colores -->
+          <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px">
+            <h4 style="margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">
+              <i class="fas fa-droplet" style="color:var(--c-gold);margin-right:8px"></i>Colores
+            </h4>
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <strong style="display:block;font-size:.88rem">Color principal</strong>
+                  <span style="font-size:.78rem;color:var(--c-gray)">Cabecera, botones, textos</span>
+                </div>
+                <input type="color" id="ap-color-primary" value="#2C1A0E"
+                  style="width:48px;height:36px;border:2px solid var(--c-border);border-radius:var(--radius-sm);cursor:pointer;padding:2px">
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <strong style="display:block;font-size:.88rem">Color acento / dorado</strong>
+                  <span style="font-size:.78rem;color:var(--c-gray)">Precios, badges, botones gold</span>
+                </div>
+                <input type="color" id="ap-color-gold" value="#C9A96E"
+                  style="width:48px;height:36px;border:2px solid var(--c-border);border-radius:var(--radius-sm);cursor:pointer;padding:2px">
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <strong style="display:block;font-size:.88rem">Color de fondo</strong>
+                  <span style="font-size:.78rem;color:var(--c-gray)">Fondo general de la web</span>
+                </div>
+                <input type="color" id="ap-color-bg" value="#FAF7F2"
+                  style="width:48px;height:36px;border:2px solid var(--c-border);border-radius:var(--radius-sm);cursor:pointer;padding:2px">
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <strong style="display:block;font-size:.88rem">Color de texto</strong>
+                  <span style="font-size:.78rem;color:var(--c-gray)">Párrafos y descripciones</span>
+                </div>
+                <input type="color" id="ap-color-text" value="#3D2B1F"
+                  style="width:48px;height:36px;border:2px solid var(--c-border);border-radius:var(--radius-sm);cursor:pointer;padding:2px">
+              </div>
+            </div>
+          </div>
+
+          <!-- Tipografías -->
+          <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px">
+            <h4 style="margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">
+              <i class="fas fa-font" style="color:var(--c-gold);margin-right:8px"></i>Tipografías
+            </h4>
+            <div class="form-group" style="margin-bottom:18px">
+              <label>Fuente de títulos</label>
+              <select id="ap-font-heading" style="width:100%">
+                <option value="Playfair Display">Playfair Display (por defecto)</option>
+                <option value="Cormorant Garamond">Cormorant Garamond</option>
+                <option value="Lora">Lora</option>
+                <option value="Merriweather">Merriweather</option>
+                <option value="Libre Baskerville">Libre Baskerville</option>
+                <option value="Raleway">Raleway</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Josefin Sans">Josefin Sans</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Fuente de cuerpo</label>
+              <select id="ap-font-body" style="width:100%">
+                <option value="Lato">Lato (por defecto)</option>
+                <option value="Open Sans">Open Sans</option>
+                <option value="Nunito">Nunito</option>
+                <option value="Raleway">Raleway</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Poppins">Poppins</option>
+                <option value="Inter">Inter</option>
+                <option value="Source Sans 3">Source Sans 3</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Preview -->
+          <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);padding:28px;grid-column:1/-1">
+            <h4 style="margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--c-border)">
+              <i class="fas fa-eye" style="color:var(--c-gold);margin-right:8px"></i>Vista previa
+            </h4>
+            <div id="ap-preview" style="border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--c-border)">
+              <div id="ap-prev-header" style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div id="ap-prev-logo" style="width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1rem">K</div>
+                  <div>
+                    <div id="ap-prev-brand" style="font-weight:700;font-size:.9rem">Kaos Decoración</div>
+                    <div style="font-size:.7rem;opacity:.5">Artesanía · Madrid</div>
+                  </div>
+                </div>
+                <div id="ap-prev-btn" style="padding:6px 16px;border-radius:6px;font-size:.78rem;font-weight:700;cursor:default">Ver tienda</div>
+              </div>
+              <div id="ap-prev-body" style="padding:24px 20px">
+                <div id="ap-prev-title" style="font-size:1.4rem;font-weight:700;margin-bottom:8px">Arte que vive en tu hogar</div>
+                <p id="ap-prev-text" style="font-size:.85rem;margin-bottom:16px;opacity:.7">Piezas artesanales únicas, hechas a mano con amor en Madrid.</p>
+                <div style="display:flex;gap:10px">
+                  <div id="ap-prev-price" style="font-size:1rem;font-weight:700">89,00 €</div>
+                  <div id="ap-prev-badge" style="padding:3px 10px;border-radius:12px;font-size:.72rem;font-weight:700">Nuevo</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones -->
+          <div style="grid-column:1/-1;display:flex;gap:12px;flex-wrap:wrap">
+            <button onclick="saveAppearance()" class="btn btn--primary btn--lg">
+              <i class="fas fa-save"></i> Guardar y aplicar
+            </button>
+            <button onclick="previewAppearance()" class="btn btn--outline">
+              <i class="fas fa-eye"></i> Ver previa en tiempo real
+            </button>
+            <button onclick="resetAppearance()" style="margin-left:auto;padding:10px 20px;border:1px solid var(--c-error);border-radius:var(--radius-sm);color:var(--c-error);background:none;cursor:pointer;font-weight:700">
+              <i class="fas fa-rotate-left"></i> Restablecer por defecto
+            </button>
+          </div>
+
+        </div>
+      </div>
+
     </div><!-- /admin-content -->
   </div><!-- /admin-main -->
 
@@ -865,8 +990,9 @@ const PAGE_HEADINGS = {
   categories: ['Categorías', 'Organización del catálogo'],
   customers: ['Clientes', 'Usuarios registrados en la tienda'],
   coupons: ['Cupones', 'Códigos de descuento activos'],
-  settings: ['Ajustes', 'Configuración general de la tienda'],
-  security: ['Seguridad', 'Gestión de contraseñas y acceso'],
+  settings:    ['Ajustes', 'Configuración general de la tienda'],
+  appearance:  ['Apariencia', 'Colores y tipografías de la tienda'],
+  security:    ['Seguridad', 'Gestión de contraseñas y acceso'],
 };
 
 function switchSection(id) {
@@ -884,6 +1010,7 @@ function switchSection(id) {
   if (id === 'customers')       renderCustomers();
   if (id === 'categories')      renderCategories();
   if (id === 'custom-orders')   renderCustomOrders();
+  if (id === 'appearance')      initAppearancePanel();
 }
 
 document.querySelectorAll('.admin-nav-item[data-section]').forEach(nav =>
@@ -1445,6 +1572,118 @@ function clearDemoData() {
   localStorage.removeItem(Auth._usersKey);
   showToast('Datos demo eliminados. Recarga.','success');
   setTimeout(() => location.reload(), 1500);
+}
+
+/* ══════════════════════════════════════════
+   APARIENCIA
+══════════════════════════════════════════ */
+const THEME_KEY = 'kaos_theme';
+const DEFAULTS  = { colorPrimary:'#2C1A0E', colorGold:'#C9A96E', colorBg:'#FAF7F2', colorText:'#3D2B1F', fontHeading:'Playfair Display', fontBody:'Lato' };
+
+function initAppearancePanel() {
+  const saved = Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem(THEME_KEY) || '{}'));
+  document.getElementById('ap-color-primary').value = saved.colorPrimary;
+  document.getElementById('ap-color-gold').value    = saved.colorGold;
+  document.getElementById('ap-color-bg').value      = saved.colorBg;
+  document.getElementById('ap-color-text').value    = saved.colorText;
+  document.getElementById('ap-font-heading').value  = saved.fontHeading;
+  document.getElementById('ap-font-body').value     = saved.fontBody;
+  updatePreview();
+
+  /* Actualizar preview en tiempo real al mover los pickers */
+  ['ap-color-primary','ap-color-gold','ap-color-bg','ap-color-text','ap-font-heading','ap-font-body']
+    .forEach(id => document.getElementById(id).addEventListener('input', updatePreview));
+}
+
+function updatePreview() {
+  const primary  = document.getElementById('ap-color-primary').value;
+  const gold     = document.getElementById('ap-color-gold').value;
+  const bg       = document.getElementById('ap-color-bg').value;
+  const text     = document.getElementById('ap-color-text').value;
+  const fHeading = document.getElementById('ap-font-heading').value;
+  const fBody    = document.getElementById('ap-font-body').value;
+
+  const header = document.getElementById('ap-prev-header');
+  const body   = document.getElementById('ap-prev-body');
+  const logo   = document.getElementById('ap-prev-logo');
+  const brand  = document.getElementById('ap-prev-brand');
+  const btn    = document.getElementById('ap-prev-btn');
+  const title  = document.getElementById('ap-prev-title');
+  const ptext  = document.getElementById('ap-prev-text');
+  const price  = document.getElementById('ap-prev-price');
+  const badge  = document.getElementById('ap-prev-badge');
+
+  if (header) header.style.background = primary;
+  if (logo)   { logo.style.background = gold; logo.style.color = primary; }
+  if (brand)  { brand.style.color = '#fff'; brand.style.fontFamily = `'${fHeading}', serif`; }
+  if (btn)    { btn.style.background = gold; btn.style.color = primary; btn.style.fontFamily = `'${fBody}', sans-serif`; }
+  if (body)   body.style.background = bg;
+  if (title)  { title.style.color = primary; title.style.fontFamily = `'${fHeading}', serif`; }
+  if (ptext)  { ptext.style.color = text; ptext.style.fontFamily = `'${fBody}', sans-serif`; }
+  if (price)  { price.style.color = primary; price.style.fontFamily = `'${fBody}', sans-serif`; }
+  if (badge)  { badge.style.background = gold + '33'; badge.style.color = gold; }
+}
+
+function previewAppearance() {
+  applyThemeToPage(
+    document.getElementById('ap-color-primary').value,
+    document.getElementById('ap-color-gold').value,
+    document.getElementById('ap-color-bg').value,
+    document.getElementById('ap-color-text').value,
+    document.getElementById('ap-font-heading').value,
+    document.getElementById('ap-font-body').value
+  );
+  showToast('Vista previa aplicada en esta página ✓','success');
+}
+
+function saveAppearance() {
+  const theme = {
+    colorPrimary: document.getElementById('ap-color-primary').value,
+    colorGold:    document.getElementById('ap-color-gold').value,
+    colorBg:      document.getElementById('ap-color-bg').value,
+    colorText:    document.getElementById('ap-color-text').value,
+    fontHeading:  document.getElementById('ap-font-heading').value,
+    fontBody:     document.getElementById('ap-font-body').value
+  };
+  localStorage.setItem(THEME_KEY, JSON.stringify(theme));
+  applyThemeToPage(theme.colorPrimary, theme.colorGold, theme.colorBg, theme.colorText, theme.fontHeading, theme.fontBody);
+  showToast('Apariencia guardada y aplicada en toda la web ✓','success');
+}
+
+function resetAppearance() {
+  if (!confirm('¿Restablecer los colores y tipografías por defecto?')) return;
+  localStorage.removeItem(THEME_KEY);
+  applyThemeToPage(DEFAULTS.colorPrimary, DEFAULTS.colorGold, DEFAULTS.colorBg, DEFAULTS.colorText, DEFAULTS.fontHeading, DEFAULTS.fontBody);
+  document.getElementById('ap-color-primary').value = DEFAULTS.colorPrimary;
+  document.getElementById('ap-color-gold').value    = DEFAULTS.colorGold;
+  document.getElementById('ap-color-bg').value      = DEFAULTS.colorBg;
+  document.getElementById('ap-color-text').value    = DEFAULTS.colorText;
+  document.getElementById('ap-font-heading').value  = DEFAULTS.fontHeading;
+  document.getElementById('ap-font-body').value     = DEFAULTS.fontBody;
+  updatePreview();
+  showToast('Apariencia restablecida por defecto ✓','success');
+}
+
+function applyThemeToPage(primary, gold, bg, text, fHeading, fBody) {
+  const r = document.documentElement;
+  r.style.setProperty('--c-primary', primary);
+  r.style.setProperty('--c-gold', gold);
+  r.style.setProperty('--c-secondary', gold);
+  r.style.setProperty('--c-bg', bg);
+  r.style.setProperty('--c-text', text);
+  loadGoogleFont(fHeading, () => r.style.setProperty('--ff-heading', `'${fHeading}', Georgia, serif`));
+  loadGoogleFont(fBody,    () => r.style.setProperty('--ff-body',    `'${fBody}', sans-serif`));
+}
+
+function loadGoogleFont(family, cb) {
+  const id = 'gf-' + family.replace(/ /g,'-');
+  if (!document.getElementById(id)) {
+    const l = document.createElement('link');
+    l.id = id; l.rel = 'stylesheet';
+    l.href = `https://fonts.googleapis.com/css2?family=${family.replace(/ /g,'+')}:wght@400;700&display=swap`;
+    l.onload = cb;
+    document.head.appendChild(l);
+  } else { cb(); }
 }
 
 /* ══════════════════════════════════════════
