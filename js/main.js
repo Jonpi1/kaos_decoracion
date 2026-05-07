@@ -81,16 +81,59 @@ function initHeader() {
   const toggle = document.getElementById('menu-toggle');
   const mobileNav = document.getElementById('mobile-nav');
   if (toggle && mobileNav) {
-    toggle.addEventListener('click', () => {
-      toggle.classList.toggle('open');
-      mobileNav.classList.toggle('open');
+    /* ── Build luxury side-panel structure ── */
+    // Overlay
+    const overlay = document.createElement('div');
+    overlay.id = 'mobile-nav-overlay';
+    overlay.className = 'mobile-nav-overlay';
+    document.body.insertBefore(overlay, mobileNav);
+
+    // Header with logo + close button
+    const navHeader = document.createElement('div');
+    navHeader.className = 'mobile-nav-header';
+    navHeader.innerHTML = `
+      <img src="img/logo.png" alt="Kaos Decoración" class="mobile-nav-logo">
+      <button class="mobile-nav-close" aria-label="Cerrar menú"><i class="fas fa-times"></i></button>
+    `;
+    mobileNav.prepend(navHeader);
+
+    // Wrap existing links & add chevrons
+    const existingLinks = [...mobileNav.querySelectorAll('a')];
+    const linksWrapper = document.createElement('div');
+    linksWrapper.className = 'mobile-nav-links';
+    existingLinks.forEach(a => {
+      a.insertAdjacentHTML('beforeend', '<i class="fas fa-chevron-right nav-arrow"></i>');
+      linksWrapper.appendChild(a);
     });
-    mobileNav.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        toggle.classList.remove('open');
-        mobileNav.classList.remove('open');
-      });
-    });
+    mobileNav.appendChild(linksWrapper);
+
+    // Footer CTA
+    const navFooter = document.createElement('div');
+    navFooter.className = 'mobile-nav-footer';
+    navFooter.innerHTML = `<a href="carrito.html" class="btn btn--gold" style="width:100%;justify-content:center"><i class="fas fa-shopping-bag"></i> Ver carrito</a>`;
+    mobileNav.appendChild(navFooter);
+
+    /* ── Open / Close helpers ── */
+    function openNav() {
+      toggle.classList.add('open');
+      mobileNav.classList.add('open');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeNav() {
+      toggle.classList.remove('open');
+      mobileNav.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', () => mobileNav.classList.contains('open') ? closeNav() : openNav());
+    overlay.addEventListener('click', closeNav);
+    mobileNav.querySelector('.mobile-nav-close')?.addEventListener('click', closeNav);
+    mobileNav.querySelectorAll('.mobile-nav-links a').forEach(a => a.addEventListener('click', closeNav));
+
+    // Close on Escape key
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
   }
 
   const searchToggle = document.getElementById('search-toggle');
