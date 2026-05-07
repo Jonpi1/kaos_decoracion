@@ -22,7 +22,7 @@
 
 <!-- Promo Bar -->
 <div id="promo-bar" class="promo-bar">
-  🎁 Envío gratuito en pedidos +80€ · Usa el código <strong>KAOS10</strong> para un 10% de descuento
+  <span data-text-key="promo-text">🎁 Envío gratuito en pedidos +80€ · Usa el código <strong>KAOS10</strong> para un 10% de descuento</span>
   <span class="close-promo" title="Cerrar"><i class="fas fa-times"></i></span>
 </div>
 
@@ -31,11 +31,7 @@
   <div class="container">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <div class="logo-mark">K</div>
-        <div class="logo-text">
-          <strong>Kaos Decoración</strong>
-          <span>Artesanía · Madrid</span>
-        </div>
+        <img src="img/logo.png" alt="Kaos Decoración" class="logo-img">
       </a>
 
       <nav class="nav">
@@ -96,20 +92,20 @@
     <div class="hero-content">
       <div class="hero-eyebrow animate-left">
         <i class="fas fa-star"></i>
-        <span>Artesanía única en Madrid</span>
+        <span data-text-key="home-hero-eyebrow">Artesanía única en Madrid</span>
       </div>
-      <h1 class="animate-up" data-delay="1">
+      <h1 class="animate-up" data-delay="1" data-text-key="home-hero-title">
         Arte que vive<br>en tu <em>hogar</em>
       </h1>
-      <p class="animate-up" data-delay="2">
+      <p class="animate-up" data-delay="2" data-text-key="home-hero-subtitle">
         Cada pieza de Kaos Decoración es creada a mano en nuestro taller de Madrid.
         Lámparas, bolsos y decoración que cuentan una historia única, la tuya.
       </p>
       <div class="hero-actions animate-up" data-delay="3">
         <a href="tienda.html" class="btn btn--gold btn--lg">
-          <i class="fas fa-shopping-bag"></i> Explorar tienda
+          <i class="fas fa-shopping-bag"></i> <span data-text-key="home-cta-primary">Explorar tienda</span>
         </a>
-        <a href="sobre-nosotros.html" class="btn btn--outline-white btn--lg">
+        <a href="sobre-nosotros.html" class="btn btn--outline-white btn--lg" data-text-key="home-cta-secondary">
           Nuestra historia
         </a>
       </div>
@@ -117,16 +113,16 @@
   </div>
   <div class="hero-stats">
     <div class="stat-card animate-up" data-delay="2">
-      <strong>500+</strong>
-      <span>Piezas vendidas</span>
+      <strong data-text-key="home-stat1-num">500+</strong>
+      <span data-text-key="home-stat1-label">Piezas vendidas</span>
     </div>
     <div class="stat-card animate-up" data-delay="3">
-      <strong>100%</strong>
-      <span>Hecho a mano</span>
+      <strong data-text-key="home-stat2-num">100%</strong>
+      <span data-text-key="home-stat2-label">Hecho a mano</span>
     </div>
     <div class="stat-card animate-up" data-delay="4">
-      <strong>4.9★</strong>
-      <span>Valoración media</span>
+      <strong data-text-key="home-stat3-num">4.9★</strong>
+      <span data-text-key="home-stat3-label">Valoración media</span>
     </div>
   </div>
   <div class="hero-scroll">
@@ -142,29 +138,29 @@
       <div class="feature-item reveal">
         <i class="fas fa-truck-fast"></i>
         <div>
-          <strong>Envío gratuito</strong>
-          <span>En pedidos +80€</span>
+          <strong data-text-key="feat1-title">Envío gratuito</strong>
+          <span data-text-key="feat1-sub">En pedidos +80€</span>
         </div>
       </div>
       <div class="feature-item reveal">
         <i class="fas fa-hand-holding-heart"></i>
         <div>
-          <strong>100% artesanal</strong>
-          <span>Hecho a mano en Madrid</span>
+          <strong data-text-key="feat2-title">100% artesanal</strong>
+          <span data-text-key="feat2-sub">Hecho a mano en Madrid</span>
         </div>
       </div>
       <div class="feature-item reveal">
         <i class="fas fa-shield-halved"></i>
         <div>
-          <strong>Pago seguro</strong>
-          <span>SSL · Stripe · PayPal</span>
+          <strong data-text-key="feat3-title">Pago seguro</strong>
+          <span data-text-key="feat3-sub">SSL · Stripe · PayPal</span>
         </div>
       </div>
       <div class="feature-item reveal">
         <i class="fas fa-arrows-rotate"></i>
         <div>
-          <strong>Devoluciones</strong>
-          <span>30 días sin preguntas</span>
+          <strong data-text-key="feat4-title">Devoluciones</strong>
+          <span data-text-key="feat4-sub">30 días sin preguntas</span>
         </div>
       </div>
     </div>
@@ -175,9 +171,9 @@
 <section class="categories">
   <div class="container">
     <div class="section-title reveal">
-      <span class="eyebrow">Explorar por</span>
-      <h2>Nuestras categorías</h2>
-      <p>Desde iluminación artesanal hasta accesorios únicos, encuentra la pieza perfecta para tu espacio.</p>
+      <span class="eyebrow" data-text-key="home-cats-eyebrow">Explorar por</span>
+      <h2 data-text-key="home-cats-title">Nuestras categorías</h2>
+      <p data-text-key="home-cats-desc">Desde iluminación artesanal hasta accesorios únicos, encuentra la pieza perfecta para tu espacio.</p>
       <div class="divider"><span></span><i class="fas fa-leaf"></i><span></span></div>
     </div>
     <div class="categories-grid" id="categories-grid">
@@ -190,9 +186,9 @@
 <section class="products-section">
   <div class="container">
     <div class="section-title reveal">
-      <span class="eyebrow">Selección especial</span>
-      <h2>Productos destacados</h2>
-      <p>Las piezas más amadas por nuestra comunidad, seleccionadas por su diseño y calidad artesanal.</p>
+      <span class="eyebrow" data-text-key="home-feat-eyebrow">Selección especial</span>
+      <h2 data-text-key="home-feat-title">Productos destacados</h2>
+      <p data-text-key="home-feat-desc">Las piezas más amadas por nuestra comunidad, seleccionadas por su diseño y calidad artesanal.</p>
       <div class="divider"><span></span><i class="fas fa-star"></i><span></span></div>
     </div>
     <div class="products-grid" id="featured-products">
@@ -200,7 +196,7 @@
     </div>
     <div style="text-align:center; margin-top:48px">
       <a href="tienda.html" class="btn btn--outline btn--lg">
-        Ver toda la tienda <i class="fas fa-arrow-right"></i>
+        <span data-text-key="home-feat-btn">Ver toda la tienda</span> <i class="fas fa-arrow-right"></i>
       </a>
     </div>
   </div>
@@ -210,9 +206,9 @@
 <section class="products-section bg-light" style="padding: 80px 0">
   <div class="container">
     <div class="section-title reveal">
-      <span class="eyebrow">Recién llegados</span>
-      <h2>Nuevos productos</h2>
-      <p>Las últimas creaciones de nuestro taller, listas para dar vida a tu hogar.</p>
+      <span class="eyebrow" data-text-key="home-new-eyebrow">Recién llegados</span>
+      <h2 data-text-key="home-new-title">Nuevos productos</h2>
+      <p data-text-key="home-new-desc">Las últimas creaciones de nuestro taller, listas para dar vida a tu hogar.</p>
       <div class="divider"><span></span><i class="fas fa-sparkles"></i><span></span></div>
     </div>
     <div class="products-grid" id="new-products">
@@ -232,12 +228,12 @@
         </div>
       </div>
       <div class="reveal">
-        <span class="script" style="font-size:1.4rem;color:var(--c-secondary);display:block;margin-bottom:8px">Nuestra historia</span>
-        <h2 style="margin-bottom:20px">Artesanía con alma, <em style="font-style:italic;color:var(--c-gold)">desde Madrid</em></h2>
-        <p class="lead" style="margin-bottom:24px">
+        <span class="script" style="font-size:1.4rem;color:var(--c-secondary);display:block;margin-bottom:8px" data-text-key="home-about-script">Nuestra historia</span>
+        <h2 style="margin-bottom:20px" data-text-key="home-about-title">Artesanía con alma, <em style="font-style:italic;color:var(--c-gold)">desde Madrid</em></h2>
+        <p class="lead" style="margin-bottom:24px" data-text-key="home-about-lead">
           Kaos Decoración nació en 2019 en un pequeño taller del barrio de Lavapiés. Lo que empezó como un proyecto personal se convirtió en un espacio donde el arte y el hogar se encuentran.
         </p>
-        <p style="color:var(--c-gray);margin-bottom:32px;line-height:1.8">
+        <p style="color:var(--c-gray);margin-bottom:32px;line-height:1.8" data-text-key="home-about-text">
           Cada pieza que creamos lleva horas de trabajo, pasión y la huella única de quien la fabrica. No somos una fábrica — somos artesanos que creen que los objetos cotidianos merecen ser extraordinarios.
         </p>
         <div style="display:flex;gap:32px;margin-bottom:40px">
@@ -255,7 +251,7 @@
           </div>
         </div>
         <a href="sobre-nosotros.html" class="btn btn--primary">
-          Conoce nuestro taller <i class="fas fa-arrow-right"></i>
+          <span data-text-key="home-about-btn">Conoce nuestro taller</span> <i class="fas fa-arrow-right"></i>
         </a>
       </div>
     </div>
@@ -266,8 +262,8 @@
 <section class="reviews-section">
   <div class="container">
     <div class="section-title reveal">
-      <span class="eyebrow">Lo que dicen</span>
-      <h2>Opiniones de clientes</h2>
+      <span class="eyebrow" data-text-key="home-reviews-eyebrow">Lo que dicen</span>
+      <h2 data-text-key="home-reviews-title">Opiniones de clientes</h2>
       <div class="divider"><span></span><i class="fas fa-heart"></i><span></span></div>
     </div>
     <div class="reviews-grid">
@@ -312,14 +308,14 @@
 <section class="newsletter">
   <div class="container">
     <div class="newsletter-content reveal">
-        <span class="eyebrow">Solo para suscriptores</span>
-        <h2>10% de descuento en tu primer pedido</h2>
+        <span class="eyebrow" data-text-key="newsletter-eyebrow">Solo para suscriptores</span>
+        <h2 data-text-key="newsletter-title">10% de descuento en tu primer pedido</h2>
         <div style="display:inline-block;background:rgba(255,255,255,.15);border:2px solid var(--c-gold);border-radius:var(--radius-md);padding:10px 32px;margin:14px 0 10px;font-size:1.5rem;font-weight:900;letter-spacing:.16em;color:var(--c-gold)">KAOS10</div>
-        <p style="font-size:1rem;margin-bottom:6px">Suscríbete y recibe este código para usarlo en tu <strong>primera compra</strong>.</p>
+        <p style="font-size:1rem;margin-bottom:6px" data-text-key="newsletter-desc">Suscríbete y recibe este código para usarlo en tu <strong>primera compra</strong>.</p>
         <p style="font-size:.82rem;opacity:.55;margin-bottom:22px">También recibirás novedades y lanzamientos exclusivos de Kaos.</p>
         <form class="newsletter-form" novalidate>
           <input type="email" placeholder="Tu email" required aria-label="Email">
-          <button type="submit" class="btn btn--gold">Obtener mi 10%</button>
+          <button type="submit" class="btn btn--gold" data-text-key="newsletter-btn">Obtener mi 10%</button>
         </form>
         <p style="font-size:.72rem;color:rgba(255,255,255,.3);margin-top:12px">*Válido solo en el primer pedido · Sin spam · Cancela cuando quieras</p>
       </div></div>
@@ -331,13 +327,9 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="logo">
-          <div class="logo-mark">K</div>
-          <div class="logo-text">
-            <strong>Kaos Decoración</strong>
-            <span>Artesanía · Madrid</span>
-          </div>
+          <img src="img/logo.png" alt="Kaos Decoración" class="logo-img">
         </a>
-        <p>Taller artesanal en el corazón de Madrid. Creamos piezas únicas que llenan los hogares de carácter y emoción.</p>
+        <p data-text-key="footer-desc">Taller artesanal en el corazón de Madrid. Creamos piezas únicas que llenan los hogares de carácter y emoción.</p>
         <div class="footer-social">
           <a href="#" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
           <a href="#" class="social-btn" title="Pinterest"><i class="fab fa-pinterest"></i></a>
@@ -372,7 +364,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Kaos Decoración. Todos los derechos reservados. Madrid, España.</span>
+      <span data-text-key="footer-copyright">© 2025 Kaos Decoración. Todos los derechos reservados. Madrid, España.</span>
       <div class="footer-payment">
         <span class="payment-badge">VISA</span>
         <span class="payment-badge">Mastercard</span>
@@ -388,6 +380,8 @@
 <script src="js/cart.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/main.js"></script>
+<script src="js/texts.js"></script>
+<script src="js/editor.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   /* Categories */

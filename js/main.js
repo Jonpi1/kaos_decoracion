@@ -6,24 +6,46 @@
 (function applyKaosTheme() {
   try {
     const t = JSON.parse(localStorage.getItem('kaos_theme') || '{}');
+    if (!Object.keys(t).length) return;
     const r = document.documentElement;
     if (t.colorPrimary) r.style.setProperty('--c-primary', t.colorPrimary);
     if (t.colorGold)    { r.style.setProperty('--c-gold', t.colorGold); r.style.setProperty('--c-secondary', t.colorGold); }
     if (t.colorBg)      r.style.setProperty('--c-bg', t.colorBg);
     if (t.colorText)    r.style.setProperty('--c-text', t.colorText);
+    if (t.colorCard)    r.style.setProperty('--c-white', t.colorCard);
     if (t.fontHeading) {
-      const l = document.createElement('link');
-      l.rel = 'stylesheet';
+      const l = document.createElement('link'); l.rel = 'stylesheet';
       l.href = 'https://fonts.googleapis.com/css2?family=' + t.fontHeading.replace(/ /g,'+') + ':ital,wght@0,400;0,700;1,400&display=swap';
       document.head.appendChild(l);
       r.style.setProperty('--ff-heading', "'" + t.fontHeading + "', Georgia, serif");
     }
     if (t.fontBody) {
-      const l = document.createElement('link');
-      l.rel = 'stylesheet';
+      const l = document.createElement('link'); l.rel = 'stylesheet';
       l.href = 'https://fonts.googleapis.com/css2?family=' + t.fontBody.replace(/ /g,'+') + ':wght@400;700&display=swap';
       document.head.appendChild(l);
       r.style.setProperty('--ff-body', "'" + t.fontBody + "', sans-serif");
+    }
+    /* Style overrides via injected <style> */
+    const btnR   = { square:'2px', rounded:'8px', pill:'50px' }[t.btnShape]   || '8px';
+    const cardR  = { square:'4px', rounded:'12px', large:'18px', xlarge:'28px' }[t.cardRadius] || '12px';
+    const shadow = { none:'none', sm:'0 2px 8px rgba(0,0,0,.06)', md:'0 4px 20px rgba(0,0,0,.10)', lg:'0 8px 40px rgba(0,0,0,.16)' }[t.cardShadow] || '0 4px 20px rgba(0,0,0,.10)';
+    const hoverCSS = { none:'', lift:'transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.15)', scale:'transform:scale(1.03)', glow:`box-shadow:0 0 0 3px ${t.colorGold||'#C9A96E'}55,0 8px 24px rgba(0,0,0,.12)` }[t.cardHover] || '';
+    const fScale = { small:'.88rem', normal:'1rem', large:'1.1rem', xlarge:'1.25rem' }[t.fontScale] || '1rem';
+    const hSpacing = { tight:'-.03em', normal:'0', wide:'.04em', wider:'.1em' }[t.headingSpacing] || '0';
+    const css = [
+      `.btn,.btn-add-cart,.btn--primary,.btn--gold{border-radius:${btnR}!important}`,
+      `.product-card,.card{border-radius:${cardR}!important;box-shadow:${shadow}!important}`,
+      hoverCSS ? `.product-card:hover{${hoverCSS}}` : '',
+      `body,p{font-size:${fScale}}`,
+      `h1,h2,h3,h4,h5,h6{text-transform:${t.headingTransform||'none'}!important;font-weight:${t.headingWeight||'700'}!important;letter-spacing:${hSpacing}!important}`,
+      t.colorFooter ? `.footer{background:${t.colorFooter}!important}` : '',
+      t.colorCard   ? `.product-card,.card{background:${t.colorCard}!important}` : '',
+      t.customCSS   || '',
+      t.headerCSS   ? `#header{${t.headerCSS}}` : ''
+    ].filter(Boolean).join('\n');
+    if (css.trim()) {
+      const s = document.createElement('style'); s.id = 'kaos-theme-overrides'; s.textContent = css;
+      document.head.appendChild(s);
     }
   } catch(e) {}
 })();

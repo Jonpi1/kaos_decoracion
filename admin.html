@@ -106,15 +106,15 @@
       flex-shrink: 0;
     }
 
-    /* ══ APPEARANCE EDITOR — Professional ══ */
-    #section-appearance { padding: 0 !important; background: none !important; border: none !important; box-shadow: none !important; margin: -32px; }
+    /* ══ APPEARANCE EDITOR ══ */
+    #section-appearance { padding: 0 !important; background: none !important; border: none !important; box-shadow: none !important; }
 
     /* Top bar */
     .ape-header {
       display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-      padding: 18px 32px; background: #fff;
-      border-bottom: 1px solid var(--c-border);
-      position: sticky; top: 65px; z-index: 50;
+      padding: 18px 24px; background: #fff;
+      border: 1px solid var(--c-border); border-radius: 12px;
+      margin-bottom: 0;
     }
     .ape-header-left { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
     .ape-header-icon { width: 40px; height: 40px; background: linear-gradient(135deg,#2C1A0E,#5a3520); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -136,25 +136,33 @@
     .ape-btn-save.saving { opacity: .6; pointer-events: none; }
 
     /* Split body */
-    .ape-body { display: flex; min-height: calc(100vh - 130px); }
+    .ape-body { display: flex; min-height: 600px; border: 1px solid var(--c-border); border-top: none; }
 
     /* Editor panel */
     .ape-editor {
       width: 380px; flex-shrink: 0; background: #fff;
       border-right: 1px solid var(--c-border);
       display: flex; flex-direction: column;
-      position: sticky; top: calc(65px + 73px); height: calc(100vh - 138px); overflow: hidden;
+      overflow-y: auto; height: 70vh;
     }
-    .ape-tabs { display: flex; border-bottom: 1px solid var(--c-border); background: #fafafa; flex-shrink: 0; }
+    /* Full-width tab nav */
+    .ape-tabs-bar {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      background: #fff;
+      border: 1px solid var(--c-border);
+      border-radius: 0;
+      margin-top: 0;
+    }
     .ape-tab {
-      flex: 1; padding: 13px 8px; background: none; border: none; border-bottom: 2px solid transparent;
-      font-size: .8rem; font-weight: 700; color: var(--c-gray); cursor: pointer;
-      transition: all .18s; display: flex; align-items: center; justify-content: center; gap: 6px;
-      margin-bottom: -1px;
+      padding: 13px 6px; background: none; border: none; border-bottom: 3px solid transparent;
+      font-size: .79rem; font-weight: 700; color: var(--c-gray); cursor: pointer;
+      transition: all .18s; display: flex; align-items: center; justify-content: center; gap: 5px;
+      margin-bottom: -2px; white-space: nowrap;
     }
-    .ape-tab:hover { color: var(--c-primary); }
-    .ape-tab.active { color: var(--c-primary); border-bottom-color: var(--c-gold); background: #fff; }
-    .ape-tab i { font-size: .78rem; }
+    .ape-tab:hover { color: var(--c-primary); background: rgba(201,169,110,.05); }
+    .ape-tab.active { color: var(--c-primary); border-bottom-color: var(--c-gold); background: rgba(201,169,110,.07); }
+    .ape-tab i { font-size: .76rem; }
     .ape-tab-content { flex: 1; overflow-y: auto; padding: 24px 20px; }
     .ape-panel-desc { font-size: .8rem; color: var(--c-gray); margin: 0 0 18px; line-height: 1.5; }
     .ape-section-label { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c-gray); margin: 20px 0 10px; }
@@ -255,9 +263,103 @@
     .apv-card-body { padding: 9px 10px; }
     .apv-card-name { font-size: .72rem; font-weight: 700; margin-bottom: 4px; }
     .apv-card-price { font-size: .78rem; font-weight: 700; }
+    .apv-mini-btn { margin-top: 7px; font-size: .62rem; font-weight: 700; text-align: center; padding: 5px 8px; color: #fff; cursor: default; letter-spacing: .03em; }
     .apv-footer { padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
     .apv-footer-brand { font-size: .75rem; font-weight: 700; }
     .apv-footer-text { font-size: .68rem; opacity: .4; }
+
+    /* Style option tiles */
+    .ap-option-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .ap-option-label { font-size: .72rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--c-gray); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .ap-option-label i { font-size: .75rem; }
+    .ap-tiles { display: flex; gap: 8px; flex-wrap: wrap; }
+    .ap-tile {
+      flex: 1; min-width: 60px; padding: 10px 8px; border: 1.5px solid var(--c-border);
+      border-radius: 10px; cursor: pointer; transition: all .18s; text-align: center;
+      background: #fff;
+    }
+    .ap-tile:hover { border-color: var(--c-gold); background: rgba(201,169,110,.04); }
+    .ap-tile.selected { border-color: var(--c-gold); background: rgba(201,169,110,.09); }
+    .ap-tile-icon { font-size: 1.2rem; margin-bottom: 4px; display: block; }
+    .ap-tile-name { font-size: .68rem; font-weight: 700; color: var(--c-primary); white-space: nowrap; }
+    .ap-tile-sub  { font-size: .62rem; color: var(--c-gray); }
+
+    /* Shadow tiles */
+    .ap-shadow-demo { height: 28px; border-radius: 6px; background: #fff; margin-bottom: 6px; border: 1px solid rgba(0,0,0,.06); }
+
+    /* Range slider */
+    .ap-range-wrap { position: relative; padding: 4px 0 20px; }
+    .ap-range { width: 100%; height: 4px; border-radius: 2px; background: var(--c-border); accent-color: var(--c-gold); cursor: pointer; }
+    .ap-range-labels { display: flex; justify-content: space-between; font-size: .68rem; color: var(--c-gray); margin-top: 6px; }
+
+    /* Toggle switch */
+    .ap-toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--c-border); }
+    .ap-toggle-row:last-child { border-bottom: none; }
+    .ap-toggle-info strong { font-size: .85rem; display: block; }
+    .ap-toggle-info span { font-size: .75rem; color: var(--c-gray); }
+    .ap-switch { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+    .ap-switch input { opacity: 0; width: 0; height: 0; }
+    .ap-switch-track { position: absolute; inset: 0; border-radius: 22px; background: #ccc; cursor: pointer; transition: .2s; }
+    .ap-switch input:checked + .ap-switch-track { background: var(--c-gold); }
+    .ap-switch-track::before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; }
+    .ap-switch input:checked + .ap-switch-track::before { transform: translateX(18px); }
+
+    /* Custom CSS textarea */
+    .ap-css-editor { width: 100%; min-height: 160px; font-family: 'Courier New', monospace; font-size: .8rem; padding: 14px; border: 1.5px solid var(--c-border); border-radius: 10px; resize: vertical; background: #1e1e2e; color: #cdd6f4; line-height: 1.6; outline: none; }
+    .ap-css-editor:focus { border-color: var(--c-gold); }
+
+    /* ── Content Editor ── */
+    .ct-tab { padding: 11px 18px; border: none; background: none; cursor: pointer; font-size: .82rem; font-weight: 700; color: var(--c-gray); border-bottom: 3px solid transparent; transition: all .18s; display: flex; align-items: center; gap: 6px; }
+    .ct-tab:hover { color: var(--c-primary); }
+    .ct-tab.active { color: var(--c-primary); border-bottom-color: var(--c-gold); background: #fff; }
+    .ct-tab i { font-size: .74rem; }
+    .ct-section-hdr { font-size: .7rem; font-weight: 900; text-transform: uppercase; letter-spacing: .1em; color: var(--c-gray); border-bottom: 1px solid var(--c-border); padding-bottom: 8px; margin: 28px 0 16px; }
+    .ct-section-hdr:first-child { margin-top: 0; }
+    .ct-grid-1 { display: flex; flex-direction: column; gap: 12px; margin-bottom: 4px; }
+    .ct-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 4px; }
+    @media (max-width: 700px) { .ct-grid-2 { grid-template-columns: 1fr; } }
+    .ct-field { display: flex; flex-direction: column; gap: 5px; }
+    .ct-label { font-size: .78rem; font-weight: 700; color: var(--c-primary); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .ct-key { background: var(--c-primary); color: var(--c-gold); border-radius: 4px; padding: 1px 6px; font-size: .65rem; font-family: monospace; font-style: normal; letter-spacing: .02em; }
+    .ct-input, .ct-textarea { width: 100%; padding: 9px 12px; border: 1.5px solid var(--c-border); border-radius: 8px; font-size: .875rem; outline: none; font-family: inherit; transition: border-color .18s, box-shadow .18s; background: #fafafa; color: var(--c-text); resize: vertical; }
+    .ct-input:focus, .ct-textarea:focus { border-color: var(--c-gold); box-shadow: 0 0 0 3px rgba(201,169,110,.12); background: #fff; }
+    .ct-input.modified, .ct-textarea.modified { border-color: var(--c-gold); background: rgba(201,169,110,.04); }
+    .ap-info-box { background: rgba(201,169,110,.08); border: 1px solid rgba(201,169,110,.25); border-radius: 10px; padding: 12px 14px; font-size: .78rem; color: var(--c-primary); margin-bottom: 14px; }
+    .ap-info-box i { color: var(--c-gold); margin-right: 6px; }
+
+    /* ── Texts Tab (apt-*) ── */
+    .apt-summary {
+      cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px;
+      padding: 11px 14px; font-size: .82rem; font-weight: 700; color: var(--c-primary);
+      background: #fafafa; border: 1.5px solid var(--c-border); border-radius: 10px;
+      margin-bottom: 0; user-select: none; transition: all .18s;
+    }
+    .apt-summary::-webkit-details-marker { display: none; }
+    .apt-summary::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: .6rem; margin-left: auto; color: var(--c-gray); transition: transform .2s; }
+    details[open] > .apt-summary::after { transform: rotate(180deg); }
+    details[open] > .apt-summary { border-radius: 10px 10px 0 0; border-bottom-color: transparent; background: rgba(201,169,110,.06); }
+    .apt-summary i { color: var(--c-gold); font-size: .8rem; }
+    .apt-group {
+      border: 1.5px solid var(--c-border); border-top: none;
+      border-radius: 0 0 10px 10px; padding: 14px 14px 10px;
+      display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px;
+    }
+    .apt-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 540px) { .apt-2col { grid-template-columns: 1fr; } }
+    .apt-row { display: flex; flex-direction: column; gap: 4px; }
+    .apt-label {
+      font-size: .73rem; font-weight: 700; color: var(--c-primary);
+      display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
+    }
+    .apt-hint { font-weight: 400; font-style: italic; color: var(--c-gray); font-size: .68rem; }
+    .apt-input {
+      width: 100%; padding: 7px 10px; border: 1.5px solid var(--c-border); border-radius: 7px;
+      font-size: .82rem; font-family: inherit; color: var(--c-text); background: #fafafa;
+      outline: none; transition: border-color .18s, box-shadow .18s; resize: vertical;
+    }
+    .apt-input:focus { border-color: var(--c-gold); box-shadow: 0 0 0 3px rgba(201,169,110,.12); background: #fff; }
+    .apt-input.modified { border-color: var(--c-gold); background: rgba(201,169,110,.04); }
+    .apt-ta { min-height: 60px; }
 
     @media (max-width: 960px) {
       .ape-body { flex-direction: column; }
@@ -389,8 +491,7 @@
   <aside class="admin-sidebar" id="admin-sidebar">
     <div class="admin-sidebar-logo">
       <a href="index.html" class="logo">
-        <div class="logo-mark">K</div>
-        <div class="logo-text"><strong>Kaos Decoración</strong><span>Panel Admin</span></div>
+        <img src="img/logo.png" alt="Kaos Decoración" class="logo-img">
       </a>
     </div>
 
@@ -408,6 +509,7 @@
     <div class="admin-nav-section">Principal</div>
     <div class="admin-nav-item active" data-section="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</div>
     <div class="admin-nav-item" data-section="appearance"><i class="fas fa-palette"></i> Apariencia</div>
+    <div class="admin-nav-item" data-section="content"><i class="fas fa-pen-to-square"></i> Contenido</div>
     <div class="admin-nav-item" data-section="customers"><i class="fas fa-users"></i> Clientes</div>
     <div class="admin-nav-item" data-section="orders"><i class="fas fa-box"></i> Pedidos</div>
     <div class="admin-nav-item" data-section="custom-orders">
@@ -726,6 +828,189 @@
         <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px" id="categories-admin-grid"></div>
       </div>
 
+      <!-- ── CONTENIDO ── -->
+      <div class="admin-page-section" id="section-content" style="padding:0!important;background:none!important;border:none!important;box-shadow:none!important;margin:-32px">
+        <div style="background:var(--c-white);border-radius:var(--radius-xl);border:1px solid var(--c-border);overflow:hidden">
+          <!-- Header -->
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:1px solid var(--c-border);background:#fafafa;flex-wrap:wrap;gap:12px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="width:40px;height:40px;background:var(--c-primary);border-radius:10px;display:flex;align-items:center;justify-content:center"><i class="fas fa-pen-to-square" style="color:var(--c-gold)"></i></div>
+              <div><strong style="font-size:1.1rem">Editor de Contenido</strong><p style="font-size:.78rem;color:var(--c-gray);margin:0">Edita cada texto de la web por separado</p></div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <span id="ct-save-status" class="ape-status saved"><i class="fas fa-check-circle"></i> Guardado</span>
+              <button onclick="resetContent()" class="btn" style="font-size:.82rem;padding:8px 16px;border:1.5px solid var(--c-border)"><i class="fas fa-rotate-left"></i> Restablecer</button>
+              <button onclick="saveContent()" id="ct-save-btn" class="btn btn--primary" style="font-size:.82rem;padding:8px 20px"><i class="fas fa-cloud-arrow-up"></i> Guardar cambios</button>
+            </div>
+          </div>
+          <!-- Tabs -->
+          <div style="display:flex;border-bottom:1px solid var(--c-border);background:#fafafa;flex-wrap:wrap">
+            <button class="ct-tab active" data-tab="ct-global" onclick="switchCtTab('ct-global',this)"><i class="fas fa-globe"></i> Global</button>
+            <button class="ct-tab" data-tab="ct-home" onclick="switchCtTab('ct-home',this)"><i class="fas fa-house"></i> Inicio</button>
+            <button class="ct-tab" data-tab="ct-shop" onclick="switchCtTab('ct-shop',this)"><i class="fas fa-bag-shopping"></i> Tienda</button>
+            <button class="ct-tab" data-tab="ct-about" onclick="switchCtTab('ct-about',this)"><i class="fas fa-users"></i> Nosotros</button>
+            <button class="ct-tab" data-tab="ct-contact" onclick="switchCtTab('ct-contact',this)"><i class="fas fa-envelope"></i> Contacto</button>
+            <button class="ct-tab" data-tab="ct-faq" onclick="switchCtTab('ct-faq',this)"><i class="fas fa-circle-question"></i> FAQ</button>
+          </div>
+          <!-- Panels -->
+          <div style="padding:28px 32px;max-height:calc(100vh - 260px);overflow-y:auto">
+
+            <!-- GLOBAL -->
+            <div id="ct-global">
+              <div class="ct-section-hdr">Barra de promoción</div>
+              <div class="ct-grid-1">
+                <div class="ct-field"><label class="ct-label">Texto de la barra <code class="ct-key">promo-text</code></label><input class="ct-input" data-content-key="promo-text" placeholder="🎁 Envío gratuito en pedidos +80€ · Código KAOS10 = 10% descuento"></div>
+              </div>
+              <div class="ct-section-hdr">Marca / Logo</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Nombre de la marca <code class="ct-key">brand-name</code></label><input class="ct-input" data-content-key="brand-name" placeholder="Kaos Decoración"></div>
+                <div class="ct-field"><label class="ct-label">Eslogan del logo <code class="ct-key">brand-tagline</code></label><input class="ct-input" data-content-key="brand-tagline" placeholder="Artesanía · Madrid"></div>
+              </div>
+              <div class="ct-section-hdr">Footer</div>
+              <div class="ct-grid-1">
+                <div class="ct-field"><label class="ct-label">Descripción del footer <code class="ct-key">footer-desc</code></label><input class="ct-input" data-content-key="footer-desc" placeholder="Taller artesanal en el corazón de Madrid."></div>
+                <div class="ct-field"><label class="ct-label">Copyright <code class="ct-key">footer-copyright</code></label><input class="ct-input" data-content-key="footer-copyright" placeholder="© 2025 Kaos Decoración. Todos los derechos reservados. Madrid, España."></div>
+              </div>
+              <div class="ct-section-hdr">Newsletter (todas las páginas)</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Subtítulo <code class="ct-key">newsletter-eyebrow</code></label><input class="ct-input" data-content-key="newsletter-eyebrow" placeholder="Solo para suscriptores"></div>
+                <div class="ct-field"><label class="ct-label">Botón <code class="ct-key">newsletter-btn</code></label><input class="ct-input" data-content-key="newsletter-btn" placeholder="Obtener mi 10%"></div>
+              </div>
+              <div class="ct-grid-1">
+                <div class="ct-field"><label class="ct-label">Título <code class="ct-key">newsletter-title</code></label><input class="ct-input" data-content-key="newsletter-title" placeholder="10% de descuento en tu primer pedido"></div>
+                <div class="ct-field"><label class="ct-label">Descripción <code class="ct-key">newsletter-desc</code></label><input class="ct-input" data-content-key="newsletter-desc" placeholder="Suscríbete y recibe este código para usarlo en tu primera compra."></div>
+              </div>
+              <div class="ct-section-hdr">Características (franja de iconos)</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Icono 1 — Título <code class="ct-key">feat1-title</code></label><input class="ct-input" data-content-key="feat1-title" placeholder="Envío gratuito"></div>
+                <div class="ct-field"><label class="ct-label">Icono 1 — Subtítulo <code class="ct-key">feat1-sub</code></label><input class="ct-input" data-content-key="feat1-sub" placeholder="En pedidos +80€"></div>
+                <div class="ct-field"><label class="ct-label">Icono 2 — Título <code class="ct-key">feat2-title</code></label><input class="ct-input" data-content-key="feat2-title" placeholder="100% artesanal"></div>
+                <div class="ct-field"><label class="ct-label">Icono 2 — Subtítulo <code class="ct-key">feat2-sub</code></label><input class="ct-input" data-content-key="feat2-sub" placeholder="Hecho a mano en Madrid"></div>
+                <div class="ct-field"><label class="ct-label">Icono 3 — Título <code class="ct-key">feat3-title</code></label><input class="ct-input" data-content-key="feat3-title" placeholder="Pago seguro"></div>
+                <div class="ct-field"><label class="ct-label">Icono 3 — Subtítulo <code class="ct-key">feat3-sub</code></label><input class="ct-input" data-content-key="feat3-sub" placeholder="SSL · Stripe · PayPal"></div>
+                <div class="ct-field"><label class="ct-label">Icono 4 — Título <code class="ct-key">feat4-title</code></label><input class="ct-input" data-content-key="feat4-title" placeholder="Devoluciones"></div>
+                <div class="ct-field"><label class="ct-label">Icono 4 — Subtítulo <code class="ct-key">feat4-sub</code></label><input class="ct-input" data-content-key="feat4-sub" placeholder="30 días sin preguntas"></div>
+              </div>
+            </div>
+
+            <!-- INICIO -->
+            <div id="ct-home" style="display:none">
+              <div class="ct-section-hdr">Hero principal</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Subeyebrow <code class="ct-key">home-hero-eyebrow</code></label><input class="ct-input" data-content-key="home-hero-eyebrow" placeholder="Artesanía única en Madrid"></div>
+                <div class="ct-field"><label class="ct-label">Título (admite HTML) <code class="ct-key">home-hero-title</code></label><input class="ct-input" data-content-key="home-hero-title" placeholder="Arte que vive&lt;br&gt;en tu &lt;em&gt;hogar&lt;/em&gt;"></div>
+              </div>
+              <div class="ct-grid-1">
+                <div class="ct-field"><label class="ct-label">Subtítulo <code class="ct-key">home-hero-subtitle</code></label><textarea class="ct-textarea" data-content-key="home-hero-subtitle" rows="2" placeholder="Cada pieza de Kaos Decoración es creada a mano..."></textarea></div>
+              </div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Botón principal <code class="ct-key">home-cta-primary</code></label><input class="ct-input" data-content-key="home-cta-primary" placeholder="Explorar tienda"></div>
+                <div class="ct-field"><label class="ct-label">Botón secundario <code class="ct-key">home-cta-secondary</code></label><input class="ct-input" data-content-key="home-cta-secondary" placeholder="Nuestra historia"></div>
+              </div>
+              <div class="ct-section-hdr">Estadísticas del hero</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Stat 1 — Número <code class="ct-key">home-stat1-num</code></label><input class="ct-input" data-content-key="home-stat1-num" placeholder="500+"></div>
+                <div class="ct-field"><label class="ct-label">Stat 1 — Etiqueta <code class="ct-key">home-stat1-label</code></label><input class="ct-input" data-content-key="home-stat1-label" placeholder="Piezas vendidas"></div>
+                <div class="ct-field"><label class="ct-label">Stat 2 — Número <code class="ct-key">home-stat2-num</code></label><input class="ct-input" data-content-key="home-stat2-num" placeholder="100%"></div>
+                <div class="ct-field"><label class="ct-label">Stat 2 — Etiqueta <code class="ct-key">home-stat2-label</code></label><input class="ct-input" data-content-key="home-stat2-label" placeholder="Hecho a mano"></div>
+                <div class="ct-field"><label class="ct-label">Stat 3 — Número <code class="ct-key">home-stat3-num</code></label><input class="ct-input" data-content-key="home-stat3-num" placeholder="4.9★"></div>
+                <div class="ct-field"><label class="ct-label">Stat 3 — Etiqueta <code class="ct-key">home-stat3-label</code></label><input class="ct-input" data-content-key="home-stat3-label" placeholder="Valoración media"></div>
+              </div>
+              <div class="ct-section-hdr">Sección Categorías</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Eyebrow <code class="ct-key">home-cats-eyebrow</code></label><input class="ct-input" data-content-key="home-cats-eyebrow" placeholder="Explorar por"></div>
+                <div class="ct-field"><label class="ct-label">Título <code class="ct-key">home-cats-title</code></label><input class="ct-input" data-content-key="home-cats-title" placeholder="Nuestras categorías"></div>
+              </div>
+              <div class="ct-grid-1">
+                <div class="ct-field"><label class="ct-label">Descripción <code class="ct-key">home-cats-desc</code></label><input class="ct-input" data-content-key="home-cats-desc" placeholder="Desde iluminación artesanal hasta accesorios únicos..."></div>
+              </div>
+              <div class="ct-section-hdr">Sección Productos Destacados</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Eyebrow <code class="ct-key">home-feat-eyebrow</code></label><input class="ct-input" data-content-key="home-feat-eyebrow" placeholder="Selección especial"></div>
+                <div class="ct-field"><label class="ct-label">Título <code class="ct-key">home-feat-title</code></label><input class="ct-input" data-content-key="home-feat-title" placeholder="Productos destacados"></div>
+              </div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Descripción <code class="ct-key">home-feat-desc</code></label><input class="ct-input" data-content-key="home-feat-desc" placeholder="Las piezas más amadas por nuestra comunidad..."></div>
+                <div class="ct-field"><label class="ct-label">Botón "ver todos" <code class="ct-key">home-feat-btn</code></label><input class="ct-input" data-content-key="home-feat-btn" placeholder="Ver toda la tienda"></div>
+              </div>
+              <div class="ct-section-hdr">Sección Nuevos Productos</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Eyebrow <code class="ct-key">home-new-eyebrow</code></label><input class="ct-input" data-content-key="home-new-eyebrow" placeholder="Recién llegados"></div>
+                <div class="ct-field"><label class="ct-label">Título <code class="ct-key">home-new-title</code></label><input class="ct-input" data-content-key="home-new-title" placeholder="Nuevos productos"></div>
+              </div>
+              <div class="ct-grid-1">
+                <div class="ct-field"><label class="ct-label">Descripción <code class="ct-key">home-new-desc</code></label><input class="ct-input" data-content-key="home-new-desc" placeholder="Las últimas creaciones de nuestro taller..."></div>
+              </div>
+              <div class="ct-section-hdr">Sección Sobre Nosotros (home)</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Script decorativo <code class="ct-key">home-about-script</code></label><input class="ct-input" data-content-key="home-about-script" placeholder="Nuestra historia"></div>
+                <div class="ct-field"><label class="ct-label">Botón <code class="ct-key">home-about-btn</code></label><input class="ct-input" data-content-key="home-about-btn" placeholder="Conoce nuestro taller"></div>
+              </div>
+              <div class="ct-grid-1">
+                <div class="ct-field"><label class="ct-label">Título (admite HTML) <code class="ct-key">home-about-title</code></label><input class="ct-input" data-content-key="home-about-title" placeholder="Artesanía con alma, desde Madrid"></div>
+                <div class="ct-field"><label class="ct-label">Párrafo principal <code class="ct-key">home-about-lead</code></label><textarea class="ct-textarea" data-content-key="home-about-lead" rows="2" placeholder="Kaos Decoración nació en 2019..."></textarea></div>
+                <div class="ct-field"><label class="ct-label">Párrafo secundario <code class="ct-key">home-about-text</code></label><textarea class="ct-textarea" data-content-key="home-about-text" rows="2" placeholder="Cada pieza que creamos lleva horas de trabajo..."></textarea></div>
+              </div>
+              <div class="ct-section-hdr">Sección Reseñas</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Eyebrow <code class="ct-key">home-reviews-eyebrow</code></label><input class="ct-input" data-content-key="home-reviews-eyebrow" placeholder="Lo que dicen"></div>
+                <div class="ct-field"><label class="ct-label">Título <code class="ct-key">home-reviews-title</code></label><input class="ct-input" data-content-key="home-reviews-title" placeholder="Opiniones de clientes"></div>
+              </div>
+            </div>
+
+            <!-- TIENDA -->
+            <div id="ct-shop" style="display:none">
+              <div class="ct-section-hdr">Cabecera de la página</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Título <code class="ct-key">shop-hero-title</code></label><input class="ct-input" data-content-key="shop-hero-title" placeholder="Nuestra Tienda"></div>
+                <div class="ct-field"><label class="ct-label">Subtítulo <code class="ct-key">shop-hero-subtitle</code></label><input class="ct-input" data-content-key="shop-hero-subtitle" placeholder="Piezas artesanales únicas, hechas a mano con amor en Madrid"></div>
+              </div>
+            </div>
+
+            <!-- NOSOTROS -->
+            <div id="ct-about" style="display:none">
+              <div class="ct-section-hdr">Hero de la página</div>
+              <div class="ct-grid-1">
+                <div class="ct-field"><label class="ct-label">Título (admite HTML) <code class="ct-key">about-hero-title</code></label><input class="ct-input" data-content-key="about-hero-title" placeholder="Artesanía con alma,&lt;br&gt;desde el corazón de Madrid"></div>
+                <div class="ct-field"><label class="ct-label">Subtítulo <code class="ct-key">about-hero-subtitle</code></label><textarea class="ct-textarea" data-content-key="about-hero-subtitle" rows="2" placeholder="Somos tres artesanos madrileños que decidieron..."></textarea></div>
+              </div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Botón principal <code class="ct-key">about-cta-primary</code></label><input class="ct-input" data-content-key="about-cta-primary" placeholder="Ver nuestra tienda"></div>
+                <div class="ct-field"><label class="ct-label">Botón secundario <code class="ct-key">about-cta-secondary</code></label><input class="ct-input" data-content-key="about-cta-secondary" placeholder="Contactar"></div>
+              </div>
+              <div class="ct-section-hdr">Sección historia</div>
+              <div class="ct-grid-1">
+                <div class="ct-field"><label class="ct-label">Título sección <code class="ct-key">about-story-title</code></label><input class="ct-input" data-content-key="about-story-title" placeholder="De afición a vocación"></div>
+              </div>
+            </div>
+
+            <!-- CONTACTO -->
+            <div id="ct-contact" style="display:none">
+              <div class="ct-section-hdr">Cabecera</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Título <code class="ct-key">contact-hero-title</code></label><input class="ct-input" data-content-key="contact-hero-title" placeholder="Contacto"></div>
+                <div class="ct-field"><label class="ct-label">Subtítulo <code class="ct-key">contact-hero-subtitle</code></label><input class="ct-input" data-content-key="contact-hero-subtitle" placeholder="Estamos aquí para ayudarte. Te respondemos en menos de 24 horas."></div>
+              </div>
+              <div class="ct-section-hdr">Sección principal</div>
+              <div class="ct-grid-1">
+                <div class="ct-field"><label class="ct-label">Título sección <code class="ct-key">contact-section-title</code></label><input class="ct-input" data-content-key="contact-section-title" placeholder="Hablemos"></div>
+                <div class="ct-field"><label class="ct-label">Descripción <code class="ct-key">contact-section-desc</code></label><textarea class="ct-textarea" data-content-key="contact-section-desc" rows="2" placeholder="Si tienes alguna pregunta sobre nuestros productos..."></textarea></div>
+              </div>
+            </div>
+
+            <!-- FAQ -->
+            <div id="ct-faq" style="display:none">
+              <div class="ct-section-hdr">Cabecera</div>
+              <div class="ct-grid-2">
+                <div class="ct-field"><label class="ct-label">Título <code class="ct-key">faq-hero-title</code></label><input class="ct-input" data-content-key="faq-hero-title" placeholder="Preguntas frecuentes"></div>
+                <div class="ct-field"><label class="ct-label">Subtítulo <code class="ct-key">faq-hero-subtitle</code></label><input class="ct-input" data-content-key="faq-hero-subtitle" placeholder="Encuentra respuesta a las dudas más comunes..."></div>
+              </div>
+            </div>
+
+          </div><!-- /panel body -->
+        </div>
+      </div>
+
       <!-- ── CLIENTES ── -->
       <div class="admin-page-section" id="section-customers">
         <h3 style="margin-bottom:20px">Clientes registrados</h3>
@@ -858,17 +1143,21 @@
           </div>
         </div>
 
+        <!-- Tab nav bar (full width, below header) -->
+        <div class="ape-tabs-bar">
+          <button class="ape-tab active" data-tab="themes"   onclick="switchApTab('themes',this)"><i class="fas fa-swatchbook"></i> Temas</button>
+          <button class="ape-tab" data-tab="colors"   onclick="switchApTab('colors',this)"><i class="fas fa-droplet"></i> Colores</button>
+          <button class="ape-tab" data-tab="fonts"    onclick="switchApTab('fonts',this)"><i class="fas fa-font"></i> Tipografía</button>
+          <button class="ape-tab" data-tab="style"    onclick="switchApTab('style',this)"><i class="fas fa-shapes"></i> Estilo</button>
+          <button class="ape-tab" data-tab="advanced" onclick="switchApTab('advanced',this)"><i class="fas fa-code"></i> Avanzado</button>
+          <button class="ape-tab" data-tab="texts"    onclick="switchApTab('texts',this)"><i class="fas fa-pen-to-square"></i> Textos</button>
+        </div>
+
         <!-- Split body -->
         <div class="ape-body">
 
           <!-- LEFT: editor panel -->
           <div class="ape-editor">
-            <div class="ape-tabs">
-              <button class="ape-tab active" data-tab="themes" onclick="switchApTab('themes',this)"><i class="fas fa-swatchbook"></i> Temas</button>
-              <button class="ape-tab" data-tab="colors" onclick="switchApTab('colors',this)"><i class="fas fa-droplet"></i> Colores</button>
-              <button class="ape-tab" data-tab="fonts"  onclick="switchApTab('fonts',this)"><i class="fas fa-font"></i> Tipografía</button>
-            </div>
-
             <div class="ape-tab-content">
 
               <!-- TAB: Temas -->
@@ -933,10 +1222,34 @@
                   <code class="ap-hex-chip" id="ap-hex-text">#3D2B1F</code>
                 </div>
 
+                <div class="ap-color-row" onclick="document.getElementById('ap-color-card').click()">
+                  <div class="ap-swatch-wrap"><div class="ap-swatch" id="ap-swatch-card" style="border:1px solid var(--c-border)"></div><input type="color" id="ap-color-card" value="#FFFFFF" style="position:absolute;opacity:0;width:0;height:0"></div>
+                  <div class="ap-color-info"><strong>Fondo de tarjetas</strong><span>Fondo de las product cards</span></div>
+                  <code class="ap-hex-chip" id="ap-hex-card">#FFFFFF</code>
+                </div>
+                <div class="ap-color-row" onclick="document.getElementById('ap-color-footer').click()">
+                  <div class="ap-swatch-wrap"><div class="ap-swatch" id="ap-swatch-footer"></div><input type="color" id="ap-color-footer" value="#2C1A0E" style="position:absolute;opacity:0;width:0;height:0"></div>
+                  <div class="ap-color-info"><strong>Fondo del pie de página</strong><span>Color del footer de la web</span></div>
+                  <code class="ap-hex-chip" id="ap-hex-footer">#2C1A0E</code>
+                </div>
+                <div class="ap-color-row" onclick="document.getElementById('ap-color-nav').click()">
+                  <div class="ap-swatch-wrap"><div class="ap-swatch" id="ap-swatch-nav"></div><input type="color" id="ap-color-nav" value="#FFFFFF" style="position:absolute;opacity:0;width:0;height:0"></div>
+                  <div class="ap-color-info"><strong>Texto de navegación</strong><span>Links del menú principal</span></div>
+                  <code class="ap-hex-chip" id="ap-hex-nav">#FFFFFF</code>
+                </div>
+
                 <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--c-border)">
-                  <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c-gray);margin-bottom:10px">Paleta actual</div>
-                  <div class="ap-palette-bar">
-                    <div id="ap-palette-1"></div><div id="ap-palette-2"></div><div id="ap-palette-3"></div><div id="ap-palette-4"></div>
+                  <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c-gray);margin-bottom:10px">Paleta completa</div>
+                  <div class="ap-palette-bar" style="height:40px">
+                    <div id="ap-palette-1" style="position:relative"><span style="position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-size:.55rem;font-weight:700;color:rgba(255,255,255,.7)">P</span></div>
+                    <div id="ap-palette-2" style="position:relative"><span style="position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-size:.55rem;font-weight:700;color:rgba(255,255,255,.7)">A</span></div>
+                    <div id="ap-palette-3" style="position:relative;border-left:1px solid rgba(0,0,0,.08);border-right:1px solid rgba(0,0,0,.08)"><span style="position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-size:.55rem;font-weight:700;color:rgba(0,0,0,.35)">F</span></div>
+                    <div id="ap-palette-4" style="position:relative"><span style="position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-size:.55rem;font-weight:700;color:rgba(255,255,255,.7)">T</span></div>
+                    <div id="ap-palette-5" style="position:relative;border-left:1px solid rgba(0,0,0,.08)"><span style="position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-size:.55rem;font-weight:700;color:rgba(0,0,0,.35)">C</span></div>
+                    <div id="ap-palette-6" style="position:relative"><span style="position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-size:.55rem;font-weight:700;color:rgba(255,255,255,.7)">F</span></div>
+                  </div>
+                  <div style="display:flex;justify-content:space-around;margin-top:4px;font-size:.6rem;color:var(--c-gray)">
+                    <span>Principal</span><span>Acento</span><span>Fondo</span><span>Texto</span><span>Tarjetas</span><span>Footer</span>
                   </div>
                 </div>
               </div>
@@ -965,7 +1278,321 @@
                   <label class="ap-font-option" data-font="Inter"><input type="radio" name="ap-font-b" value="Inter"><div style="flex:1"><div class="ap-font-name" style="font-family:'Inter',sans-serif">Inter</div><div class="ap-font-sample" style="font-family:'Inter',sans-serif;font-size:.8rem">Piezas artesanales únicas</div></div><span class="ap-font-tag">Digital</span><div class="ap-font-check"><i class="fas fa-check"></i></div></label>
                 </div>
                 <input type="hidden" id="ap-font-body" value="Lato">
+
+                <!-- Heading style extras -->
+                <div style="border-top:1px solid var(--c-border);margin-top:20px;padding-top:20px">
+                  <div class="ape-section-label">Estilo del titular</div>
+
+                  <div class="ap-option-group">
+                    <div class="ap-option-label"><i class="fas fa-text-height"></i> Transformación</div>
+                    <div class="ap-tiles">
+                      <div class="ap-tile" data-group="headingTransform" data-val="none" onclick="setStyleOption('headingTransform','none',this)"><span class="ap-tile-icon" style="font-size:.9rem;font-weight:700">Aa</span><div class="ap-tile-name">Normal</div></div>
+                      <div class="ap-tile" data-group="headingTransform" data-val="uppercase" onclick="setStyleOption('headingTransform','uppercase',this)"><span class="ap-tile-icon" style="font-size:.75rem;font-weight:900;letter-spacing:.08em">AA</span><div class="ap-tile-name">MAYÚS</div></div>
+                      <div class="ap-tile" data-group="headingTransform" data-val="capitalize" onclick="setStyleOption('headingTransform','capitalize',this)"><span class="ap-tile-icon" style="font-size:.88rem;font-weight:700">Ab</span><div class="ap-tile-name">Capital</div></div>
+                    </div>
+                  </div>
+
+                  <div class="ap-option-group">
+                    <div class="ap-option-label"><i class="fas fa-bold"></i> Peso de fuente</div>
+                    <div class="ap-tiles">
+                      <div class="ap-tile" data-group="headingWeight" data-val="400" onclick="setStyleOption('headingWeight','400',this)"><span class="ap-tile-icon" style="font-size:.95rem;font-weight:400">Aa</span><div class="ap-tile-name">Regular</div></div>
+                      <div class="ap-tile" data-group="headingWeight" data-val="600" onclick="setStyleOption('headingWeight','600',this)"><span class="ap-tile-icon" style="font-size:.95rem;font-weight:600">Aa</span><div class="ap-tile-name">Semi</div></div>
+                      <div class="ap-tile" data-group="headingWeight" data-val="700" onclick="setStyleOption('headingWeight','700',this)"><span class="ap-tile-icon" style="font-size:.95rem;font-weight:700">Aa</span><div class="ap-tile-name">Bold</div></div>
+                      <div class="ap-tile" data-group="headingWeight" data-val="900" onclick="setStyleOption('headingWeight','900',this)"><span class="ap-tile-icon" style="font-size:.95rem;font-weight:900">Aa</span><div class="ap-tile-name">Black</div></div>
+                    </div>
+                  </div>
+
+                  <div class="ap-option-group">
+                    <div class="ap-option-label"><i class="fas fa-text-width"></i> Espaciado letras</div>
+                    <div class="ap-tiles">
+                      <div class="ap-tile" data-group="headingSpacing" data-val="tight" onclick="setStyleOption('headingSpacing','tight',this)"><span class="ap-tile-icon" style="font-size:.8rem;letter-spacing:-.04em;font-weight:700">AaBb</span><div class="ap-tile-name">Estrecho</div></div>
+                      <div class="ap-tile" data-group="headingSpacing" data-val="normal" onclick="setStyleOption('headingSpacing','normal',this)"><span class="ap-tile-icon" style="font-size:.8rem;letter-spacing:0;font-weight:700">AaBb</span><div class="ap-tile-name">Normal</div></div>
+                      <div class="ap-tile" data-group="headingSpacing" data-val="wide" onclick="setStyleOption('headingSpacing','wide',this)"><span class="ap-tile-icon" style="font-size:.75rem;letter-spacing:.06em;font-weight:700">AaBb</span><div class="ap-tile-name">Amplio</div></div>
+                      <div class="ap-tile" data-group="headingSpacing" data-val="wider" onclick="setStyleOption('headingSpacing','wider',this)"><span class="ap-tile-icon" style="font-size:.7rem;letter-spacing:.14em;font-weight:700">AaBb</span><div class="ap-tile-name">Muy amp.</div></div>
+                    </div>
+                  </div>
+
+                  <div class="ap-option-group">
+                    <div class="ap-option-label"><i class="fas fa-magnifying-glass"></i> Tamaño de texto</div>
+                    <div class="ap-tiles">
+                      <div class="ap-tile" data-group="fontScale" data-val="small" onclick="setStyleOption('fontScale','small',this)"><span class="ap-tile-icon" style="font-size:.7rem;font-weight:700">A</span><div class="ap-tile-name">Pequeño</div></div>
+                      <div class="ap-tile" data-group="fontScale" data-val="normal" onclick="setStyleOption('fontScale','normal',this)"><span class="ap-tile-icon" style="font-size:.95rem;font-weight:700">A</span><div class="ap-tile-name">Normal</div></div>
+                      <div class="ap-tile" data-group="fontScale" data-val="large" onclick="setStyleOption('fontScale','large',this)"><span class="ap-tile-icon" style="font-size:1.15rem;font-weight:700">A</span><div class="ap-tile-name">Grande</div></div>
+                      <div class="ap-tile" data-group="fontScale" data-val="xlarge" onclick="setStyleOption('fontScale','xlarge',this)"><span class="ap-tile-icon" style="font-size:1.35rem;font-weight:700">A</span><div class="ap-tile-name">XL</div></div>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              <!-- TAB: Estilo -->
+              <div id="ape-tab-style" class="ape-panel" style="display:none">
+                <p class="ape-panel-desc">Controla la forma, sombras y efectos de los elementos visuales de la tienda.</p>
+
+                <div class="ap-option-group">
+                  <div class="ap-option-label"><i class="fas fa-circle-half-stroke"></i> Forma de botones</div>
+                  <div class="ap-tiles">
+                    <div class="ap-tile" data-group="btnShape" data-val="square" onclick="setStyleOption('btnShape','square',this)">
+                      <span class="ap-tile-icon"><span style="display:inline-block;background:var(--c-primary);color:#fff;font-size:.6rem;font-weight:700;padding:5px 10px;border-radius:2px">BTN</span></span>
+                      <div class="ap-tile-name">Cuadrado</div>
+                    </div>
+                    <div class="ap-tile" data-group="btnShape" data-val="rounded" onclick="setStyleOption('btnShape','rounded',this)">
+                      <span class="ap-tile-icon"><span style="display:inline-block;background:var(--c-primary);color:#fff;font-size:.6rem;font-weight:700;padding:5px 10px;border-radius:7px">BTN</span></span>
+                      <div class="ap-tile-name">Redondeado</div>
+                    </div>
+                    <div class="ap-tile" data-group="btnShape" data-val="pill" onclick="setStyleOption('btnShape','pill',this)">
+                      <span class="ap-tile-icon"><span style="display:inline-block;background:var(--c-primary);color:#fff;font-size:.6rem;font-weight:700;padding:5px 14px;border-radius:50px">BTN</span></span>
+                      <div class="ap-tile-name">Píldora</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ap-option-group">
+                  <div class="ap-option-label"><i class="fas fa-layer-group"></i> Radio de tarjetas</div>
+                  <div class="ap-tiles">
+                    <div class="ap-tile" data-group="cardRadius" data-val="square" onclick="setStyleOption('cardRadius','square',this)">
+                      <span class="ap-tile-icon"><span style="display:inline-block;width:34px;height:26px;background:var(--c-light-gray);border:1.5px solid var(--c-border);border-radius:2px"></span></span>
+                      <div class="ap-tile-name">Cuadrado</div>
+                    </div>
+                    <div class="ap-tile" data-group="cardRadius" data-val="rounded" onclick="setStyleOption('cardRadius','rounded',this)">
+                      <span class="ap-tile-icon"><span style="display:inline-block;width:34px;height:26px;background:var(--c-light-gray);border:1.5px solid var(--c-border);border-radius:8px"></span></span>
+                      <div class="ap-tile-name">Redondeado</div>
+                    </div>
+                    <div class="ap-tile" data-group="cardRadius" data-val="large" onclick="setStyleOption('cardRadius','large',this)">
+                      <span class="ap-tile-icon"><span style="display:inline-block;width:34px;height:26px;background:var(--c-light-gray);border:1.5px solid var(--c-border);border-radius:16px"></span></span>
+                      <div class="ap-tile-name">Grande</div>
+                    </div>
+                    <div class="ap-tile" data-group="cardRadius" data-val="xlarge" onclick="setStyleOption('cardRadius','xlarge',this)">
+                      <span class="ap-tile-icon"><span style="display:inline-block;width:34px;height:26px;background:var(--c-light-gray);border:1.5px solid var(--c-border);border-radius:24px"></span></span>
+                      <div class="ap-tile-name">Circular</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ap-option-group">
+                  <div class="ap-option-label"><i class="fas fa-cloud"></i> Sombra de tarjetas</div>
+                  <div class="ap-tiles">
+                    <div class="ap-tile" data-group="cardShadow" data-val="none" onclick="setStyleOption('cardShadow','none',this)">
+                      <div class="ap-shadow-demo" style="box-shadow:none"></div>
+                      <div class="ap-tile-name">Sin sombra</div>
+                    </div>
+                    <div class="ap-tile" data-group="cardShadow" data-val="sm" onclick="setStyleOption('cardShadow','sm',this)">
+                      <div class="ap-shadow-demo" style="box-shadow:0 2px 8px rgba(0,0,0,.1)"></div>
+                      <div class="ap-tile-name">Suave</div>
+                    </div>
+                    <div class="ap-tile" data-group="cardShadow" data-val="md" onclick="setStyleOption('cardShadow','md',this)">
+                      <div class="ap-shadow-demo" style="box-shadow:0 6px 20px rgba(0,0,0,.14)"></div>
+                      <div class="ap-tile-name">Media</div>
+                    </div>
+                    <div class="ap-tile" data-group="cardShadow" data-val="lg" onclick="setStyleOption('cardShadow','lg',this)">
+                      <div class="ap-shadow-demo" style="box-shadow:0 12px 36px rgba(0,0,0,.2)"></div>
+                      <div class="ap-tile-name">Fuerte</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ap-option-group">
+                  <div class="ap-option-label"><i class="fas fa-hand-pointer"></i> Efecto hover tarjeta</div>
+                  <div class="ap-tiles">
+                    <div class="ap-tile" data-group="cardHover" data-val="none" onclick="setStyleOption('cardHover','none',this)"><span class="ap-tile-icon">—</span><div class="ap-tile-name">Ninguno</div></div>
+                    <div class="ap-tile" data-group="cardHover" data-val="lift" onclick="setStyleOption('cardHover','lift',this)"><span class="ap-tile-icon">↑</span><div class="ap-tile-name">Elevar</div></div>
+                    <div class="ap-tile" data-group="cardHover" data-val="scale" onclick="setStyleOption('cardHover','scale',this)"><span class="ap-tile-icon">⊕</span><div class="ap-tile-name">Escalar</div></div>
+                    <div class="ap-tile" data-group="cardHover" data-val="glow" onclick="setStyleOption('cardHover','glow',this)"><span class="ap-tile-icon">✦</span><div class="ap-tile-name">Brillo</div></div>
+                  </div>
+                </div>
+
+                <div class="ap-option-group" style="margin-bottom:0">
+                  <div class="ap-option-label"><i class="fas fa-sliders"></i> Opciones globales</div>
+                  <div style="border:1px solid var(--c-border);border-radius:12px;overflow:hidden">
+                    <div class="ap-toggle-row" style="padding:12px 14px">
+                      <div class="ap-toggle-info"><strong>Animaciones de entrada</strong><span>Elementos aparecen con fade-in al hacer scroll</span></div>
+                      <label class="ap-switch"><input type="checkbox" id="ap-toggle-reveal" checked onchange="markUnsaved();updatePreview()"><span class="ap-switch-track"></span></label>
+                    </div>
+                    <div class="ap-toggle-row" style="padding:12px 14px">
+                      <div class="ap-toggle-info"><strong>Barra promocional</strong><span>Franja superior con oferta o código</span></div>
+                      <label class="ap-switch"><input type="checkbox" id="ap-toggle-promo" checked onchange="markUnsaved();updatePreview()"><span class="ap-switch-track"></span></label>
+                    </div>
+                    <div class="ap-toggle-row" style="padding:12px 14px">
+                      <div class="ap-toggle-info"><strong>Header fijo al hacer scroll</strong><span>La cabecera permanece visible siempre</span></div>
+                      <label class="ap-switch"><input type="checkbox" id="ap-toggle-sticky" checked onchange="markUnsaved()"><span class="ap-switch-track"></span></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAB: Avanzado -->
+              <div id="ape-tab-advanced" class="ape-panel" style="display:none">
+                <p class="ape-panel-desc">Para usuarios avanzados. Los cambios se aplican directamente sobre el CSS de la tienda.</p>
+
+                <div class="ap-info-box"><i class="fas fa-circle-info"></i> El CSS personalizado se inyecta <strong>después</strong> de todos los estilos base, por lo que sobreescribe cualquier regla. Usa <code>!important</code> si es necesario.</div>
+
+                <div style="margin-bottom:12px">
+                  <div class="ap-option-label" style="margin-bottom:8px"><i class="fas fa-code"></i> CSS personalizado</div>
+                  <textarea class="ap-css-editor" id="ap-custom-css" placeholder="/* Escribe aquí tu CSS personalizado */
+.product-card { border: 2px solid gold; }
+.btn--primary { letter-spacing: .1em; }
+" oninput="markUnsaved()"></textarea>
+                </div>
+
+                <div style="margin-bottom:24px">
+                  <div class="ap-option-label" style="margin-bottom:8px"><i class="fas fa-image"></i> CSS de cabecera personalizada</div>
+                  <textarea class="ap-css-editor" id="ap-header-css" placeholder="/* Estilos solo para el header */
+#header { border-bottom: 3px solid var(--c-gold); }
+" oninput="markUnsaved()" style="min-height:100px"></textarea>
+                </div>
+
+                <div style="background:var(--c-light-gray);border-radius:12px;padding:16px;font-size:.8rem">
+                  <div style="font-weight:700;margin-bottom:8px;color:var(--c-primary)"><i class="fas fa-lightbulb" style="color:var(--c-gold);margin-right:6px"></i>Variables disponibles</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;font-family:monospace;font-size:.72rem;color:var(--c-gray)">
+                    <span>--c-primary</span><span>--c-gold</span>
+                    <span>--c-bg</span><span>--c-text</span>
+                    <span>--c-card</span><span>--c-footer</span>
+                    <span>--ff-heading</span><span>--ff-body</span>
+                    <span>--btn-radius</span><span>--card-radius</span>
+                    <span>--radius-sm/md/lg</span><span>--shadow-sm/md/lg</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAB: TEXTOS -->
+              <div id="ape-tab-texts" class="ape-panel" style="display:none">
+                <p class="ape-panel-desc">Edita cualquier texto de la web. Deja un campo vacío para mantener el texto original.</p>
+
+                <!-- GLOBAL -->
+                <details open>
+                  <summary class="apt-summary"><i class="fas fa-globe"></i> Global — todas las páginas</summary>
+                  <div class="apt-group">
+                    <div class="apt-row">
+                      <label class="apt-label">Barra de promoción</label>
+                      <input class="apt-input" data-text-field="promo-text" placeholder="🎁 Envío gratuito en pedidos +80€ · Código KAOS10 = 10%">
+                    </div>
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Nombre de la marca</label><input class="apt-input" data-text-field="brand-name" placeholder="Kaos Decoración"></div>
+                      <div class="apt-row"><label class="apt-label">Eslogan del logo</label><input class="apt-input" data-text-field="brand-tagline" placeholder="Artesanía · Madrid"></div>
+                    </div>
+                    <div class="apt-row"><label class="apt-label">Descripción del footer</label><input class="apt-input" data-text-field="footer-desc" placeholder="Taller artesanal en el corazón de Madrid."></div>
+                    <div class="apt-row"><label class="apt-label">Copyright</label><input class="apt-input" data-text-field="footer-copyright" placeholder="© 2025 Kaos Decoración. Todos los derechos reservados."></div>
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Newsletter — eyebrow</label><input class="apt-input" data-text-field="newsletter-eyebrow" placeholder="Solo para suscriptores"></div>
+                      <div class="apt-row"><label class="apt-label">Newsletter — botón</label><input class="apt-input" data-text-field="newsletter-btn" placeholder="Obtener mi 10%"></div>
+                    </div>
+                    <div class="apt-row"><label class="apt-label">Newsletter — título</label><input class="apt-input" data-text-field="newsletter-title" placeholder="10% de descuento en tu primer pedido"></div>
+                    <div class="apt-row"><label class="apt-label">Newsletter — descripción</label><input class="apt-input" data-text-field="newsletter-desc" placeholder="Suscríbete y recibe este código..."></div>
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Icono 1 — título</label><input class="apt-input" data-text-field="feat1-title" placeholder="Envío gratuito"></div>
+                      <div class="apt-row"><label class="apt-label">Icono 1 — subtítulo</label><input class="apt-input" data-text-field="feat1-sub" placeholder="En pedidos +80€"></div>
+                      <div class="apt-row"><label class="apt-label">Icono 2 — título</label><input class="apt-input" data-text-field="feat2-title" placeholder="100% artesanal"></div>
+                      <div class="apt-row"><label class="apt-label">Icono 2 — subtítulo</label><input class="apt-input" data-text-field="feat2-sub" placeholder="Hecho a mano en Madrid"></div>
+                      <div class="apt-row"><label class="apt-label">Icono 3 — título</label><input class="apt-input" data-text-field="feat3-title" placeholder="Pago seguro"></div>
+                      <div class="apt-row"><label class="apt-label">Icono 3 — subtítulo</label><input class="apt-input" data-text-field="feat3-sub" placeholder="SSL · Stripe · PayPal"></div>
+                      <div class="apt-row"><label class="apt-label">Icono 4 — título</label><input class="apt-input" data-text-field="feat4-title" placeholder="Devoluciones"></div>
+                      <div class="apt-row"><label class="apt-label">Icono 4 — subtítulo</label><input class="apt-input" data-text-field="feat4-sub" placeholder="30 días sin preguntas"></div>
+                    </div>
+                  </div>
+                </details>
+
+                <!-- INICIO -->
+                <details>
+                  <summary class="apt-summary"><i class="fas fa-house"></i> Inicio (index.html)</summary>
+                  <div class="apt-group">
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Hero — eyebrow</label><input class="apt-input" data-text-field="home-hero-eyebrow" placeholder="Artesanía única en Madrid"></div>
+                      <div class="apt-row"><label class="apt-label">Hero — título <span class="apt-hint">admite HTML</span></label><input class="apt-input" data-text-field="home-hero-title" placeholder="Arte que vive&lt;br&gt;en tu &lt;em&gt;hogar&lt;/em&gt;"></div>
+                    </div>
+                    <div class="apt-row"><label class="apt-label">Hero — subtítulo</label><textarea class="apt-input apt-ta" data-text-field="home-hero-subtitle" rows="2" placeholder="Cada pieza de Kaos Decoración es creada a mano..."></textarea></div>
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">CTA principal</label><input class="apt-input" data-text-field="home-cta-primary" placeholder="Explorar tienda"></div>
+                      <div class="apt-row"><label class="apt-label">CTA secundario</label><input class="apt-input" data-text-field="home-cta-secondary" placeholder="Nuestra historia"></div>
+                    </div>
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Stat 1 — número</label><input class="apt-input" data-text-field="home-stat1-num" placeholder="500+"></div>
+                      <div class="apt-row"><label class="apt-label">Stat 1 — etiqueta</label><input class="apt-input" data-text-field="home-stat1-label" placeholder="Piezas vendidas"></div>
+                      <div class="apt-row"><label class="apt-label">Stat 2 — número</label><input class="apt-input" data-text-field="home-stat2-num" placeholder="100%"></div>
+                      <div class="apt-row"><label class="apt-label">Stat 2 — etiqueta</label><input class="apt-input" data-text-field="home-stat2-label" placeholder="Hecho a mano"></div>
+                      <div class="apt-row"><label class="apt-label">Stat 3 — número</label><input class="apt-input" data-text-field="home-stat3-num" placeholder="4.9★"></div>
+                      <div class="apt-row"><label class="apt-label">Stat 3 — etiqueta</label><input class="apt-input" data-text-field="home-stat3-label" placeholder="Valoración media"></div>
+                    </div>
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Categorías — eyebrow</label><input class="apt-input" data-text-field="home-cats-eyebrow" placeholder="Explorar por"></div>
+                      <div class="apt-row"><label class="apt-label">Categorías — título</label><input class="apt-input" data-text-field="home-cats-title" placeholder="Nuestras categorías"></div>
+                    </div>
+                    <div class="apt-row"><label class="apt-label">Categorías — descripción</label><input class="apt-input" data-text-field="home-cats-desc" placeholder="Desde iluminación artesanal hasta accesorios únicos..."></div>
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Destacados — eyebrow</label><input class="apt-input" data-text-field="home-feat-eyebrow" placeholder="Selección especial"></div>
+                      <div class="apt-row"><label class="apt-label">Destacados — título</label><input class="apt-input" data-text-field="home-feat-title" placeholder="Productos destacados"></div>
+                    </div>
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Destacados — descripción</label><input class="apt-input" data-text-field="home-feat-desc" placeholder="Las piezas más amadas por nuestra comunidad..."></div>
+                      <div class="apt-row"><label class="apt-label">Destacados — botón</label><input class="apt-input" data-text-field="home-feat-btn" placeholder="Ver toda la tienda"></div>
+                    </div>
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Nuevos — eyebrow</label><input class="apt-input" data-text-field="home-new-eyebrow" placeholder="Recién llegados"></div>
+                      <div class="apt-row"><label class="apt-label">Nuevos — título</label><input class="apt-input" data-text-field="home-new-title" placeholder="Nuevos productos"></div>
+                    </div>
+                    <div class="apt-row"><label class="apt-label">Nuevos — descripción</label><input class="apt-input" data-text-field="home-new-desc" placeholder="Las últimas creaciones de nuestro taller..."></div>
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Sobre nosotros — script</label><input class="apt-input" data-text-field="home-about-script" placeholder="Nuestra historia"></div>
+                      <div class="apt-row"><label class="apt-label">Sobre nosotros — botón</label><input class="apt-input" data-text-field="home-about-btn" placeholder="Conoce nuestro taller"></div>
+                    </div>
+                    <div class="apt-row"><label class="apt-label">Sobre nosotros — título <span class="apt-hint">admite HTML</span></label><input class="apt-input" data-text-field="home-about-title" placeholder="Artesanía con alma, desde Madrid"></div>
+                    <div class="apt-row"><label class="apt-label">Sobre nosotros — párrafo 1</label><textarea class="apt-input apt-ta" data-text-field="home-about-lead" rows="2" placeholder="Kaos Decoración nació en 2019..."></textarea></div>
+                    <div class="apt-row"><label class="apt-label">Sobre nosotros — párrafo 2</label><textarea class="apt-input apt-ta" data-text-field="home-about-text" rows="2" placeholder="Cada pieza que creamos lleva horas de trabajo..."></textarea></div>
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Reseñas — eyebrow</label><input class="apt-input" data-text-field="home-reviews-eyebrow" placeholder="Lo que dicen"></div>
+                      <div class="apt-row"><label class="apt-label">Reseñas — título</label><input class="apt-input" data-text-field="home-reviews-title" placeholder="Opiniones de clientes"></div>
+                    </div>
+                  </div>
+                </details>
+
+                <!-- TIENDA -->
+                <details>
+                  <summary class="apt-summary"><i class="fas fa-bag-shopping"></i> Tienda (tienda.html)</summary>
+                  <div class="apt-group">
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Título de la página</label><input class="apt-input" data-text-field="shop-hero-title" placeholder="Nuestra Tienda"></div>
+                      <div class="apt-row"><label class="apt-label">Subtítulo</label><input class="apt-input" data-text-field="shop-hero-subtitle" placeholder="Piezas artesanales únicas, hechas a mano con amor en Madrid"></div>
+                    </div>
+                  </div>
+                </details>
+
+                <!-- NOSOTROS -->
+                <details>
+                  <summary class="apt-summary"><i class="fas fa-users"></i> Sobre Nosotros (sobre-nosotros.html)</summary>
+                  <div class="apt-group">
+                    <div class="apt-row"><label class="apt-label">Hero — título <span class="apt-hint">admite HTML</span></label><input class="apt-input" data-text-field="about-hero-title" placeholder="Artesanía con alma,&lt;br&gt;desde el corazón de Madrid"></div>
+                    <div class="apt-row"><label class="apt-label">Hero — subtítulo</label><textarea class="apt-input apt-ta" data-text-field="about-hero-subtitle" rows="2" placeholder="Somos tres artesanos madrileños..."></textarea></div>
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">CTA principal</label><input class="apt-input" data-text-field="about-cta-primary" placeholder="Ver nuestra tienda"></div>
+                      <div class="apt-row"><label class="apt-label">CTA secundario</label><input class="apt-input" data-text-field="about-cta-secondary" placeholder="Contactar"></div>
+                    </div>
+                    <div class="apt-row"><label class="apt-label">Sección historia — título</label><input class="apt-input" data-text-field="about-story-title" placeholder="De afición a vocación"></div>
+                  </div>
+                </details>
+
+                <!-- CONTACTO -->
+                <details>
+                  <summary class="apt-summary"><i class="fas fa-envelope"></i> Contacto (contacto.html)</summary>
+                  <div class="apt-group">
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Título de la página</label><input class="apt-input" data-text-field="contact-hero-title" placeholder="Contacto"></div>
+                      <div class="apt-row"><label class="apt-label">Subtítulo</label><input class="apt-input" data-text-field="contact-hero-subtitle" placeholder="Estamos aquí para ayudarte..."></div>
+                    </div>
+                    <div class="apt-row"><label class="apt-label">Título sección principal</label><input class="apt-input" data-text-field="contact-section-title" placeholder="Hablemos"></div>
+                    <div class="apt-row"><label class="apt-label">Descripción sección</label><textarea class="apt-input apt-ta" data-text-field="contact-section-desc" rows="2" placeholder="Si tienes alguna pregunta sobre nuestros productos..."></textarea></div>
+                  </div>
+                </details>
+
+                <!-- FAQ -->
+                <details>
+                  <summary class="apt-summary"><i class="fas fa-circle-question"></i> FAQ (faq.html)</summary>
+                  <div class="apt-group">
+                    <div class="apt-2col">
+                      <div class="apt-row"><label class="apt-label">Título de la página</label><input class="apt-input" data-text-field="faq-hero-title" placeholder="Preguntas frecuentes"></div>
+                      <div class="apt-row"><label class="apt-label">Subtítulo</label><input class="apt-input" data-text-field="faq-hero-subtitle" placeholder="Encuentra respuesta a las dudas más comunes..."></div>
+                    </div>
+                  </div>
+                </details>
+
+              </div><!-- /ape-tab-texts -->
 
             </div><!-- /ape-tab-content -->
           </div><!-- /ape-editor -->
@@ -1015,13 +1642,18 @@
                   </div>
                 </div>
                 <div class="apv-products" id="ap-prev-cards">
-                  <div class="apv-card"><div class="apv-card-img" id="ap-mini-img1"><i class="fas fa-lightbulb" style="font-size:1.6rem"></i></div><div class="apv-card-body"><div class="apv-card-name" id="ap-mini-name1">Lámpara Artesanal</div><div class="apv-card-price" id="ap-mini-price1">89,00 €</div></div></div>
-                  <div class="apv-card"><div class="apv-card-img" id="ap-mini-img2"><i class="fas fa-bag-shopping" style="font-size:1.6rem"></i></div><div class="apv-card-body"><div class="apv-card-name" id="ap-mini-name2">Bolso Cuero</div><div class="apv-card-price" id="ap-mini-price2">195,00 €</div></div></div>
-                  <div class="apv-card"><div class="apv-card-img" id="ap-mini-img3"><i class="fas fa-couch" style="font-size:1.6rem"></i></div><div class="apv-card-body"><div class="apv-card-name" id="ap-mini-name3">Cojín Bordado</div><div class="apv-card-price" id="ap-mini-price3">72,00 €</div></div></div>
+                  <div class="apv-card" id="ap-mini-card1"><div class="apv-card-img" id="ap-mini-img1"><i class="fas fa-lightbulb" style="font-size:1.6rem"></i></div><div class="apv-card-body"><div class="apv-card-name" id="ap-mini-name1">Lámpara Artesanal</div><div class="apv-card-price" id="ap-mini-price1">89,00 €</div><div id="ap-mini-addbtn1" class="apv-mini-btn">Añadir</div></div></div>
+                  <div class="apv-card" id="ap-mini-card2"><div class="apv-card-img" id="ap-mini-img2"><i class="fas fa-bag-shopping" style="font-size:1.6rem"></i></div><div class="apv-card-body"><div class="apv-card-name" id="ap-mini-name2">Bolso Cuero</div><div class="apv-card-price" id="ap-mini-price2">195,00 €</div><div id="ap-mini-addbtn2" class="apv-mini-btn">Añadir</div></div></div>
+                  <div class="apv-card" id="ap-mini-card3"><div class="apv-card-img" id="ap-mini-img3"><i class="fas fa-couch" style="font-size:1.6rem"></i></div><div class="apv-card-body"><div class="apv-card-name" id="ap-mini-name3">Cojín Bordado</div><div class="apv-card-price" id="ap-mini-price3">72,00 €</div><div id="ap-mini-addbtn3" class="apv-mini-btn">Añadir</div></div></div>
                 </div>
                 <div class="apv-footer" id="ap-prev-footer">
                   <div class="apv-footer-brand" id="ap-prev-footer-brand">Kaos Decoración</div>
-                  <div class="apv-footer-text">© 2025 · Madrid, España</div>
+                  <div class="apv-footer-text ap-prev-footer-link">© 2025 · Madrid, España</div>
+                  <div style="display:flex;gap:12px;margin-top:6px">
+                    <span class="ap-prev-footer-link" style="font-size:.65rem">Tienda</span>
+                    <span class="ap-prev-footer-link" style="font-size:.65rem">Contacto</span>
+                    <span class="ap-prev-footer-link" style="font-size:.65rem">FAQ</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1247,6 +1879,7 @@ function switchSection(id) {
   if (id === 'categories')      renderCategories();
   if (id === 'custom-orders')   renderCustomOrders();
   if (id === 'appearance')      initAppearancePanel();
+  if (id === 'content')         initContentPanel();
 }
 
 document.querySelectorAll('.admin-nav-item[data-section]').forEach(nav =>
@@ -1814,23 +2447,33 @@ function clearDemoData() {
    APARIENCIA — Professional Editor
 ══════════════════════════════════════════ */
 const THEME_KEY = 'kaos_theme';
-const DEFAULTS  = { colorPrimary:'#2C1A0E', colorGold:'#C9A96E', colorBg:'#FAF7F2', colorText:'#3D2B1F', fontHeading:'Playfair Display', fontBody:'Lato' };
-const PRESETS   = {
-  kaos:     { colorPrimary:'#2C1A0E', colorGold:'#C9A96E', colorBg:'#FAF7F2', colorText:'#3D2B1F', fontHeading:'Playfair Display', fontBody:'Lato' },
-  noche:    { colorPrimary:'#0D1117', colorGold:'#C0A060', colorBg:'#161B22', colorText:'#E6EDF3', fontHeading:'Cormorant Garamond', fontBody:'Inter' },
-  botanico: { colorPrimary:'#1B3A2D', colorGold:'#B5834A', colorBg:'#F2F7F5', colorText:'#3D5A50', fontHeading:'Lora', fontBody:'Nunito' },
-  cielo:    { colorPrimary:'#1A2E4A', colorGold:'#E0A842', colorBg:'#F4F8FC', colorText:'#334E6B', fontHeading:'Raleway', fontBody:'Open Sans' },
-  tierra:   { colorPrimary:'#5C3A1E', colorGold:'#D4956A', colorBg:'#FDF6EE', colorText:'#7A5C3F', fontHeading:'Montserrat', fontBody:'Poppins' },
-  minimal:  { colorPrimary:'#1A1A1A', colorGold:'#B8860B', colorBg:'#FFFFFF', colorText:'#555555', fontHeading:'Josefin Sans', fontBody:'Lato' },
+const TEXTS_KEY = 'kaos_texts';
+const DEFAULTS = {
+  colorPrimary:'#2C1A0E', colorGold:'#C9A96E', colorBg:'#FAF7F2', colorText:'#3D2B1F',
+  colorCard:'#FFFFFF', colorFooter:'#2C1A0E', colorNav:'#FFFFFF',
+  fontHeading:'Playfair Display', fontBody:'Lato',
+  headingTransform:'none', headingWeight:'700', headingSpacing:'normal', fontScale:'normal',
+  btnShape:'rounded', cardRadius:'rounded', cardShadow:'md', cardHover:'lift',
+  toggleReveal:true, togglePromo:true, toggleSticky:true,
+  customCSS:'', headerCSS:''
+};
+const PRESETS = {
+  kaos:     { colorPrimary:'#2C1A0E', colorGold:'#C9A96E', colorBg:'#FAF7F2', colorText:'#3D2B1F', colorCard:'#FFFFFF', colorFooter:'#2C1A0E', colorNav:'#FFFFFF', fontHeading:'Playfair Display', fontBody:'Lato',       headingTransform:'none',      headingWeight:'700', headingSpacing:'normal', fontScale:'normal', btnShape:'rounded', cardRadius:'rounded', cardShadow:'md', cardHover:'lift' },
+  noche:    { colorPrimary:'#0D1117', colorGold:'#C0A060', colorBg:'#161B22', colorText:'#E6EDF3', colorCard:'#1E2530', colorFooter:'#080C10', colorNav:'#E6EDF3', fontHeading:'Cormorant Garamond', fontBody:'Inter',     headingTransform:'none',      headingWeight:'600', headingSpacing:'wide',   fontScale:'normal', btnShape:'pill',    cardRadius:'rounded', cardShadow:'lg', cardHover:'glow' },
+  botanico: { colorPrimary:'#1B3A2D', colorGold:'#B5834A', colorBg:'#F2F7F5', colorText:'#3D5A50', colorCard:'#FFFFFF', colorFooter:'#0F2219', colorNav:'#FFFFFF', fontHeading:'Lora',               fontBody:'Nunito',    headingTransform:'none',      headingWeight:'700', headingSpacing:'normal', fontScale:'normal', btnShape:'rounded', cardRadius:'large',   cardShadow:'sm', cardHover:'lift' },
+  cielo:    { colorPrimary:'#1A2E4A', colorGold:'#E0A842', colorBg:'#F4F8FC', colorText:'#334E6B', colorCard:'#FFFFFF', colorFooter:'#0D1A2B', colorNav:'#FFFFFF', fontHeading:'Raleway',            fontBody:'Open Sans', headingTransform:'uppercase', headingWeight:'700', headingSpacing:'wider',  fontScale:'normal', btnShape:'square',  cardRadius:'square',  cardShadow:'sm', cardHover:'scale' },
+  tierra:   { colorPrimary:'#5C3A1E', colorGold:'#D4956A', colorBg:'#FDF6EE', colorText:'#7A5C3F', colorCard:'#FFF9F2', colorFooter:'#3A2010', colorNav:'#FFFFFF', fontHeading:'Montserrat',         fontBody:'Poppins',   headingTransform:'none',      headingWeight:'900', headingSpacing:'tight',  fontScale:'large',  btnShape:'rounded', cardRadius:'xlarge',  cardShadow:'md', cardHover:'lift' },
+  minimal:  { colorPrimary:'#1A1A1A', colorGold:'#B8860B', colorBg:'#FFFFFF', colorText:'#555555', colorCard:'#F8F8F8', colorFooter:'#111111', colorNav:'#FFFFFF', fontHeading:'Josefin Sans',       fontBody:'Lato',      headingTransform:'uppercase', headingWeight:'700', headingSpacing:'wider',  fontScale:'small',  btnShape:'square',  cardRadius:'square',  cardShadow:'none', cardHover:'none' },
 };
 
 /* ── Tab switching ── */
 function switchApTab(tab, btn) {
-  ['themes','colors','fonts'].forEach(t => {
+  ['themes','colors','fonts','style','advanced','texts'].forEach(t => {
     const panel = document.getElementById('ape-tab-' + t);
     if (panel) panel.style.display = t === tab ? '' : 'none';
   });
   document.querySelectorAll('.ape-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  if (tab === 'texts') initTextsTab();
 }
 
 /* ── Device switcher ── */
@@ -1850,6 +2493,20 @@ function markSaved() {
   if (st) { st.className = 'ape-status saved'; st.innerHTML = '<i class="fas fa-check-circle"></i> Guardado'; }
 }
 
+/* ── Tile option selector ── */
+function setStyleOption(group, val, el) {
+  document.querySelectorAll(`.ap-tile[data-group="${group}"]`).forEach(t => t.classList.remove('selected'));
+  if (el) el.classList.add('selected');
+  updatePreview();
+  markUnsaved();
+}
+
+/* ── Get current tile value ── */
+function getTileVal(group, fallback) {
+  const sel = document.querySelector(`.ap-tile[data-group="${group}"].selected`);
+  return sel ? sel.dataset.val : fallback;
+}
+
 /* ── Apply preset ── */
 function applyPreset(name) {
   const p = PRESETS[name];
@@ -1858,7 +2515,6 @@ function applyPreset(name) {
   document.querySelectorAll('.ap-theme-card').forEach(c => c.classList.toggle('active', c.dataset.theme === name));
   updatePreview();
   markUnsaved();
-  /* Switch to colors tab to show changes */
   switchApTab('colors', document.querySelector('.ape-tab[data-tab="colors"]'));
   showToast(`Tema aplicado — guarda para hacerlo permanente`, 'info');
 }
@@ -1866,23 +2522,52 @@ function applyPreset(name) {
 /* ── Set all controls from values object ── */
 function setAppearanceValues(p) {
   const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
-  set('ap-color-primary', p.colorPrimary);
-  set('ap-color-gold',    p.colorGold);
-  set('ap-color-bg',      p.colorBg);
-  set('ap-color-text',    p.colorText);
-  set('ap-font-heading',  p.fontHeading);
-  set('ap-font-body',     p.fontBody);
+  /* Colors */
+  set('ap-color-primary', p.colorPrimary || DEFAULTS.colorPrimary);
+  set('ap-color-gold',    p.colorGold    || DEFAULTS.colorGold);
+  set('ap-color-bg',      p.colorBg      || DEFAULTS.colorBg);
+  set('ap-color-text',    p.colorText    || DEFAULTS.colorText);
+  set('ap-color-card',    p.colorCard    || DEFAULTS.colorCard);
+  set('ap-color-footer',  p.colorFooter  || DEFAULTS.colorFooter);
+  set('ap-color-nav',     p.colorNav     || DEFAULTS.colorNav);
+  /* Fonts */
+  set('ap-font-heading',  p.fontHeading  || DEFAULTS.fontHeading);
+  set('ap-font-body',     p.fontBody     || DEFAULTS.fontBody);
+  /* Font option tiles */
   document.querySelectorAll('#ap-heading-options .ap-font-option').forEach(opt =>
-    opt.classList.toggle('selected', opt.querySelector('input').value === p.fontHeading));
+    opt.classList.toggle('selected', opt.querySelector('input')?.value === (p.fontHeading || DEFAULTS.fontHeading)));
   document.querySelectorAll('#ap-body-options .ap-font-option').forEach(opt =>
-    opt.classList.toggle('selected', opt.querySelector('input').value === p.fontBody));
+    opt.classList.toggle('selected', opt.querySelector('input')?.value === (p.fontBody || DEFAULTS.fontBody)));
+  /* Style tiles */
+  const tileGroups = {
+    headingTransform: p.headingTransform || DEFAULTS.headingTransform,
+    headingWeight:    String(p.headingWeight || DEFAULTS.headingWeight),
+    headingSpacing:   p.headingSpacing   || DEFAULTS.headingSpacing,
+    fontScale:        p.fontScale        || DEFAULTS.fontScale,
+    btnShape:         p.btnShape         || DEFAULTS.btnShape,
+    cardRadius:       p.cardRadius       || DEFAULTS.cardRadius,
+    cardShadow:       p.cardShadow       || DEFAULTS.cardShadow,
+    cardHover:        p.cardHover        || DEFAULTS.cardHover
+  };
+  Object.entries(tileGroups).forEach(([group, val]) => {
+    document.querySelectorAll(`.ap-tile[data-group="${group}"]`).forEach(t =>
+      t.classList.toggle('selected', t.dataset.val === val));
+  });
+  /* Toggles */
+  const setChk = (id, val) => { const el = document.getElementById(id); if (el) el.checked = val !== false; };
+  setChk('ap-toggle-reveal',  p.toggleReveal);
+  setChk('ap-toggle-promo',   p.togglePromo);
+  setChk('ap-toggle-sticky',  p.toggleSticky);
+  /* Custom CSS */
+  set('ap-custom-css',    p.customCSS    || '');
+  set('ap-header-css',    p.headerCSS    || '');
 }
 
 /* ── Detect & highlight active preset ── */
 function detectActivePreset(vals) {
   let found = null;
   Object.entries(PRESETS).forEach(([name, p]) => {
-    if (p.colorPrimary === vals.colorPrimary && p.colorGold === vals.colorGold) found = name;
+    if (p.colorPrimary === vals.colorPrimary && p.colorGold === vals.colorGold && p.btnShape === vals.btnShape) found = name;
   });
   document.querySelectorAll('.ap-theme-card').forEach(c => c.classList.toggle('active', c.dataset.theme === found));
 }
@@ -1895,13 +2580,13 @@ function initAppearancePanel() {
   detectActivePreset(saved);
 
   /* Color pickers */
-  ['primary','gold','bg','text'].forEach(key => {
+  ['primary','gold','bg','text','card','footer','nav'].forEach(key => {
     const inp = document.getElementById('ap-color-' + key);
     if (!inp) return;
     inp.addEventListener('input', () => { updatePreview(); markUnsaved(); });
   });
 
-  /* Font options */
+  /* Font tile options */
   document.querySelectorAll('#ap-heading-options .ap-font-option').forEach(opt => {
     opt.addEventListener('click', () => {
       const val = opt.querySelector('input').value;
@@ -1923,6 +2608,18 @@ function initAppearancePanel() {
     });
   });
 
+  /* Toggle switches */
+  ['ap-toggle-reveal','ap-toggle-promo','ap-toggle-sticky'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('change', () => markUnsaved());
+  });
+
+  /* Custom CSS textareas */
+  ['ap-custom-css','ap-header-css'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', () => markUnsaved());
+  });
+
   /* Keyboard shortcut Ctrl/Cmd+S */
   document.addEventListener('keydown', e => {
     if ((e.ctrlKey || e.metaKey) && e.key === 's' && document.getElementById('section-appearance')?.classList.contains('active')) {
@@ -1937,22 +2634,34 @@ function updatePreview() {
   const gold     = document.getElementById('ap-color-gold')?.value    || DEFAULTS.colorGold;
   const bg       = document.getElementById('ap-color-bg')?.value      || DEFAULTS.colorBg;
   const text     = document.getElementById('ap-color-text')?.value    || DEFAULTS.colorText;
+  const cardBg   = document.getElementById('ap-color-card')?.value    || DEFAULTS.colorCard;
+  const footer   = document.getElementById('ap-color-footer')?.value  || DEFAULTS.colorFooter;
   const fHeading = document.getElementById('ap-font-heading')?.value  || DEFAULTS.fontHeading;
   const fBody    = document.getElementById('ap-font-body')?.value     || DEFAULTS.fontBody;
+  const btnShape = getTileVal('btnShape', DEFAULTS.btnShape);
+  const cardRad  = getTileVal('cardRadius', DEFAULTS.cardRadius);
+  const hTrans   = getTileVal('headingTransform', DEFAULTS.headingTransform);
+  const hWeight  = getTileVal('headingWeight', DEFAULTS.headingWeight);
+  const hSpacing = getTileVal('headingSpacing', DEFAULTS.headingSpacing);
 
   const $ = id => document.getElementById(id);
   const bg10 = primary + '18';
 
+  /* Btn radius map */
+  const btnR = { square:'2px', rounded:'8px', pill:'50px' };
+  /* Card radius map */
+  const cardRMap = { square:'4px', rounded:'12px', large:'18px', xlarge:'28px' };
+
   /* Swatches + hex */
-  ['primary','gold','bg','text'].forEach(k => {
-    const colors = { primary, gold, bg, text };
+  ['primary','gold','bg','text','card','footer','nav'].forEach(k => {
+    const colors = { primary, gold, bg, text, card: cardBg, footer, nav: document.getElementById('ap-color-nav')?.value || DEFAULTS.colorNav };
     const sw = $('ap-swatch-'+k); if (sw) sw.style.background = colors[k];
-    const hx = $('ap-hex-'+k);   if (hx) hx.textContent = colors[k].toUpperCase();
+    const hx = $('ap-hex-'+k);   if (hx) hx.textContent = colors[k]?.toUpperCase() || '';
   });
 
   /* Palette bar */
-  [$('ap-palette-1'),$('ap-palette-2'),$('ap-palette-3'),$('ap-palette-4')].forEach((el,i) => {
-    if (el) el.style.background = [primary,gold,bg,text][i];
+  [$('ap-palette-1'),$('ap-palette-2'),$('ap-palette-3'),$('ap-palette-4'),$('ap-palette-5'),$('ap-palette-6')].forEach((el,i) => {
+    if (el) el.style.background = [primary,gold,bg,text,cardBg,footer][i];
   });
 
   /* Promo */
@@ -1971,57 +2680,135 @@ function updatePreview() {
     const el = $(id); if (el) { el.style.color = 'rgba(255,255,255,.75)'; el.style.fontFamily = `'${fBody}',sans-serif`; }
   });
   const navBtn = $('ap-prev-btn');
-  if (navBtn) { navBtn.style.background = gold; navBtn.style.color = primary; navBtn.style.fontFamily = `'${fBody}',sans-serif`; }
+  if (navBtn) {
+    navBtn.style.background = gold; navBtn.style.color = primary;
+    navBtn.style.fontFamily = `'${fBody}',sans-serif`;
+    navBtn.style.borderRadius = btnR[btnShape] || '8px';
+  }
 
   /* Hero */
   const hero = $('ap-prev-hero'); if (hero) hero.style.background = bg;
   const eyebrow = $('ap-prev-eyebrow'); if (eyebrow) { eyebrow.style.color = gold; eyebrow.style.fontFamily = `'${fBody}',sans-serif`; }
-  const title = $('ap-prev-title'); if (title) { title.style.color = primary; title.style.fontFamily = `'${fHeading}',serif`; }
+  const title = $('ap-prev-title'); if (title) {
+    title.style.color = primary; title.style.fontFamily = `'${fHeading}',serif`;
+    title.style.textTransform = hTrans; title.style.fontWeight = hWeight;
+    title.style.letterSpacing = { tight:'-.03em', normal:'0', wide:'.04em', wider:'.1em' }[hSpacing] || '0';
+  }
   const ptext = $('ap-prev-text'); if (ptext) { ptext.style.color = text; ptext.style.fontFamily = `'${fBody}',sans-serif`; }
-  const cta1 = $('ap-prev-cta1'); if (cta1) { cta1.style.background = primary; cta1.style.color = '#fff'; cta1.style.fontFamily = `'${fBody}',sans-serif`; }
-  const cta2 = $('ap-prev-cta2'); if (cta2) { cta2.style.borderColor = primary; cta2.style.color = primary; cta2.style.background = 'transparent'; cta2.style.fontFamily = `'${fBody}',sans-serif`; }
+  const cta1 = $('ap-prev-cta1'); if (cta1) {
+    cta1.style.background = primary; cta1.style.color = '#fff';
+    cta1.style.fontFamily = `'${fBody}',sans-serif`;
+    cta1.style.borderRadius = btnR[btnShape] || '8px';
+  }
+  const cta2 = $('ap-prev-cta2'); if (cta2) {
+    cta2.style.borderColor = primary; cta2.style.color = primary;
+    cta2.style.background = 'transparent'; cta2.style.fontFamily = `'${fBody}',sans-serif`;
+    cta2.style.borderRadius = btnR[btnShape] || '8px';
+  }
 
   /* Product cards */
   const cards = $('ap-prev-cards'); if (cards) cards.style.background = bg;
   [1,2,3].forEach(i => {
-    const img = $('ap-mini-img'+i); if (img) { img.style.background = bg10; const ic = img.querySelector('i'); if (ic) ic.style.color = gold + 'cc'; }
+    const wrap = $('ap-mini-card'+i);
+    if (wrap) { wrap.style.background = cardBg; wrap.style.borderRadius = cardRMap[cardRad] || '12px'; }
+    const img = $('ap-mini-img'+i); if (img) {
+      img.style.background = bg10;
+      img.style.borderRadius = `${cardRMap[cardRad] || '12px'} ${cardRMap[cardRad] || '12px'} 0 0`;
+      const ic = img.querySelector('i'); if (ic) ic.style.color = gold + 'cc';
+    }
     const nm  = $('ap-mini-name'+i); if (nm) { nm.style.color = primary; nm.style.fontFamily = `'${fHeading}',serif`; }
     const pr  = $('ap-mini-price'+i); if (pr) { pr.style.color = gold; pr.style.fontFamily = `'${fBody}',sans-serif`; }
+    const ab  = $('ap-mini-addbtn'+i); if (ab) {
+      ab.style.background = primary; ab.style.color = '#fff';
+      ab.style.borderRadius = btnR[btnShape] || '8px';
+      ab.style.fontFamily = `'${fBody}',sans-serif`;
+    }
   });
 
   /* Footer */
-  const footer = $('ap-prev-footer'); if (footer) { footer.style.background = primary; }
+  const footerEl = $('ap-prev-footer'); if (footerEl) { footerEl.style.background = footer; }
   const fbrand = $('ap-prev-footer-brand'); if (fbrand) { fbrand.style.color = gold; fbrand.style.fontFamily = `'${fHeading}',serif`; }
+  document.querySelectorAll('.ap-prev-footer-link').forEach(el => { el.style.color = 'rgba(255,255,255,.55)'; el.style.fontFamily = `'${fBody}',sans-serif`; });
+}
+
+/* ── Read all current values into a theme object ── */
+function readCurrentTheme() {
+  return {
+    colorPrimary:     document.getElementById('ap-color-primary')?.value || DEFAULTS.colorPrimary,
+    colorGold:        document.getElementById('ap-color-gold')?.value    || DEFAULTS.colorGold,
+    colorBg:          document.getElementById('ap-color-bg')?.value      || DEFAULTS.colorBg,
+    colorText:        document.getElementById('ap-color-text')?.value    || DEFAULTS.colorText,
+    colorCard:        document.getElementById('ap-color-card')?.value    || DEFAULTS.colorCard,
+    colorFooter:      document.getElementById('ap-color-footer')?.value  || DEFAULTS.colorFooter,
+    colorNav:         document.getElementById('ap-color-nav')?.value     || DEFAULTS.colorNav,
+    fontHeading:      document.getElementById('ap-font-heading')?.value  || DEFAULTS.fontHeading,
+    fontBody:         document.getElementById('ap-font-body')?.value     || DEFAULTS.fontBody,
+    headingTransform: getTileVal('headingTransform', DEFAULTS.headingTransform),
+    headingWeight:    getTileVal('headingWeight',    DEFAULTS.headingWeight),
+    headingSpacing:   getTileVal('headingSpacing',   DEFAULTS.headingSpacing),
+    fontScale:        getTileVal('fontScale',        DEFAULTS.fontScale),
+    btnShape:         getTileVal('btnShape',         DEFAULTS.btnShape),
+    cardRadius:       getTileVal('cardRadius',       DEFAULTS.cardRadius),
+    cardShadow:       getTileVal('cardShadow',       DEFAULTS.cardShadow),
+    cardHover:        getTileVal('cardHover',        DEFAULTS.cardHover),
+    toggleReveal:     document.getElementById('ap-toggle-reveal')?.checked !== false,
+    togglePromo:      document.getElementById('ap-toggle-promo')?.checked  !== false,
+    toggleSticky:     document.getElementById('ap-toggle-sticky')?.checked !== false,
+    customCSS:        document.getElementById('ap-custom-css')?.value || '',
+    headerCSS:        document.getElementById('ap-header-css')?.value || ''
+  };
+}
+
+/* ── Texts tab: load & save ── */
+let _textsTabInited = false;
+function initTextsTab() {
+  const saved = JSON.parse(localStorage.getItem(TEXTS_KEY) || '{}');
+  document.querySelectorAll('[data-text-field]').forEach(el => {
+    const key = el.dataset.textField;
+    el.value = saved[key] || '';
+    el.classList.toggle('modified', !!saved[key]);
+    if (!_textsTabInited) {
+      el.addEventListener('input', () => {
+        el.classList.toggle('modified', el.value.trim() !== '');
+        markUnsaved();
+      });
+    }
+  });
+  _textsTabInited = true;
+}
+
+function saveTextsTab() {
+  const existing = JSON.parse(localStorage.getItem(TEXTS_KEY) || '{}');
+  document.querySelectorAll('[data-text-field]').forEach(el => {
+    const key = el.dataset.textField;
+    if (el.value.trim()) existing[key] = el.value.trim();
+    else delete existing[key];
+  });
+  localStorage.setItem(TEXTS_KEY, JSON.stringify(existing));
 }
 
 /* ── Save ── */
 function saveAppearance() {
   const btn = document.getElementById('ape-save-btn');
   if (btn) { btn.classList.add('saving'); btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando…'; }
-  const theme = {
-    colorPrimary: document.getElementById('ap-color-primary').value,
-    colorGold:    document.getElementById('ap-color-gold').value,
-    colorBg:      document.getElementById('ap-color-bg').value,
-    colorText:    document.getElementById('ap-color-text').value,
-    fontHeading:  document.getElementById('ap-font-heading').value,
-    fontBody:     document.getElementById('ap-font-body').value
-  };
+  const theme = readCurrentTheme();
   setTimeout(() => {
     localStorage.setItem(THEME_KEY, JSON.stringify(theme));
-    applyThemeToPage(theme.colorPrimary, theme.colorGold, theme.colorBg, theme.colorText, theme.fontHeading, theme.fontBody);
+    applyThemeToPage(theme);
+    saveTextsTab();
     markSaved();
     if (btn) { btn.classList.remove('saving'); btn.innerHTML = '<i class="fas fa-cloud-arrow-up"></i> Guardar cambios'; }
-    showToast('Apariencia guardada y aplicada en toda la web ✓','success');
+    showToast('Apariencia y textos guardados ✓','success');
   }, 600);
 }
 
 /* ── Reset ── */
 function resetAppearance() {
-  if (!confirm('¿Restablecer los colores y tipografías por defecto?')) return;
+  if (!confirm('¿Restablecer toda la apariencia por defecto?')) return;
   localStorage.removeItem(THEME_KEY);
   setAppearanceValues(DEFAULTS);
   updatePreview();
-  applyThemeToPage(DEFAULTS.colorPrimary, DEFAULTS.colorGold, DEFAULTS.colorBg, DEFAULTS.colorText, DEFAULTS.fontHeading, DEFAULTS.fontBody);
+  applyThemeToPage(DEFAULTS);
   detectActivePreset(DEFAULTS);
   markSaved();
   showToast('Apariencia restablecida por defecto ✓','success');
@@ -2029,31 +2816,78 @@ function resetAppearance() {
 
 /* ── Preview on this page ── */
 function previewAppearance() {
-  applyThemeToPage(
-    document.getElementById('ap-color-primary').value,
-    document.getElementById('ap-color-gold').value,
-    document.getElementById('ap-color-bg').value,
-    document.getElementById('ap-color-text').value,
-    document.getElementById('ap-font-heading').value,
-    document.getElementById('ap-font-body').value
-  );
+  applyThemeToPage(readCurrentTheme());
   showToast('Vista previa aplicada en esta página ✓','success');
 }
 
-/* ── Apply theme to page CSS vars ── */
-function applyThemeToPage(primary, gold, bg, text, fHeading, fBody) {
+/* ── Apply theme to page CSS vars + inject override CSS ── */
+function applyThemeToPage(t) {
   const r = document.documentElement;
-  r.style.setProperty('--c-primary', primary);
-  r.style.setProperty('--c-gold', gold);
-  r.style.setProperty('--c-secondary', gold);
-  r.style.setProperty('--c-bg', bg);
-  r.style.setProperty('--c-text', text);
-  loadGoogleFont(fHeading, () => r.style.setProperty('--ff-heading', `'${fHeading}', Georgia, serif`));
-  loadGoogleFont(fBody,    () => r.style.setProperty('--ff-body',    `'${fBody}', sans-serif`));
+  r.style.setProperty('--c-primary', t.colorPrimary);
+  r.style.setProperty('--c-gold', t.colorGold);
+  r.style.setProperty('--c-secondary', t.colorGold);
+  r.style.setProperty('--c-bg', t.colorBg);
+  r.style.setProperty('--c-text', t.colorText);
+  if (t.colorCard)   r.style.setProperty('--c-white', t.colorCard);
+  if (t.colorFooter) r.style.setProperty('--c-footer', t.colorFooter);
+  loadGoogleFont(t.fontHeading, () => r.style.setProperty('--ff-heading', `'${t.fontHeading}', Georgia, serif`));
+  loadGoogleFont(t.fontBody,    () => r.style.setProperty('--ff-body',    `'${t.fontBody}', sans-serif`));
+  injectThemeCSS(t);
+}
+
+/* ── Inject CSS overrides for style settings ── */
+function injectThemeCSS(t) {
+  const btnR = { square:'2px', rounded:'8px', pill:'50px' }[t.btnShape] || '8px';
+  const cardR = { square:'4px', rounded:'12px', large:'18px', xlarge:'28px' }[t.cardRadius] || '12px';
+  const shadowMap = {
+    none: 'none',
+    sm:   '0 2px 8px rgba(0,0,0,.06)',
+    md:   '0 4px 20px rgba(0,0,0,.10)',
+    lg:   '0 8px 40px rgba(0,0,0,.16)'
+  };
+  const shadow = shadowMap[t.cardShadow] || shadowMap.md;
+  const hoverMap = {
+    none:  '',
+    lift:  'transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.15);',
+    scale: 'transform: scale(1.03);',
+    glow:  `box-shadow: 0 0 0 3px ${t.colorGold}55, 0 8px 24px rgba(0,0,0,.12);`
+  };
+  const hoverCSS = hoverMap[t.cardHover] || hoverMap.lift;
+  const scaleMap = { small:'.88rem', normal:'1rem', large:'1.1rem', xlarge:'1.25rem' };
+  const fScale = scaleMap[t.fontScale] || '1rem';
+  const spacingMap = { tight:'-.03em', normal:'0', wide:'.04em', wider:'.1em' };
+  const hSpacing = spacingMap[t.headingSpacing] || '0';
+
+  const css = `
+/* ─── Kaos Theme Overrides ─── */
+.btn, button.btn, a.btn, .btn-add-cart, .btn--primary, .btn--gold {
+  border-radius: ${btnR} !important;
+}
+.product-card, .card {
+  border-radius: ${cardR} !important;
+  box-shadow: ${shadow} !important;
+}
+${hoverCSS ? `.product-card:hover { ${hoverCSS} }` : ''}
+body, p, .nav a, .footer { font-size: ${fScale}; }
+h1, h2, h3, h4, h5, h6 {
+  text-transform: ${t.headingTransform || 'none'} !important;
+  font-weight: ${t.headingWeight || '700'} !important;
+  letter-spacing: ${hSpacing} !important;
+}
+${t.colorFooter ? `.footer { background: ${t.colorFooter} !important; }` : ''}
+${t.colorCard   ? `.product-card, .card { background: ${t.colorCard} !important; }` : ''}
+${t.customCSS  || ''}
+${t.headerCSS  ? `#header { ${t.headerCSS} }` : ''}
+`;
+
+  let tag = document.getElementById('kaos-theme-overrides');
+  if (!tag) { tag = document.createElement('style'); tag.id = 'kaos-theme-overrides'; document.head.appendChild(tag); }
+  tag.textContent = css;
 }
 
 /* ── Load Google Font ── */
 function loadGoogleFont(family, cb) {
+  if (!family) { if (cb) cb(); return; }
   const id = 'gf-' + family.replace(/ /g,'-');
   if (!document.getElementById(id)) {
     const l = document.createElement('link');
@@ -2062,6 +2896,69 @@ function loadGoogleFont(family, cb) {
     l.onload = cb;
     document.head.appendChild(l);
   } else if (cb) { cb(); }
+}
+
+/* ══════════════════════════════════════════
+   CONTENT EDITOR
+══════════════════════════════════════════ */
+
+function switchCtTab(tab, btn) {
+  document.querySelectorAll('#section-content [id^="ct-"]').forEach(p => {
+    if (p.id.startsWith('ct-') && !p.id.includes('save') && !p.id.includes('panel')) p.style.display = p.id === tab ? '' : 'none';
+  });
+  document.querySelectorAll('.ct-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+}
+
+function markCtUnsaved() {
+  const st = document.getElementById('ct-save-status');
+  if (st) { st.className = 'ape-status unsaved'; st.innerHTML = '<i class="fas fa-circle-exclamation"></i> Cambios sin guardar'; }
+}
+function markCtSaved() {
+  const st = document.getElementById('ct-save-status');
+  if (st) { st.className = 'ape-status saved'; st.innerHTML = '<i class="fas fa-check-circle"></i> Guardado'; }
+}
+
+let _contentPanelInited = false;
+function initContentPanel() {
+  const saved = JSON.parse(localStorage.getItem(TEXTS_KEY) || '{}');
+  document.querySelectorAll('[data-content-key]').forEach(el => {
+    const key = el.dataset.contentKey;
+    el.value = saved[key] || '';
+    el.classList.toggle('modified', !!saved[key]);
+    if (!_contentPanelInited) {
+      el.addEventListener('input', () => {
+        el.classList.toggle('modified', el.value.trim() !== '');
+        markCtUnsaved();
+      });
+    }
+  });
+  _contentPanelInited = true;
+}
+
+function saveContent() {
+  const btn = document.getElementById('ct-save-btn');
+  if (btn) { btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando…'; btn.disabled = true; }
+  const texts = {};
+  document.querySelectorAll('[data-content-key]').forEach(el => {
+    if (el.value.trim()) texts[el.dataset.contentKey] = el.value.trim();
+  });
+  setTimeout(() => {
+    localStorage.setItem(TEXTS_KEY, JSON.stringify(texts));
+    markCtSaved();
+    if (btn) { btn.innerHTML = '<i class="fas fa-cloud-arrow-up"></i> Guardar cambios'; btn.disabled = false; }
+    showToast('Textos guardados — se aplicarán en toda la web ✓', 'success');
+  }, 500);
+}
+
+function resetContent() {
+  if (!confirm('¿Restablecer todos los textos al original? Se perderán todos los cambios.')) return;
+  localStorage.removeItem(TEXTS_KEY);
+  document.querySelectorAll('[data-content-key]').forEach(el => {
+    el.value = '';
+    el.classList.remove('modified');
+  });
+  markCtSaved();
+  showToast('Textos restablecidos al original ✓', 'success');
 }
 
 /* ══════════════════════════════════════════

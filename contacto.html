@@ -11,14 +11,13 @@
 </head>
 <body>
 <div id="loading-overlay" class="loading-overlay"><div class="loader"></div><span class="script" style="font-size:1.2rem">Kaos Decoración</span></div>
-<div id="promo-bar" class="promo-bar">🎁 Envío gratuito +80€ · Código <strong>KAOS10</strong> = 10% dto.<span class="close-promo"><i class="fas fa-times"></i></span></div>
+<div id="promo-bar" class="promo-bar"><span data-text-key="promo-text">🎁 Envío gratuito +80€ · Código <strong>KAOS10</strong> = 10% dto.</span><span class="close-promo"><i class="fas fa-times"></i></span></div>
 
 <header id="header">
   <div class="container">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <div class="logo-mark">K</div>
-        <div class="logo-text"><strong>Kaos Decoración</strong><span>Artesanía · Madrid</span></div>
+        <img src="img/logo.png" alt="Kaos Decoración" class="logo-img">
       </a>
       <nav class="nav">
         <a href="index.html">Inicio</a><div class="nav-dropdown"><a href="tienda.html">Tienda <i class="fas fa-chevron-down dd-arrow"></i></a><div class="nav-dropdown-menu"><a href="tienda.html?cat=pantallas"><i class="fas fa-lightbulb"></i> Lámparas</a><a href="tienda.html?cat=bolsos"><i class="fas fa-bag-shopping"></i> Bolsos</a><a href="tienda.html?cat=cojines"><i class="fas fa-couch"></i> Cojines</a></div></div>
@@ -40,8 +39,8 @@
 
 <div class="page-content">
   <div class="page-banner">
-    <h1>Contacto</h1>
-    <p>Estamos aquí para ayudarte. Te respondemos en menos de 24 horas.</p>
+    <h1 data-text-key="contact-hero-title">Contacto</h1>
+    <p data-text-key="contact-hero-subtitle">Estamos aquí para ayudarte. Te respondemos en menos de 24 horas.</p>
     <div class="breadcrumb">
       <a href="index.html">Inicio</a><i class="fas fa-chevron-right"></i>
       <span class="current">Contacto</span>
@@ -53,8 +52,8 @@
       <div class="contact-grid">
         <!-- Info -->
         <div class="reveal">
-          <h2 style="margin-bottom:16px">Hablemos</h2>
-          <p>Si tienes alguna pregunta sobre nuestros productos, quieres encargar una pieza personalizada o simplemente quieres conocer el taller, no dudes en escribirnos.</p>
+          <h2 style="margin-bottom:16px" data-text-key="contact-section-title">Hablemos</h2>
+          <p data-text-key="contact-section-desc">Si tienes alguna pregunta sobre nuestros productos, quieres encargar una pieza personalizada o simplemente quieres conocer el taller, no dudes en escribirnos.</p>
 
           <div class="contact-detail">
             <div class="contact-detail-icon"><i class="fas fa-phone"></i></div>
@@ -194,14 +193,14 @@
   <section class="newsletter">
     <div class="container">
       <div class="newsletter-content reveal">
-        <span class="eyebrow">Solo para suscriptores</span>
-        <h2>10% de descuento en tu primer pedido</h2>
+        <span class="eyebrow" data-text-key="newsletter-eyebrow">Solo para suscriptores</span>
+        <h2 data-text-key="newsletter-title">10% de descuento en tu primer pedido</h2>
         <div style="display:inline-block;background:rgba(255,255,255,.15);border:2px solid var(--c-gold);border-radius:var(--radius-md);padding:10px 32px;margin:14px 0 10px;font-size:1.5rem;font-weight:900;letter-spacing:.16em;color:var(--c-gold)">KAOS10</div>
-        <p style="font-size:1rem;margin-bottom:6px">Suscríbete y recibe este código para usarlo en tu <strong>primera compra</strong>.</p>
+        <p style="font-size:1rem;margin-bottom:6px" data-text-key="newsletter-desc">Suscríbete y recibe este código para usarlo en tu <strong>primera compra</strong>.</p>
         <p style="font-size:.82rem;opacity:.55;margin-bottom:22px">También recibirás novedades y lanzamientos exclusivos de Kaos.</p>
         <form class="newsletter-form" novalidate>
           <input type="email" placeholder="Tu email" required aria-label="Email">
-          <button type="submit" class="btn btn--gold">Obtener mi 10%</button>
+          <button type="submit" class="btn btn--gold" data-text-key="newsletter-btn">Obtener mi 10%</button>
         </form>
         <p style="font-size:.72rem;color:rgba(255,255,255,.3);margin-top:12px">*Válido solo en el primer pedido · Sin spam · Cancela cuando quieras</p>
       </div></div>
@@ -211,8 +210,8 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="index.html" class="logo"><div class="logo-mark">K</div><div class="logo-text"><strong>Kaos Decoración</strong><span>Artesanía · Madrid</span></div></a>
-          <p>Taller artesanal en el corazón de Madrid.</p>
+          <a href="index.html" class="logo"><img src="img/logo.png" alt="Kaos Decoración" class="logo-img"></a>
+          <p data-text-key="footer-desc">Taller artesanal en el corazón de Madrid.</p>
           <div class="footer-social">
             <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
             <a href="#" class="social-btn"><i class="fab fa-pinterest"></i></a>
@@ -223,7 +222,7 @@
         <div class="footer-col"><h5>Empresa</h5><a href="sobre-nosotros.html">Sobre nosotros</a><a href="contacto.html">Contacto</a><a href="faq.html">FAQ</a></div>
         <div class="footer-col"><h5>Contacto</h5><a href="tel:+34912345678"><i class="fas fa-phone" style="color:var(--c-gold);margin-right:6px"></i>+34 912 345 678</a><a href="mailto:hola@kaos.es"><i class="fas fa-envelope" style="color:var(--c-gold);margin-right:6px"></i>hola@kaos.es</a><a href="#"><i class="fas fa-location-dot" style="color:var(--c-gold);margin-right:6px"></i>Lavapiés, Madrid</a></div>
       </div>
-      <div class="footer-bottom"><span>© 2025 Kaos Decoración · Madrid, España</span></div>
+      <div class="footer-bottom"><span data-text-key="footer-copyright">© 2025 Kaos Decoración · Madrid, España</span></div>
     </div>
   </footer>
 </div>
@@ -232,5 +231,7 @@
 <script src="js/cart.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/main.js"></script>
+<script src="js/texts.js"></script>
+<script src="js/editor.js"></script>
 </body>
 </html>
