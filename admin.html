@@ -877,6 +877,19 @@
 <script src="js/auth.js"></script>
 <script src="js/main.js"></script>
 <script>
+/* ── Limpieza única de datos de ejemplo ── */
+(function clearDemoData() {
+  if (!localStorage.getItem('kaos_demo_cleared')) {
+    localStorage.removeItem('kaos_extra_products');
+    localStorage.removeItem('kaos_deleted_ids');
+    localStorage.removeItem('kaos_orders');
+    localStorage.removeItem('kaos_users');
+    localStorage.removeItem('kaos_wishlist');
+    localStorage.removeItem('kaos_cart');
+    localStorage.setItem('kaos_demo_cleared', '1');
+  }
+})();
+
 /* ══════════════════════════════════════════
    PRODUCTOS EN LOCALSTORAGE
    (extiende el array PRODUCTS de data.js)
