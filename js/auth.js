@@ -312,15 +312,40 @@ function initAuthForms() {
 /* ─── Account Panel Switching ─── */
 function initAccountPanels() {
   const menuItems = document.querySelectorAll('.account-menu-item[data-panel]');
+  const grid      = document.querySelector('.account-grid');
+  const content   = document.querySelector('.account-content');
+
+  /* Inject mobile back button once */
+  if (content && !document.getElementById('account-mobile-back')) {
+    const backBtn = document.createElement('button');
+    backBtn.id = 'account-mobile-back';
+    backBtn.className = 'account-mobile-back';
+    backBtn.innerHTML = '<i class="fas fa-chevron-left"></i> Menú de cuenta';
+    content.insertBefore(backBtn, content.firstChild);
+    backBtn.addEventListener('click', () => {
+      grid?.classList.remove('show-content');
+      window.scrollTo({ top: grid?.offsetTop - 80 || 0, behavior: 'smooth' });
+    });
+  }
+
+  function isMobile() { return window.innerWidth <= 768; }
+
   menuItems.forEach(item => {
     item.addEventListener('click', function() {
       const panelId = this.dataset.panel;
       if (panelId === 'logout') { Auth.logout(); window.location.href = 'index.html'; return; }
+
       menuItems.forEach(m => m.classList.remove('active'));
       this.classList.add('active');
       document.querySelectorAll('.account-panel').forEach(p => p.classList.remove('active'));
       const panel = document.getElementById('panel-' + panelId);
       if (panel) panel.classList.add('active');
+
+      /* On mobile: hide sidebar, reveal content */
+      if (isMobile() && grid) {
+        grid.classList.add('show-content');
+        window.scrollTo({ top: grid.offsetTop - 80, behavior: 'smooth' });
+      }
     });
   });
 }

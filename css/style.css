@@ -1359,6 +1359,28 @@ p:last-child { margin-bottom: 0; }
   .account-menu-item { min-width: 80px; font-size: .76rem; padding: 10px 6px; }
 }
 
+/* ── Account page mobile: sidebar ↔ content toggle ── */
+@media (max-width: 768px) {
+  .account-grid.show-content .account-sidebar { display: none; }
+  .account-grid.show-content .account-content { display: block; }
+  .account-grid:not(.show-content) .account-sidebar { display: block; }
+  .account-grid:not(.show-content) .account-content { display: none; }
+  .account-mobile-back {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 20px; padding: 10px 16px;
+    background: var(--c-white); border: 1.5px solid var(--c-border);
+    border-radius: var(--radius-md); font-size: .88rem; font-weight: 700;
+    color: var(--c-primary); cursor: pointer; transition: all var(--transition);
+    width: 100%;
+  }
+  .account-mobile-back:hover { background: var(--c-light-gray); }
+  .account-mobile-back i { color: var(--c-gold); }
+}
+@media (min-width: 769px) {
+  .account-mobile-back { display: none; }
+  .account-content { display: block !important; }
+}
+
 /* ── Touch devices: always show product actions ── */
 @media (hover: none) {
   .product-actions-hover { opacity: 1; transform: translateY(-50%); }
