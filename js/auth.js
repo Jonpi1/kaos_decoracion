@@ -133,6 +133,12 @@ const Auth = {
     users.push(user);
     this.saveUsers(users);
     this._setSession(user);
+    /* Enviar email de bienvenida (sin bloquear el registro) */
+    fetch('/.netlify/functions/send-welcome', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: firstname, email })
+    }).catch(() => {});
     return { ok: true, user };
   },
 
