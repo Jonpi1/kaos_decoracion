@@ -428,6 +428,243 @@
       animation: slideUp .3s ease;
     }
 
+    /* ═══════════════════════════════
+       CRM STYLES
+    ═══════════════════════════════ */
+    .crm-stats { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:28px; }
+    .crm-stat {
+      background:var(--c-white); border:1px solid var(--c-border); border-radius:var(--radius-lg);
+      padding:18px 16px; text-align:center;
+    }
+    .crm-stat strong { display:block; font-family:var(--ff-heading); font-size:1.6rem; color:var(--c-primary); }
+    .crm-stat span { font-size:.75rem; color:var(--c-gray); text-transform:uppercase; letter-spacing:.06em; }
+    .crm-stat.highlight { background:var(--c-primary); border-color:var(--c-primary); }
+    .crm-stat.highlight strong, .crm-stat.highlight span { color:var(--c-white); }
+    .crm-stat.highlight strong { color:var(--c-gold); }
+
+    .crm-toolbar {
+      display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+      margin-bottom:20px;
+    }
+    .crm-search {
+      flex:1; min-width:200px; display:flex; align-items:center; gap:8px;
+      background:var(--c-white); border:1.5px solid var(--c-border); border-radius:var(--radius-md);
+      padding:8px 14px;
+    }
+    .crm-search input {
+      flex:1; border:none; background:none; outline:none; font-size:.88rem; color:var(--c-dark);
+    }
+    .crm-search i { color:var(--c-gray); font-size:.9rem; }
+    .crm-filter-tabs { display:flex; gap:6px; flex-wrap:wrap; }
+    .crm-filter-tab {
+      padding:7px 14px; border-radius:20px; font-size:.8rem; font-weight:700;
+      color:var(--c-gray); border:1.5px solid var(--c-border); cursor:pointer;
+      transition:all .2s;
+    }
+    .crm-filter-tab:hover { border-color:var(--c-primary); color:var(--c-primary); }
+    .crm-filter-tab.active { background:var(--c-primary); color:var(--c-white); border-color:var(--c-primary); }
+    .crm-view-btns { display:flex; gap:4px; }
+    .crm-view-btn {
+      width:34px; height:34px; border-radius:var(--radius-sm); border:1.5px solid var(--c-border);
+      display:flex; align-items:center; justify-content:center; font-size:.85rem;
+      color:var(--c-gray); cursor:pointer; transition:all .2s;
+    }
+    .crm-view-btn.active { background:var(--c-primary); color:var(--c-white); border-color:var(--c-primary); }
+
+    /* ── Contacts Table ── */
+    .crm-table { width:100%; border-collapse:collapse; }
+    .crm-table thead th {
+      text-align:left; padding:10px 14px; font-size:.75rem; font-weight:700;
+      letter-spacing:.08em; text-transform:uppercase; color:var(--c-gray);
+      background:var(--c-light-gray); border-bottom:1px solid var(--c-border);
+    }
+    .crm-table tbody tr {
+      border-bottom:1px solid var(--c-border); cursor:pointer;
+      transition:background .15s;
+    }
+    .crm-table tbody tr:hover { background:rgba(201,169,110,.04); }
+    .crm-table tbody tr:last-child { border-bottom:none; }
+    .crm-table td { padding:12px 14px; font-size:.88rem; vertical-align:middle; }
+    .crm-avatar {
+      width:36px; height:36px; border-radius:50%;
+      background:var(--c-primary); color:var(--c-gold);
+      font-family:var(--ff-heading); font-weight:700; font-size:.95rem;
+      display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .crm-name-cell { display:flex; align-items:center; gap:10px; }
+    .crm-name-cell strong { display:block; color:var(--c-primary); font-size:.9rem; }
+    .crm-name-cell span { font-size:.78rem; color:var(--c-gray); }
+
+    /* Stage badges */
+    .crm-stage {
+      display:inline-block; padding:3px 10px; border-radius:20px;
+      font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+    }
+    .crm-stage.lead        { background:rgba(52,152,219,.12); color:#2980b9; }
+    .crm-stage.prospecto   { background:rgba(155,89,182,.12); color:#8e44ad; }
+    .crm-stage.cliente     { background:rgba(74,124,89,.12);  color:var(--c-success); }
+    .crm-stage.vip         { background:rgba(201,169,110,.18); color:var(--c-gold-dark); }
+    .crm-stage.inactivo    { background:rgba(127,140,141,.12); color:#7f8c8d; }
+
+    /* Tags */
+    .crm-tag {
+      display:inline-block; padding:2px 8px; border-radius:10px;
+      font-size:.7rem; font-weight:700; background:var(--c-light-gray); color:var(--c-gray);
+      margin:1px;
+    }
+    .crm-tag.vip-tag    { background:rgba(201,169,110,.2); color:var(--c-gold-dark); }
+    .crm-tag.nuevo-tag  { background:rgba(74,124,89,.15);  color:var(--c-success); }
+
+    /* ── Pipeline Kanban ── */
+    .crm-pipeline { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; align-items:start; }
+    .crm-pipeline-col {
+      background:var(--c-light-gray); border-radius:var(--radius-lg); padding:14px 12px;
+    }
+    .crm-pipeline-col-header {
+      display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;
+    }
+    .crm-pipeline-col-header h4 { font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--c-primary); }
+    .crm-pipeline-col-header .crm-col-count {
+      width:22px; height:22px; border-radius:50%; background:var(--c-primary); color:var(--c-white);
+      font-size:.72rem; font-weight:700; display:flex; align-items:center; justify-content:center;
+    }
+    .crm-kanban-card {
+      background:var(--c-white); border-radius:var(--radius-md); padding:12px;
+      margin-bottom:8px; border:1px solid var(--c-border); cursor:pointer;
+      transition:all .2s; box-shadow:0 1px 4px rgba(0,0,0,.04);
+    }
+    .crm-kanban-card:hover { box-shadow:var(--shadow-md); transform:translateY(-1px); }
+    .crm-kanban-card strong { display:block; font-size:.85rem; color:var(--c-primary); margin-bottom:4px; }
+    .crm-kanban-card span { font-size:.75rem; color:var(--c-gray); }
+    .crm-kanban-card .crm-kanban-value { font-family:var(--ff-heading); color:var(--c-gold); font-size:.88rem; font-weight:700; margin-top:6px; }
+
+    /* ── Contact Detail Panel ── */
+    .crm-detail-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,.45); backdrop-filter:blur(3px);
+      z-index:1050; opacity:0; pointer-events:none; transition:opacity .3s;
+    }
+    .crm-detail-overlay.open { opacity:1; pointer-events:auto; }
+    .crm-detail-panel {
+      position:fixed; top:0; right:-110%; width:min(480px,95vw); height:100vh;
+      background:var(--c-white); z-index:1051; overflow-y:auto;
+      box-shadow:-8px 0 48px rgba(0,0,0,.18);
+      transition:right .35s cubic-bezier(.4,0,.2,1);
+      display:flex; flex-direction:column;
+    }
+    .crm-detail-panel.open { right:0; }
+    .crm-detail-header {
+      display:flex; align-items:center; gap:14px; padding:24px;
+      border-bottom:1px solid var(--c-border); flex-shrink:0; position:sticky; top:0;
+      background:var(--c-white); z-index:2;
+    }
+    .crm-detail-avatar {
+      width:52px; height:52px; border-radius:50%; flex-shrink:0;
+      background:var(--c-primary); color:var(--c-gold);
+      font-family:var(--ff-heading); font-size:1.3rem; font-weight:700;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .crm-detail-header-info { flex:1; min-width:0; }
+    .crm-detail-header-info h3 { font-size:1.1rem; margin-bottom:3px; color:var(--c-primary); }
+    .crm-detail-header-info span { font-size:.82rem; color:var(--c-gray); }
+    .crm-detail-close {
+      width:36px; height:36px; border-radius:50%; background:var(--c-light-gray);
+      display:flex; align-items:center; justify-content:center; font-size:.9rem;
+      color:var(--c-gray); cursor:pointer; transition:all .2s; flex-shrink:0;
+    }
+    .crm-detail-close:hover { background:var(--c-border); color:var(--c-primary); }
+    .crm-detail-body { padding:24px; flex:1; }
+    .crm-detail-section { margin-bottom:24px; }
+    .crm-detail-section h4 {
+      font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em;
+      color:var(--c-gray); margin-bottom:12px; padding-bottom:8px;
+      border-bottom:1px solid var(--c-border);
+    }
+    .crm-info-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; font-size:.88rem; }
+    .crm-info-row i { width:18px; text-align:center; color:var(--c-gold); font-size:.9rem; }
+    .crm-info-row a { color:var(--c-primary); transition:color .2s; }
+    .crm-info-row a:hover { color:var(--c-gold); }
+    .crm-metric-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+    .crm-metric-box {
+      background:var(--c-light-gray); border-radius:var(--radius-md); padding:12px; text-align:center;
+    }
+    .crm-metric-box strong { display:block; font-family:var(--ff-heading); font-size:1.2rem; color:var(--c-primary); }
+    .crm-metric-box span { font-size:.72rem; color:var(--c-gray); }
+    .crm-stage-selector { display:flex; gap:6px; flex-wrap:wrap; }
+    .crm-stage-btn {
+      padding:6px 12px; border-radius:20px; font-size:.75rem; font-weight:700;
+      border:1.5px solid var(--c-border); color:var(--c-gray); cursor:pointer; transition:all .2s;
+    }
+    .crm-stage-btn:hover { border-color:var(--c-primary); color:var(--c-primary); }
+    .crm-stage-btn.active.lead        { background:rgba(52,152,219,.15); border-color:#2980b9; color:#2980b9; }
+    .crm-stage-btn.active.prospecto   { background:rgba(155,89,182,.15); border-color:#8e44ad; color:#8e44ad; }
+    .crm-stage-btn.active.cliente     { background:rgba(74,124,89,.15);  border-color:var(--c-success); color:var(--c-success); }
+    .crm-stage-btn.active.vip         { background:rgba(201,169,110,.2); border-color:var(--c-gold); color:var(--c-gold-dark); }
+    .crm-stage-btn.active.inactivo    { background:rgba(127,140,141,.15); border-color:#7f8c8d; color:#7f8c8d; }
+    .crm-notes-list { display:flex; flex-direction:column; gap:10px; }
+    .crm-note {
+      background:var(--c-light-gray); border-radius:var(--radius-md); padding:12px 14px;
+      font-size:.85rem; position:relative;
+    }
+    .crm-note .crm-note-meta { font-size:.73rem; color:var(--c-gray); margin-bottom:4px; }
+    .crm-note p { color:var(--c-dark); line-height:1.5; margin:0; }
+    .crm-note .crm-note-del {
+      position:absolute; top:8px; right:8px; width:20px; height:20px; border-radius:50%;
+      font-size:.7rem; color:var(--c-gray); display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition:all .2s;
+    }
+    .crm-note .crm-note-del:hover { background:var(--c-error); color:var(--c-white); }
+    .crm-note-form { display:flex; gap:8px; margin-top:12px; }
+    .crm-note-form textarea {
+      flex:1; padding:9px 12px; border:1.5px solid var(--c-border); border-radius:var(--radius-sm);
+      font-size:.85rem; outline:none; resize:none; min-height:72px; font-family:inherit;
+      transition:border-color .2s;
+    }
+    .crm-note-form textarea:focus { border-color:var(--c-gold); }
+    .crm-orders-list { display:flex; flex-direction:column; gap:8px; }
+    .crm-order-row {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 12px; background:var(--c-light-gray); border-radius:var(--radius-md);
+      font-size:.84rem;
+    }
+    .crm-order-row strong { color:var(--c-primary); }
+    .crm-order-row span { color:var(--c-gray); font-size:.78rem; }
+
+    /* ── Add/Edit Modal ── */
+    .crm-modal-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,.5); backdrop-filter:blur(4px);
+      z-index:1100; display:none; align-items:center; justify-content:center; padding:24px;
+    }
+    .crm-modal-overlay.open { display:flex; }
+    .crm-modal {
+      background:var(--c-white); border-radius:var(--radius-xl); padding:32px;
+      width:100%; max-width:520px; max-height:90vh; overflow-y:auto;
+      animation:slideUp .3s ease both;
+    }
+    .crm-modal h3 { font-size:1.3rem; margin-bottom:24px; }
+    .crm-modal-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px; }
+    .crm-modal-grid .full { grid-column:1/-1; }
+    .crm-modal label { display:block; font-size:.82rem; font-weight:700; color:var(--c-primary); margin-bottom:5px; }
+    .crm-modal input, .crm-modal select {
+      width:100%; padding:9px 12px; border:1.5px solid var(--c-border);
+      border-radius:var(--radius-sm); font-size:.88rem; outline:none; background:var(--c-bg);
+      transition:border-color .2s;
+    }
+    .crm-modal input:focus, .crm-modal select:focus { border-color:var(--c-gold); }
+    .crm-modal-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:8px; }
+
+    @media (max-width: 960px) {
+      .crm-stats { grid-template-columns:repeat(3,1fr); }
+      .crm-pipeline { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .crm-stats { grid-template-columns:1fr 1fr; }
+      .crm-pipeline { grid-template-columns:1fr; }
+      .crm-table thead { display:none; }
+      .crm-table tbody tr { display:block; padding:12px; border-radius:var(--radius-md); margin-bottom:8px; border:1px solid var(--c-border); }
+      .crm-table td { display:flex; padding:4px 0; font-size:.82rem; }
+      .crm-metric-grid { grid-template-columns:1fr 1fr; }
+    }
+
     /* ─── Custom Orders badge ─── */
     .notif-badge {
       min-width: 18px; height: 18px; border-radius: 9px;
@@ -547,6 +784,9 @@
     <div class="admin-nav-item" data-section="add-product"><i class="fas fa-plus-circle"></i> Añadir producto</div>
     <div class="admin-nav-item" data-section="categories"><i class="fas fa-folder"></i> Categorías</div>
     <div class="admin-nav-item" data-section="coupons"><i class="fas fa-percent"></i> Cupones</div>
+
+    <div class="admin-nav-section">CRM</div>
+    <div class="admin-nav-item" data-section="crm"><i class="fas fa-address-book"></i> CRM Clientes</div>
 
     <div class="admin-nav-section">Cuenta</div>
     <div class="admin-nav-item" data-section="settings"><i class="fas fa-cog"></i> Ajustes tienda</div>
@@ -1702,6 +1942,143 @@
         </div><!-- /ape-body -->
       </div>
 
+      <!-- ══ CRM ══ -->
+      <div class="admin-page-section" id="section-crm">
+
+        <!-- Header -->
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px">
+          <div>
+            <h3 style="margin-bottom:4px">CRM — Gestión de Clientes</h3>
+            <p style="color:var(--c-gray);font-size:.85rem">Contactos, pipeline de ventas y seguimiento de clientes.</p>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button onclick="crmSyncUsers()" class="btn btn--outline btn--sm" title="Sincronizar con clientes registrados">
+              <i class="fas fa-rotate"></i> Sincronizar
+            </button>
+            <button onclick="crmOpenAdd()" class="btn btn--primary btn--sm">
+              <i class="fas fa-user-plus"></i> Añadir contacto
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="crm-stats" id="crm-stats"></div>
+
+        <!-- Toolbar -->
+        <div class="crm-toolbar">
+          <div class="crm-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="crm-search-input" placeholder="Buscar por nombre, email, teléfono..." oninput="crmRender()">
+          </div>
+          <div class="crm-filter-tabs" id="crm-filter-tabs">
+            <div class="crm-filter-tab active" data-stage="all" onclick="crmSetFilter('all',this)">Todos</div>
+            <div class="crm-filter-tab" data-stage="lead"      onclick="crmSetFilter('lead',this)">Leads</div>
+            <div class="crm-filter-tab" data-stage="prospecto" onclick="crmSetFilter('prospecto',this)">Prospectos</div>
+            <div class="crm-filter-tab" data-stage="cliente"   onclick="crmSetFilter('cliente',this)">Clientes</div>
+            <div class="crm-filter-tab" data-stage="vip"       onclick="crmSetFilter('vip',this)">VIP</div>
+            <div class="crm-filter-tab" data-stage="inactivo"  onclick="crmSetFilter('inactivo',this)">Inactivos</div>
+          </div>
+          <div class="crm-view-btns">
+            <div class="crm-view-btn active" id="crm-btn-list"     onclick="crmSetView('list')"     title="Lista"><i class="fas fa-list"></i></div>
+            <div class="crm-view-btn"        id="crm-btn-pipeline" onclick="crmSetView('pipeline')" title="Pipeline"><i class="fas fa-columns"></i></div>
+          </div>
+        </div>
+
+        <!-- List view -->
+        <div id="crm-list-view">
+          <div style="background:var(--c-white);border-radius:var(--radius-lg);border:1px solid var(--c-border);overflow:hidden">
+            <table class="crm-table">
+              <thead>
+                <tr>
+                  <th>Contacto</th>
+                  <th>Etapa</th>
+                  <th>Fuente</th>
+                  <th>Total gastado</th>
+                  <th>Pedidos</th>
+                  <th>Último contacto</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="crm-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pipeline view -->
+        <div id="crm-pipeline-view" style="display:none">
+          <div class="crm-pipeline" id="crm-pipeline"></div>
+        </div>
+
+      </div><!-- /section-crm -->
+
+      <!-- CRM Detail Panel -->
+      <div class="crm-detail-overlay" id="crm-detail-overlay" onclick="crmCloseDetail()"></div>
+      <div class="crm-detail-panel" id="crm-detail-panel">
+        <div class="crm-detail-header">
+          <div class="crm-detail-avatar" id="cdp-avatar">?</div>
+          <div class="crm-detail-header-info">
+            <h3 id="cdp-name">—</h3>
+            <span id="cdp-stage-badge"></span>
+          </div>
+          <button class="crm-detail-close" onclick="crmCloseDetail()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="crm-detail-body" id="crm-detail-body"></div>
+      </div>
+
+      <!-- CRM Add/Edit Modal -->
+      <div class="crm-modal-overlay" id="crm-modal-overlay">
+        <div class="crm-modal">
+          <h3 id="crm-modal-title">Añadir contacto</h3>
+          <input type="hidden" id="crm-modal-id">
+          <div class="crm-modal-grid">
+            <div>
+              <label>Nombre *</label>
+              <input type="text" id="cm-name" placeholder="Nombre completo">
+            </div>
+            <div>
+              <label>Email</label>
+              <input type="email" id="cm-email" placeholder="correo@ejemplo.com">
+            </div>
+            <div>
+              <label>Teléfono</label>
+              <input type="tel" id="cm-phone" placeholder="+34 600 000 000">
+            </div>
+            <div>
+              <label>Empresa</label>
+              <input type="text" id="cm-company" placeholder="Opcional">
+            </div>
+            <div>
+              <label>Etapa</label>
+              <select id="cm-stage">
+                <option value="lead">Lead</option>
+                <option value="prospecto">Prospecto</option>
+                <option value="cliente" selected>Cliente</option>
+                <option value="vip">VIP</option>
+                <option value="inactivo">Inactivo</option>
+              </select>
+            </div>
+            <div>
+              <label>Fuente</label>
+              <select id="cm-source">
+                <option value="web">Web</option>
+                <option value="instagram">Instagram</option>
+                <option value="referido">Referido</option>
+                <option value="tienda">Tienda física</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div class="full">
+              <label>Etiquetas <small style="font-weight:400;color:var(--c-gray)">(separadas por coma)</small></label>
+              <input type="text" id="cm-tags" placeholder="VIP, Habitual, Interesado en lámparas...">
+            </div>
+          </div>
+          <div class="crm-modal-actions">
+            <button onclick="crmCloseModal()" class="btn btn--outline btn--sm">Cancelar</button>
+            <button onclick="crmSaveContact()" class="btn btn--primary btn--sm"><i class="fas fa-save"></i> Guardar</button>
+          </div>
+        </div>
+      </div>
+
     </div><!-- /admin-content -->
   </div><!-- /admin-main -->
 
@@ -1901,6 +2278,7 @@ const PAGE_HEADINGS = {
   settings:    ['Ajustes', 'Configuración general de la tienda'],
   appearance:  ['Apariencia', 'Colores y tipografías de la tienda'],
   security:    ['Seguridad', 'Gestión de contraseñas y acceso'],
+  crm:         ['CRM', 'Gestión de relaciones con clientes'],
 };
 
 function switchSection(id) {
@@ -1920,6 +2298,7 @@ function switchSection(id) {
   if (id === 'custom-orders')   renderCustomOrders();
   if (id === 'appearance')      initAppearancePanel();
   if (id === 'content')         initContentPanel();
+  if (id === 'crm')             crmRenderAll();
 }
 
 document.querySelectorAll('.admin-nav-item[data-section]').forEach(nav =>
@@ -3037,11 +3416,461 @@ function resetContent() {
 }
 
 /* ══════════════════════════════════════════
+   CRM
+══════════════════════════════════════════ */
+const CRM_KEY = 'kaos_crm';
+let _crmFilter = 'all';
+let _crmView   = 'list';
+let _crmActive = null; // id of open detail
+
+function crmGet() {
+  try { return JSON.parse(localStorage.getItem(CRM_KEY)) || []; } catch { return []; }
+}
+function crmSave(list) { localStorage.setItem(CRM_KEY, JSON.stringify(list)); }
+
+/* Build initials avatar */
+function crmInitials(name) {
+  return (name || '?').split(' ').slice(0,2).map(w => w[0]).join('').toUpperCase();
+}
+
+/* Format currency */
+function crmFmt(n) { return '€' + (Number(n)||0).toFixed(2).replace(/\.00$/,'').replace(/\B(?=(\d{3})+(?!\d))/g,'.'); }
+
+/* Stage label */
+const CRM_STAGES = { lead:'Lead', prospecto:'Prospecto', cliente:'Cliente', vip:'VIP', inactivo:'Inactivo' };
+const CRM_SOURCES = { web:'Web', instagram:'Instagram', referido:'Referido', tienda:'Tienda física', otro:'Otro' };
+
+/* ── Sync registered users into CRM ── */
+function crmSyncUsers() {
+  const users   = Auth.getUsers();
+  const orders  = JSON.parse(localStorage.getItem(Auth._ordersKey) || '[]');
+  let contacts  = crmGet();
+  let added = 0;
+
+  users.forEach(u => {
+    if (contacts.find(c => c.userId === u.id || (c.email && c.email.toLowerCase() === u.email.toLowerCase()))) return;
+    const userOrders = orders.filter(o => o.userId === u.id);
+    const totalSpent = userOrders.reduce((s, o) => s + (o.totals?.total || 0), 0);
+    contacts.push({
+      id: 'crm_' + Date.now() + '_' + Math.random().toString(36).slice(2,6),
+      name: u.name || u.username || u.email,
+      email: u.email,
+      phone: u.phone || '',
+      company: '',
+      stage: totalSpent >= 300 ? 'vip' : totalSpent > 0 ? 'cliente' : 'lead',
+      tags: totalSpent >= 300 ? ['VIP'] : [],
+      source: 'web',
+      totalSpent,
+      orderCount: userOrders.length,
+      notes: [],
+      lastContact: u.createdAt || new Date().toISOString(),
+      userId: u.id,
+      createdAt: u.createdAt || new Date().toISOString()
+    });
+    added++;
+  });
+
+  /* Also update metrics for existing linked contacts */
+  contacts = contacts.map(c => {
+    if (!c.userId) return c;
+    const userOrders = orders.filter(o => o.userId === c.userId);
+    return {
+      ...c,
+      totalSpent: userOrders.reduce((s, o) => s + (o.totals?.total || 0), 0),
+      orderCount: userOrders.length
+    };
+  });
+
+  crmSave(contacts);
+  crmRenderAll();
+  showToast(added ? `${added} nuevo(s) contacto(s) importado(s) ✓` : 'Contactos ya sincronizados ✓', 'success');
+}
+
+/* ── Render stats ── */
+function crmRenderStats() {
+  const contacts = crmGet();
+  const total = contacts.length;
+  const byStage = s => contacts.filter(c => c.stage === s).length;
+  const revenue = contacts.reduce((s, c) => s + (c.totalSpent || 0), 0);
+  document.getElementById('crm-stats').innerHTML = `
+    <div class="crm-stat highlight"><strong>${total}</strong><span>Contactos</span></div>
+    <div class="crm-stat"><strong>${byStage('lead')}</strong><span>Leads</span></div>
+    <div class="crm-stat"><strong>${byStage('prospecto')}</strong><span>Prospectos</span></div>
+    <div class="crm-stat"><strong>${byStage('cliente') + byStage('vip')}</strong><span>Clientes</span></div>
+    <div class="crm-stat"><strong>${crmFmt(revenue)}</strong><span>Revenue CRM</span></div>
+  `;
+}
+
+/* ── Filter + search ── */
+function crmFiltered() {
+  const q = (document.getElementById('crm-search-input')?.value || '').toLowerCase();
+  return crmGet().filter(c => {
+    if (_crmFilter !== 'all' && c.stage !== _crmFilter) return false;
+    if (!q) return true;
+    return (c.name + c.email + c.phone + (c.company||'')).toLowerCase().includes(q);
+  });
+}
+
+/* ── Render list view ── */
+function crmRenderList() {
+  const list = crmFiltered();
+  const tbody = document.getElementById('crm-tbody');
+  if (!tbody) return;
+  if (!list.length) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--c-gray)">
+      No hay contactos que coincidan.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = list.map(c => `
+    <tr onclick="crmOpenDetail('${c.id}')">
+      <td>
+        <div class="crm-name-cell">
+          <div class="crm-avatar">${crmInitials(c.name)}</div>
+          <div>
+            <strong>${c.name}</strong>
+            <span>${c.email || '—'}</span>
+          </div>
+        </div>
+      </td>
+      <td><span class="crm-stage ${c.stage}">${CRM_STAGES[c.stage] || c.stage}</span></td>
+      <td style="font-size:.82rem;color:var(--c-gray)">${CRM_SOURCES[c.source] || c.source || '—'}</td>
+      <td style="font-family:var(--ff-heading);font-weight:700;color:var(--c-primary)">${crmFmt(c.totalSpent||0)}</td>
+      <td style="color:var(--c-gray);font-size:.85rem">${c.orderCount || 0}</td>
+      <td style="font-size:.8rem;color:var(--c-gray)">${c.lastContact ? new Date(c.lastContact).toLocaleDateString('es-ES') : '—'}</td>
+      <td>
+        <div style="display:flex;gap:4px">
+          <button onclick="event.stopPropagation();crmOpenEdit('${c.id}')"
+            style="width:28px;height:28px;border-radius:6px;border:1px solid var(--c-border);font-size:.75rem;color:var(--c-gray);display:flex;align-items:center;justify-content:center;transition:.2s"
+            onmouseover="this.style.background='var(--c-light-gray)'" onmouseout="this.style.background=''"
+            title="Editar"><i class="fas fa-pen"></i></button>
+          <button onclick="event.stopPropagation();crmDelete('${c.id}')"
+            style="width:28px;height:28px;border-radius:6px;border:1px solid var(--c-border);font-size:.75rem;color:var(--c-gray);display:flex;align-items:center;justify-content:center;transition:.2s"
+            onmouseover="this.style.background='rgba(192,57,43,.08)';this.style.color='var(--c-error)'" onmouseout="this.style.background='';this.style.color='var(--c-gray)'"
+            title="Eliminar"><i class="fas fa-trash"></i></button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+/* ── Render pipeline ── */
+function crmRenderPipeline() {
+  const contacts = crmFiltered();
+  const stages = ['lead','prospecto','cliente','vip','inactivo'];
+  const colors  = { lead:'#2980b9', prospecto:'#8e44ad', cliente:'var(--c-success)', vip:'var(--c-gold-dark)', inactivo:'#7f8c8d' };
+  const el = document.getElementById('crm-pipeline');
+  if (!el) return;
+  el.innerHTML = stages.map(s => {
+    const cols = contacts.filter(c => c.stage === s);
+    return `
+      <div class="crm-pipeline-col">
+        <div class="crm-pipeline-col-header">
+          <h4 style="color:${colors[s]}">${CRM_STAGES[s]}</h4>
+          <div class="crm-col-count" style="background:${colors[s]}">${cols.length}</div>
+        </div>
+        ${cols.length ? cols.map(c => `
+          <div class="crm-kanban-card" onclick="crmOpenDetail('${c.id}')">
+            <strong>${c.name}</strong>
+            <span>${c.email || c.phone || '—'}</span>
+            ${c.totalSpent > 0 ? `<div class="crm-kanban-value">${crmFmt(c.totalSpent)}</div>` : ''}
+          </div>
+        `).join('') : `<div style="text-align:center;padding:20px;font-size:.78rem;color:var(--c-gray)">Sin contactos</div>`}
+      </div>`;
+  }).join('');
+}
+
+function crmRender() { _crmView === 'list' ? crmRenderList() : crmRenderPipeline(); }
+function crmRenderAll() { crmRenderStats(); crmRender(); }
+
+/* ── Filter / view setters ── */
+function crmSetFilter(stage, el) {
+  _crmFilter = stage;
+  document.querySelectorAll('.crm-filter-tab').forEach(t => t.classList.toggle('active', t.dataset.stage === stage));
+  crmRender();
+}
+function crmSetView(v) {
+  _crmView = v;
+  document.getElementById('crm-list-view').style.display     = v === 'list'     ? '' : 'none';
+  document.getElementById('crm-pipeline-view').style.display = v === 'pipeline' ? '' : 'none';
+  document.getElementById('crm-btn-list').classList.toggle('active',     v === 'list');
+  document.getElementById('crm-btn-pipeline').classList.toggle('active', v === 'pipeline');
+  crmRender();
+}
+
+/* ── Detail panel ── */
+function crmOpenDetail(id) {
+  const contacts = crmGet();
+  const c = contacts.find(x => x.id === id);
+  if (!c) return;
+  _crmActive = id;
+
+  document.getElementById('cdp-avatar').textContent = crmInitials(c.name);
+  document.getElementById('cdp-name').textContent = c.name;
+  document.getElementById('cdp-stage-badge').innerHTML = `<span class="crm-stage ${c.stage}">${CRM_STAGES[c.stage]||c.stage}</span>`;
+
+  const orders = JSON.parse(localStorage.getItem(Auth._ordersKey)||'[]')
+    .filter(o => c.userId ? o.userId === c.userId : o.customerEmail === c.email);
+
+  const tagsHtml = (c.tags||[]).map(t =>
+    `<span class="crm-tag ${t.toLowerCase()==='vip'?'vip-tag':''}">${t}</span>`
+  ).join(' ');
+
+  const stageButtons = Object.entries(CRM_STAGES).map(([k,v]) =>
+    `<button class="crm-stage-btn ${k} ${c.stage===k?'active':''}" onclick="crmSetStage('${id}','${k}')">${v}</button>`
+  ).join('');
+
+  const notesHtml = (c.notes||[]).slice().reverse().map(n => `
+    <div class="crm-note">
+      <div class="crm-note-meta">${new Date(n.date).toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'})} · ${n.author||'Admin'}</div>
+      <p>${n.text}</p>
+      <button class="crm-note-del" onclick="crmDeleteNote('${id}','${n.id}')" title="Eliminar nota"><i class="fas fa-times"></i></button>
+    </div>
+  `).join('');
+
+  const ordersHtml = orders.slice(0,5).map(o => `
+    <div class="crm-order-row">
+      <div><strong>${o.id}</strong> <span>${new Date(o.createdAt).toLocaleDateString('es-ES')}</span></div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="order-status ${o.status}">${(o.status||'').charAt(0).toUpperCase()+(o.status||'').slice(1)}</span>
+        <strong style="color:var(--c-primary)">${crmFmt(o.totals?.total||0)}</strong>
+      </div>
+    </div>
+  `).join('') || '<p style="color:var(--c-gray);font-size:.85rem">Sin pedidos registrados.</p>';
+
+  document.getElementById('crm-detail-body').innerHTML = `
+    <!-- Info -->
+    <div class="crm-detail-section">
+      <h4>Información</h4>
+      ${c.email ? `<div class="crm-info-row"><i class="fas fa-envelope"></i><a href="mailto:${c.email}">${c.email}</a></div>` : ''}
+      ${c.phone ? `<div class="crm-info-row"><i class="fas fa-phone"></i><a href="tel:${c.phone}">${c.phone}</a></div>` : ''}
+      ${c.company ? `<div class="crm-info-row"><i class="fas fa-building"></i><span>${c.company}</span></div>` : ''}
+      <div class="crm-info-row"><i class="fas fa-tag"></i><span>${CRM_SOURCES[c.source]||c.source||'—'}</span></div>
+      <div class="crm-info-row"><i class="fas fa-calendar"></i><span>Desde ${new Date(c.createdAt).toLocaleDateString('es-ES')}</span></div>
+    </div>
+
+    <!-- Metrics -->
+    <div class="crm-detail-section">
+      <h4>Métricas</h4>
+      <div class="crm-metric-grid">
+        <div class="crm-metric-box"><strong>${crmFmt(c.totalSpent||0)}</strong><span>Total gastado</span></div>
+        <div class="crm-metric-box"><strong>${c.orderCount||0}</strong><span>Pedidos</span></div>
+        <div class="crm-metric-box"><strong>${c.orderCount ? crmFmt((c.totalSpent||0)/(c.orderCount)) : '—'}</strong><span>Ticket medio</span></div>
+      </div>
+    </div>
+
+    <!-- Stage -->
+    <div class="crm-detail-section">
+      <h4>Etapa</h4>
+      <div class="crm-stage-selector">${stageButtons}</div>
+    </div>
+
+    <!-- Tags -->
+    <div class="crm-detail-section">
+      <h4>Etiquetas</h4>
+      <div id="cdp-tags">${tagsHtml || '<span style="color:var(--c-gray);font-size:.82rem">Sin etiquetas</span>'}</div>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <input type="text" id="cdp-tag-input" placeholder="Nueva etiqueta..."
+          style="flex:1;padding:7px 10px;border:1.5px solid var(--c-border);border-radius:var(--radius-sm);font-size:.82rem;outline:none"
+          onkeydown="if(event.key==='Enter')crmAddTag('${id}')">
+        <button onclick="crmAddTag('${id}')" class="btn btn--primary btn--sm">Añadir</button>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="crm-detail-section">
+      <h4>Notas</h4>
+      <div class="crm-notes-list" id="cdp-notes">${notesHtml || '<p style="color:var(--c-gray);font-size:.85rem">Sin notas todavía.</p>'}</div>
+      <div class="crm-note-form">
+        <textarea id="cdp-note-input" placeholder="Escribe una nota sobre este contacto..."></textarea>
+        <button onclick="crmAddNote('${id}')" class="btn btn--primary btn--sm" style="align-self:flex-end">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Orders -->
+    <div class="crm-detail-section">
+      <h4>Pedidos</h4>
+      <div class="crm-orders-list">${ordersHtml}</div>
+    </div>
+
+    <!-- Actions -->
+    <div style="display:flex;gap:10px;margin-top:8px;padding-top:20px;border-top:1px solid var(--c-border)">
+      <button onclick="crmOpenEdit('${id}')" class="btn btn--outline btn--sm" style="flex:1"><i class="fas fa-pen"></i> Editar</button>
+      <button onclick="crmDelete('${id}')" class="btn btn--sm" style="flex:1;border:1px solid var(--c-error);color:var(--c-error)">
+        <i class="fas fa-trash"></i> Eliminar
+      </button>
+    </div>
+  `;
+
+  document.getElementById('crm-detail-overlay').classList.add('open');
+  document.getElementById('crm-detail-panel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function crmCloseDetail() {
+  document.getElementById('crm-detail-overlay').classList.remove('open');
+  document.getElementById('crm-detail-panel').classList.remove('open');
+  document.body.style.overflow = '';
+  _crmActive = null;
+}
+
+/* ── Stage change from detail panel ── */
+function crmSetStage(id, stage) {
+  const contacts = crmGet();
+  const idx = contacts.findIndex(c => c.id === id);
+  if (idx === -1) return;
+  contacts[idx].stage = stage;
+  contacts[idx].lastContact = new Date().toISOString();
+  crmSave(contacts);
+  crmRenderAll();
+  crmOpenDetail(id); // re-render panel
+  showToast(`Etapa actualizada a ${CRM_STAGES[stage]} ✓`, 'success');
+}
+
+/* ── Tags ── */
+function crmAddTag(id) {
+  const input = document.getElementById('cdp-tag-input');
+  const tag = (input?.value || '').trim();
+  if (!tag) return;
+  const contacts = crmGet();
+  const idx = contacts.findIndex(c => c.id === id);
+  if (idx === -1) return;
+  if (!contacts[idx].tags) contacts[idx].tags = [];
+  if (!contacts[idx].tags.includes(tag)) contacts[idx].tags.push(tag);
+  crmSave(contacts);
+  crmOpenDetail(id);
+  showToast('Etiqueta añadida ✓', 'success');
+}
+
+/* ── Notes ── */
+function crmAddNote(id) {
+  const textarea = document.getElementById('cdp-note-input');
+  const text = (textarea?.value || '').trim();
+  if (!text) { showToast('Escribe algo antes de guardar', 'error'); return; }
+  const contacts = crmGet();
+  const idx = contacts.findIndex(c => c.id === id);
+  if (idx === -1) return;
+  if (!contacts[idx].notes) contacts[idx].notes = [];
+  const session = Admin.current();
+  contacts[idx].notes.push({
+    id: 'note_' + Date.now(),
+    date: new Date().toISOString(),
+    text,
+    author: session?.name || 'Admin'
+  });
+  contacts[idx].lastContact = new Date().toISOString();
+  crmSave(contacts);
+  crmRenderAll();
+  crmOpenDetail(id);
+  showToast('Nota guardada ✓', 'success');
+}
+
+function crmDeleteNote(contactId, noteId) {
+  const contacts = crmGet();
+  const idx = contacts.findIndex(c => c.id === contactId);
+  if (idx === -1) return;
+  contacts[idx].notes = (contacts[idx].notes || []).filter(n => n.id !== noteId);
+  crmSave(contacts);
+  crmOpenDetail(contactId);
+}
+
+/* ── Add / Edit modal ── */
+function crmOpenAdd() {
+  document.getElementById('crm-modal-title').textContent = 'Añadir contacto';
+  document.getElementById('crm-modal-id').value = '';
+  ['name','email','phone','company'].forEach(f => { const el = document.getElementById('cm-' + f); if(el) el.value = ''; });
+  document.getElementById('cm-stage').value = 'cliente';
+  document.getElementById('cm-source').value = 'web';
+  document.getElementById('cm-tags').value = '';
+  document.getElementById('crm-modal-overlay').classList.add('open');
+}
+
+function crmOpenEdit(id) {
+  const c = crmGet().find(x => x.id === id);
+  if (!c) return;
+  document.getElementById('crm-modal-title').textContent = 'Editar contacto';
+  document.getElementById('crm-modal-id').value = id;
+  document.getElementById('cm-name').value    = c.name    || '';
+  document.getElementById('cm-email').value   = c.email   || '';
+  document.getElementById('cm-phone').value   = c.phone   || '';
+  document.getElementById('cm-company').value = c.company || '';
+  document.getElementById('cm-stage').value   = c.stage   || 'cliente';
+  document.getElementById('cm-source').value  = c.source  || 'web';
+  document.getElementById('cm-tags').value    = (c.tags||[]).join(', ');
+  document.getElementById('crm-modal-overlay').classList.add('open');
+}
+
+function crmCloseModal() { document.getElementById('crm-modal-overlay').classList.remove('open'); }
+
+function crmSaveContact() {
+  const name = document.getElementById('cm-name').value.trim();
+  if (!name) { showToast('El nombre es obligatorio', 'error'); return; }
+  const id      = document.getElementById('crm-modal-id').value;
+  const tags    = document.getElementById('cm-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const contacts = crmGet();
+
+  if (id) {
+    const idx = contacts.findIndex(c => c.id === id);
+    if (idx !== -1) {
+      Object.assign(contacts[idx], {
+        name, email: document.getElementById('cm-email').value.trim(),
+        phone: document.getElementById('cm-phone').value.trim(),
+        company: document.getElementById('cm-company').value.trim(),
+        stage: document.getElementById('cm-stage').value,
+        source: document.getElementById('cm-source').value,
+        tags
+      });
+    }
+    showToast('Contacto actualizado ✓', 'success');
+  } else {
+    contacts.push({
+      id: 'crm_' + Date.now(),
+      name, email: document.getElementById('cm-email').value.trim(),
+      phone: document.getElementById('cm-phone').value.trim(),
+      company: document.getElementById('cm-company').value.trim(),
+      stage: document.getElementById('cm-stage').value,
+      source: document.getElementById('cm-source').value,
+      tags, notes: [], totalSpent: 0, orderCount: 0,
+      userId: null,
+      lastContact: new Date().toISOString(),
+      createdAt: new Date().toISOString()
+    });
+    showToast('Contacto añadido ✓', 'success');
+  }
+  crmSave(contacts);
+  crmCloseModal();
+  if (_crmActive === id) crmOpenDetail(id);
+  crmRenderAll();
+}
+
+/* ── Delete ── */
+function crmDelete(id) {
+  if (!confirm('¿Eliminar este contacto del CRM? Los datos del usuario registrado no se verán afectados.')) return;
+  crmSave(crmGet().filter(c => c.id !== id));
+  if (_crmActive === id) crmCloseDetail();
+  crmRenderAll();
+  showToast('Contacto eliminado', 'info');
+}
+
+/* ══════════════════════════════════════════
    INIT
 ══════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
   if (Admin.isLoggedIn()) showAdminPanel();
   else { localStorage.removeItem('kaos_admin_session'); }
+
+  /* CRM modal: close on outside click */
+  document.getElementById('crm-modal-overlay')?.addEventListener('click', function(e) {
+    if (e.target === this) crmCloseModal();
+  });
+
+  /* Escape key: close CRM detail / modal */
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (document.getElementById('crm-modal-overlay')?.classList.contains('open')) { crmCloseModal(); return; }
+    if (document.getElementById('crm-detail-panel')?.classList.contains('open'))  { crmCloseDetail(); }
+  });
 
   /* ── Sidebar móvil ── */
   const sidebar  = document.getElementById('admin-sidebar');
